@@ -15,8 +15,9 @@ download() {
 }
 
 install() {
-  package=$1
-  download "$package"
+  base_url=$1
+  package=$2
+  download $base_url $package
 
   echo "Installing "`basename "$package"`
   sudo installer -dumplog -package `basename "$package"` -target /
@@ -24,8 +25,6 @@ install() {
 
 # See $BASE_URL/$HASH/unity-$VERSION-$PLATFORM.ini for complete list
 # of available packages, where PLATFORM is `osx` or `win`
-
-// http://download.unity3d.com/download_unity/38bd7dec5000/MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-2018.2.11f1.pkg
 install $BASE_EDITOR_URL "MacEditorInstaller/Unity-$VERSION.pkg"
 install $BASE_INSTALLER_URL "MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-$VERSION.pkg"
 install $BASE_INSTALLER_URL "MacEditorTargetInstaller/UnitySetup-Mac-Support-for-Editor-$VERSION.pkg"
