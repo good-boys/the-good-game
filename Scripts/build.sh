@@ -2,6 +2,9 @@
 
 project="GoodGame"
 
+echo "DEBUG: Printing all files"
+find .
+
 echo "Attempting to build $project for Windows"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \

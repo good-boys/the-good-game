@@ -27,5 +27,4 @@ install() {
 # of available packages, where PLATFORM is `osx` or `win`
 install $BASE_EDITOR_URL "MacEditorInstaller/Unity-$VERSION.pkg"
 install $BASE_INSTALLER_URL "MacEditorTargetInstaller/UnitySetup-Windows-Mono-Support-for-Editor-$VERSION.pkg"
-install $BASE_INSTALLER_URL "MacEditorTargetInstaller/UnitySetup-Mac-Support-for-Editor-$VERSION.pkg"
 install $BASE_INSTALLER_URL "MacEditorTargetInstaller/UnitySetup-Linux-Support-for-Editor-$VERSION.pkg"
