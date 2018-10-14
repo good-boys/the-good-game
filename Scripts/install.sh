@@ -2,8 +2,10 @@
 
 BASE_EDITOR_URL=https://netstorage.unity3d.com/unity
 BASE_INSTALLER_URL=http://download.unity3d.com/download_unity
-HASH=38bd7dec5000
-VERSION=2018.2.11f1
+# HASH=38bd7dec5000
+# VERSION=2018.2.11f1
+HASH=6902ad48015d
+VERSION=2017.4.13f1
 
 download() {
   base_url=$1
