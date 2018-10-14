@@ -3,7 +3,7 @@
 project="GoodGame"
 
 echo "Attempting to build $project for Windows"
-/Applications/Unity_2018.2.11f1/Unity.app/Contents/MacOS/Unity \
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
   -silent-crashes \
@@ -13,7 +13,7 @@ echo "Attempting to build $project for Windows"
   -quit
 
 echo "Attempting to build $project for OS X"
-/Applications/Unity_2018.2.11f1/Unity.app/Contents/MacOS/Unity \
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
   -silent-crashes \
@@ -23,7 +23,7 @@ echo "Attempting to build $project for OS X"
   -quit
 
 echo "Attempting to build $project for Linux"
-/Applications/Unity_2018.2.11f1/Unity.app/Contents/MacOS/Unity \
+/Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
   -nographics \
   -silent-crashes \
