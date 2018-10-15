@@ -2,11 +2,11 @@
 
 project="GoodGame"
 
-buildname() {
-     platform=$1
+uniquefilename() {
+     file=$1
      shorthash=$(openssl sha1 $file | cut -d ' ' -f 2 | cut -c1-7)
      date=$(date "+%F-%H%M")
-     return $date-$shorthash-$platform
+     mv $date-$shorthash-$file
 }
 
 echo "Attempting to build $project for Windows"
@@ -43,6 +43,13 @@ echo 'Logs from build'
 cat $(pwd)/unity.log
 
 echo 'Attempting to zip builds'
-zip -r $(pwd)/Build/$(buildname linux).zip $(pwd)/Build/linux/
-zip -r $(pwd)/Build/$(buildname mac).zip $(pwd)/Build/osx/
-zip -r $(pwd)/Build/$(buildname windows).zip $(pwd)/Build/windows/
+zip -r $(pwd)/Build/linux.zip $(pwd)/Build/linux/
+zip -r $(pwd)/Build/mac.zip $(pwd)/Build/osx/
+zip -r $(pwd)/Build/windows.zip $(pwd)/Build/windows/
+
+echo 'Renaming builds to unique hash'
+pushd Build
+uniquefilename linux.zip
+uniquefilename mac.zip
+uniquefilename windows.zip
+popd
