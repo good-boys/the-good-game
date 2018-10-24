@@ -3,10 +3,12 @@
 project="GoodGame"
 
 uniquefilename() {
-     file=$1
-     shorthash=$(openssl sha1 $file | cut -d ' ' -f 2 | cut -c1-7)
-     date=$(date "+%F-%H%M")
-     mv $date-$shorthash-$file
+     local file=$1
+     local shorthash=$(git rev-parse --short HEAD)
+     local date=$(date "+%F-%H%M")
+     local build_name=$date-$shorthash-$file
+     mv $file $build_name
+     echo $build_name
 }
 
 echo "Attempting to build $project for Windows"
@@ -47,9 +49,9 @@ zip -r $(pwd)/Build/linux.zip $(pwd)/Build/linux/
 zip -r $(pwd)/Build/mac.zip $(pwd)/Build/osx/
 zip -r $(pwd)/Build/windows.zip $(pwd)/Build/windows/
 
-echo 'Renaming builds to unique hash'
+echo 'Renaming builds with timestamp + git hash'
 pushd Build
-uniquefilename linux.zip
-uniquefilename mac.zip
-uniquefilename windows.zip
+linux_build=$(uniquefilename linux.zip)
+mac_build=$(uniquefilename mac.zip)
+windows_build=$(uniquefilename windows.zip)
 popd
