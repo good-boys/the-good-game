@@ -10,7 +10,6 @@ install:
 - "./Scripts/install.sh"
 script:
 - "./Scripts/build.sh"
-script:
 - "./Scripts/publish.sh"
 
 env:
