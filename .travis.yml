@@ -20,12 +20,11 @@ before_deploy:
 
 deploy:
      provider: releases
-     api_key:
-          secure: $GITHUB_TOKEN
+     api_key: "$GITHUB_TOKEN"
      file:
-          - Build/$MAC_BUILD
-          - Build/$LINUX_BUILD
-          - Build/$WINDOWS_BUILD
+          - "Build/$MAC_BUILD"
+          - "Build/$LINUX_BUILD"
+          - "Build/$WINDOWS_BUILD"
      skip_cleanup: true
      on:
           all_branches: true
