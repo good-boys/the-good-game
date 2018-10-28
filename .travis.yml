@@ -11,7 +11,9 @@ script:
 before_deploy:
 - git config --local user.name "imann24"
 - git config --local user.email "isaiahbmann@gmail.com"
-- git tag -a "$(git rev-parse --short HEAD)-$(date '+%F-%H%M')" $(git rev-parse --short HEAD) -m "Created by Travis Build $TRAVIS_BUILD_ID"
+- git_tag=$(git rev-parse --short HEAD)-$(date '+%F-%H%M')
+- git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build $TRAVIS_BUILD_ID"
+- git push origin $git_tag
 deploy:
   provider: releases
   api_key:

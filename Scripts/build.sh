@@ -2,15 +2,6 @@
 
 project="GoodGame"
 
-uniquefilename() {
-     local file=$1
-     local shorthash=$(git rev-parse --short HEAD)
-     local date=$(date "+%F-%H%M")
-     local build_name=$date-$shorthash-$file
-     mv $file $build_name
-     echo $build_name
-}
-
 echo "Attempting to build $project for Windows"
 /Applications/Unity/Unity.app/Contents/MacOS/Unity \
   -batchmode \
