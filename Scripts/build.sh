@@ -51,7 +51,7 @@ zip -r $(pwd)/Build/windows.zip $(pwd)/Build/windows/
 
 echo 'Renaming builds with timestamp + git hash'
 pushd Build
-linux_build=$(uniquefilename linux.zip)
-mac_build=$(uniquefilename mac.zip)
-windows_build=$(uniquefilename windows.zip)
+export LINUX_BUILD=$(uniquefilename linux.zip)
+export MAC_BUILD=$(uniquefilename mac.zip)
+export WINDOWS_BUILD=$(uniquefilename windows.zip)
 popd
