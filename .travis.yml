@@ -14,6 +14,7 @@ before_deploy:
 - git_tag=$(git rev-parse --short HEAD)-$(date '+%F-%H%M')
 - git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build $TRAVIS_BUILD_ID"
 - git push origin $git_tag
+- git push --quiet https://$GITHUB_TOKEN@github.com/good-boys/the-good-game $git_tag > /dev/null 2>&1
 deploy:
   provider: releases
   api_key:
@@ -24,3 +25,6 @@ deploy:
   on:
     repo: good-boys/the-good-game
     all_branches: true
+env:
+  global:
+    secure: i51xAMHiaRlMuneupoh9hPodBlb+EF9MkLM+buZshfiKYyU1Z2RUhhTvjgbrKvN/gpNvfoqdr35QcwgQrn6kOymeBE0H8nfOkRA06w9YWDMW5QSRHpAJzQNREa312BPJti5/00WZAvkjib9dZN/lUydAgUAJTSF9QNLXa4NEogFJSd5uhccjw9CP3kaLMy8EjuzHvF3X6lYs9JrbzaOkc5DxQLrOY025vNe4s1iwLWgLvlV+r+ca4FvKPg+Zm6CaJVLnNk0z6NT35nKV0zXWLsoalv9KIwMuKXKEmzmQ9GsilpeRqRhkSui8CWsA5TSaNQzA6o+hjHK8bZIkirCUUykQMtZRlzUqSr7kvK2V32Y8mk1PB+SJzH6RL1PJpyRcgfyVzQYTVrw3Jit9Yd1fdhU7KKz5i5E9/KtNcZU9wepjAx+ev+chV9RjNfBal2ZkAHhUhizdzYXTGfc72PQMAz8dk3lhtUBHyzvsxT4Lx9/ijO5R/jPyu+PuiPcF+q1u4DuUbEIIBuYN8TA95QFz8ZXmveByBTi36DQC+eDilgYIq1SnyvyBJm3NK9578r7emPAIGaRCyrfA+LO7xIcCPXNtwld6DT2pGscVQa6gwJadpzKPN9hVepistrX2v6VZo8Op0zpJJlFsQ8Corl4m5DkzYEHrgHDOnuO5r4jjRKU=
