@@ -1,4 +1,3 @@
-# DO NOT BUILD on new tag. Otherwise, build logic creates an infinite loop (https://github.com/travis-ci/travis-ci/issues/1532)
 if: tag IS blank
 language: objective-c
 rvm:
@@ -14,8 +13,10 @@ before_deploy:
 - git config --local user.name "imann24"
 - git config --local user.email "isaiahbmann@gmail.com"
 - git_tag=$(git rev-parse --short HEAD)-$(date '+%F-%H%M')
-- git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build $TRAVIS_BUILD_ID"
-- git push --quiet https://$GITHUB_TOKEN@github.com/good-boys/the-good-game $git_tag > /dev/null 2>&1
+- git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build
+  $TRAVIS_BUILD_ID"
+- git push --quiet https://$GITHUB_TOKEN@github.com/good-boys/the-good-game $git_tag
+  > /dev/null 2>&1
 deploy:
   provider: releases
   api_key:
@@ -29,3 +30,6 @@ deploy:
 env:
   global:
     secure: d8TOj6fKUXvFIqFpQsVle1DpCLwFohSNBbge9fIHd30+GyyUbEOawwnIaWjjzx5QB6kPAwuNyS3qq/f1gEeTZhd4VG8vvHBWoZmu95/JDxZAc1hCWED1G8iI/6tIbJT5GFZY/TuQUWEbGuWLwmA+KnCNfIQs7o2uc7e1lnRMVWwkrbhNrY+mNOJy3vDvBaTlbRMyQi+s4ybMlt9AC8WRMabi38Qs0s75iEX6EwuC0TEjgKVYRfGO5I5lZYrepWdqlHgTAGvtl6F/kcTTYMOheHPro1nEPGu7rF/Q/Opbfc/1J9WgE7Jj8pT2G/6R11bna4PZLVC3qJCd9YYuUhWA5DAD082YsJRz1wvySCsU1duKCtYY9jLXBErSg745hnlbjKF7nix8SJ4x1GsWu1P0qAjGKiqiftXoW6G7uNTRRgU9QbEj+uT0TqEz3Rmsz+EDe9bGoMYVDDSh145ow3op4hjlPCtoeVBGXeMaNW0c+dU9jA9DX39v6aR0ZCwIjchhUODeBkHjkKiXwVD75j10kikQhgEo24j44fTISSQbRtiIiK8UwDVxh90BLtQsYd1Xr8pG4+GxKSziDHxIytJ1fajzcmA0xNwoms5NdMXy3BHZPk4U0dX/12aVMobwG7ZlJNzOF4bFIpiii3QoYefXNzZ+rE+i/LMB7s56Vgyz0Q0=
+notifications:
+  slack:
+    secure: deK1wSPJAu8d9qUi8HXjapYqdpsxTx3ILaluYhTRE/n3efSRZBp+NPq8rQR5kK7H9iTvTifrUhBLU3IqRa4aE7TAKeC33sUnGHpIIBd974D4Mrav+/VY23d1T8+vbsfQgIYhLRvYQeGRUvDZbkD/SEjv7ozvbhIHKCvNZdX4Qmwf9piA/SzcrI+vNCYLNjrI9UxTD2OVkftVBB/PSm7LdnRApcsb0vwEQ/bYldckIYzSGLkjSfKIrHWw/JpR0woVajI0RjsIng/+236B9dS9G7z6SNjeAdqeNrkvdS4gEBdm9k2J/mSqEPHVcsM+6kWyY5hwirlNT0mYkXy3bWCfVtyKIgmM8uFVAkFG05Z0iWzQ9uYmufxi/AgRNPmiFpdeKFk2tba5bpI3wxRg9rTzOUrKoHdc7z9Oqgj1QkVVRECKcNkBjL9D1i8+Blfs1N+ZPIFUjC3edbLm6TlwDvQgfDkgY92+JpSVg7aYqaeShZOS9dxYaB3AMCcM51c6JF0SClHUA8yhjj56RGx7xNHuMGVIYrfRY9o5S2lNviSdmA9aFELJ5T+MEpB9Ar6PtnepFfSLSHy29Kb6Zfh8oEFTZKyrDYxa0E2Dv3c+EVlBMCPzJGIxRj/fIgjzsnMYA3rAh8CRMDnNMfI/uAPajAdn+GK6VmPV1LL1dSsRtKHQL8A=
