@@ -27,6 +27,8 @@ deploy:
           - Build/$LINUX_BUILD
           - Build/$WINDOWS_BUILD
      skip_cleanup: true
+     on:
+          all_branches: true
 
 env:
   global:
