@@ -15,7 +15,7 @@ script:
 
 before_deploy:
 - git config --local user.name "imann24"
-- git config --local.user.email "isaiahbmann@gmail.com"
+- git config --local user.email "isaiahbmann@gmail.com"
 - git tag="$(git rev-parse --short HEAD)-$(date '+%F-%H%M')"
 
 deploy:
