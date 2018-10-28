@@ -1,3 +1,5 @@
+# DO NOT BUILD on new tag. Otherwise, build logic creates an infinite loop (https://github.com/travis-ci/travis-ci/issues/1532)
+if: tag IS blank
 language: objective-c
 rvm:
 - 2.2
