@@ -4,11 +4,14 @@ rvm:
 - 2.2
 before_install:
 - chmod a+x ./Scripts/install.sh
+- chmod a+x ./Scripts/test.sh
 - chmod a+x ./Scripts/build.sh
 install:
 - "./Scripts/install.sh"
 script:
+- "./Scripts/test.sh"
 - "./Scripts/build.sh"
+
 before_deploy:
 - git config --local user.name "imann24"
 - git config --local user.email "isaiahbmann@gmail.com"
