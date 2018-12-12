@@ -19,7 +19,7 @@ public class CharacterCombatHandler
         this.deathHandler = onDeathHandler;
     }
 
-    public void Subscribe(CharacterCombatHandler characterCombatHandler)
+    public virtual void Subscribe(CharacterCombatHandler characterCombatHandler)
     {
         this.attackHandler += characterCombatHandler.attackHandler;
         this.defendHandler += characterCombatHandler.defendHandler;

@@ -1,8 +1,10 @@
 ﻿using NUnit.Framework;
+using Moq;
 
 public class CharacterTest
 {
     Character character;
+    Mock<CharacterCombatHandler> mockCombatHandler;
 
     [SetUp]
     public void Setup()
@@ -11,7 +13,7 @@ public class CharacterTest
     }
 
 
-    [Test]
+   [Test]
 	public void TestInitCharacter() 
     {
         string testName = "test";
@@ -34,10 +36,22 @@ public class CharacterTest
         Assert.AreEqual(health - damage, character.Health);
     }
 
+    [Test]
+    public void TestSubscribeCombatHandler()
+    {
+        CharacterCombatHandler mockHandler = new Mock<CharacterCombatHandler>().Object;
+
+        character.SubscribeCombatHandler(mockHandler);
+
+        mockCombatHandler.Verify(handler => handler.Subscribe(mockHandler));
+    }
+
     Character givenCharacter()
     {
         string testName = "test";
         int testHealth = 100;
-        return new Character(testName, testHealth);
+        mockCombatHandler = new Mock<CharacterCombatHandler>();
+        mockCombatHandler.Setup(handler => handler.Subscribe(It.IsAny<CharacterCombatHandler>()));
+        return new Character(testName, testHealth, mockCombatHandler.Object);
     }
 }
