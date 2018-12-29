@@ -2,7 +2,7 @@
 
 public class Attack : CharacterAction 
 {
-    public int Damage
+    public virtual int Damage
     {
         get;
         private set;

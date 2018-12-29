@@ -11,7 +11,16 @@ public class CharacterInitializer : MonoBehaviour
     [SerializeField]
     EnemyActionManager enemyActionManager;
 
-    void Awake()
+    public CharacterInitializer(CharacterManager characterManager, 
+                                StatManager statManager, 
+                                EnemyActionManager enemyActionManager)
+    {
+        this.characterManager = characterManager;
+        this.statManager = statManager;
+        this.enemyActionManager = enemyActionManager;
+    }
+
+    public void Awake()
     {
         characterManager.Init(statManager, enemyActionManager);
     }

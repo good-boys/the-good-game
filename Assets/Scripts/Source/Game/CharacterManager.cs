@@ -8,7 +8,7 @@ public class CharacterManager : MonoBehaviour {
     List<Player> players;
     List<Enemy> enemies;
 
-    public void Init(StatManager statManager, EnemyActionManager enemyActionManager)
+    public virtual void Init(StatManager statManager, EnemyActionManager enemyActionManager)
     {
         this.statManager = statManager;
         this.enemyActionManager = enemyActionManager;

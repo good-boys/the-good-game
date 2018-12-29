@@ -27,7 +27,7 @@ public class CharacterCombatHandler
         this.deathHandler += characterCombatHandler.deathHandler;
     }
 
-    public void OnAttack()
+    public virtual void OnAttack()
     {
         if(attackHandler != null)
         {
@@ -35,7 +35,7 @@ public class CharacterCombatHandler
         }
     }
 
-    public void OnDefend()
+    public virtual void OnDefend()
     {
         if(defendHandler != null)
         {
@@ -43,7 +43,7 @@ public class CharacterCombatHandler
         }
     }
 
-    public void OnDamage(int remainingHealth, int maxHealth, int damage)
+    public virtual void OnDamage(int remainingHealth, int maxHealth, int damage)
     {
         if(damageHandler != null)
         {
@@ -51,7 +51,7 @@ public class CharacterCombatHandler
         }
     }
 
-    public void OnDeath()
+    public virtual void OnDeath()
     {
         if(deathHandler != null)
         {

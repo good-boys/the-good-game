@@ -1,13 +1,13 @@
 ﻿
 public class Weapon : CharacterItem
 {
-    public int Damage
+    public virtual int Damage
     {
         get;
         private set;
     }
 
-    public int Defense
+    public virtual int Defense
     {
         get;
         private set;
