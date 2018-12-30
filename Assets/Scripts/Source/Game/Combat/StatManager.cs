@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StatManager : MonoBehaviour 
 {
-    public void ProcessAction(CharacterAction characterAction)
+    public virtual void ProcessAction(CharacterAction characterAction)
     {
         if(characterAction is Attack)
         {

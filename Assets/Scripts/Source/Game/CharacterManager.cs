@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour {
+public class CharacterManager : MonoBehaviour 
+{
     StatManager statManager;
     EnemyActionManager enemyActionManager;
     List<Player> players;
@@ -18,6 +19,11 @@ public class CharacterManager : MonoBehaviour {
 
     public CharacterAction RequestNextAction(Character character)
     {
+        if(players.Count == 0)
+        {
+            Debug.LogError("Cannot determine next action because there is no player");
+            return null;
+        }
         if(character is Enemy)
         {
             return enemyActionManager.RequestNextAction(character as Enemy, GetActivePlayer());

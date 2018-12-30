@@ -1,9 +1,11 @@
-﻿using NUnit.Framework;
+﻿using UnityEngine;
+using NUnit.Framework;
 using Moq;
 
 public class CharacterInitializerTest 
 {
     CharacterInitializer characterInitializer;
+    GameObject gameObject;
     Mock<CharacterManager> mockCharacterManager;
     Mock<StatManager> mockStatManager;
     Mock<EnemyActionManager> mockEnemyActionManager;
@@ -16,9 +18,12 @@ public class CharacterInitializerTest
         mockEnemyActionManager = new Mock<EnemyActionManager>();
         mockCharacterManager.Setup(manager => manager.Init(mockStatManager.Object,
                                                            mockEnemyActionManager.Object));
-        characterInitializer = new CharacterInitializer(mockCharacterManager.Object,
-                                                        mockStatManager.Object,
-                                                        mockEnemyActionManager.Object);
+        gameObject = new GameObject();
+        characterInitializer = gameObject.AddComponent<CharacterInitializer>();
+        
+        characterInitializer.Init(mockCharacterManager.Object,
+                                  mockStatManager.Object,
+                                  mockEnemyActionManager.Object);
     }
 
     [Test]

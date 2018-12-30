@@ -4,7 +4,7 @@ public class CharacterAction
 {
     Action onUseHandler;
 
-    public Character Actor
+    public virtual Character Actor
     {
         get;
         private set;

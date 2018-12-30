@@ -48,18 +48,18 @@ public class Character
 
     public Character(string name, int health)
     {
+        characterCombatHandler = new CharacterCombatHandler();
         this.Name = name;
         this.MaxHealth = health;
         this.Health = health;
-        characterCombatHandler = new CharacterCombatHandler();
     }
 
     public Character(string name, int health, CharacterCombatHandler characterCombatHandler)
     {
+        this.characterCombatHandler = characterCombatHandler;
         this.Name = name;
         this.MaxHealth = health;
         this.Health = health;
-        this.characterCombatHandler = characterCombatHandler;
     }
 
     public void Damage(int damage)
@@ -98,7 +98,7 @@ public class Character
         characterCombatHandler.OnDefend();
     }
 
-    public void SetActiveAction(CharacterAction action)
+    public virtual void SetActiveAction(CharacterAction action)
     {
         ActiveAction = action;
     }

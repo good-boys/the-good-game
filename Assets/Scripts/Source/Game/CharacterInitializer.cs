@@ -11,7 +11,7 @@ public class CharacterInitializer : MonoBehaviour
     [SerializeField]
     EnemyActionManager enemyActionManager;
 
-    public CharacterInitializer(CharacterManager characterManager, 
+    public void Init(CharacterManager characterManager, 
                                 StatManager statManager, 
                                 EnemyActionManager enemyActionManager)
     {
