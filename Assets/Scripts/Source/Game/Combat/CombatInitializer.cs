@@ -20,6 +20,21 @@ public class CombatInitializer : MonoBehaviour
     [SerializeField]
     GameFlowManager gameFlowManager;
 
+    public void Init(CombatManager combatManager,
+                        AbstractCombatConfig combatConfig,
+                        AbstractCombatUI combatUI,
+                        CharacterManager characterManager,
+                        TurnManager turnManager,
+                        GameFlowManager gameFlowManager)
+    {
+        this.combatManager = combatManager;
+        this.combatConfig = combatConfig;
+        this.combatUI = combatUI;
+        this.characterManager = characterManager;
+        this.turnManager = turnManager;
+        this.gameFlowManager = gameFlowManager;
+    }
+
     void Start()
     {
         setupCharacterManager();

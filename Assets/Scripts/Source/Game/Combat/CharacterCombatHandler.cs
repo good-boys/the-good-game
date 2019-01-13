@@ -58,4 +58,21 @@ public class CharacterCombatHandler
             deathHandler();
         }
     }
+
+    public override bool Equals(object obj)
+    {
+        if (obj == this)
+        {
+            return true;
+        }
+        if (obj is CharacterCombatHandler)
+        {
+            CharacterCombatHandler characterCombatHandler = obj as CharacterCombatHandler;
+            return Object.Equals(characterCombatHandler.attackHandler, attackHandler) &&
+                            Object.Equals(characterCombatHandler.defendHandler, defendHandler) &&
+                            Object.Equals(characterCombatHandler.damageHandler, damageHandler) &&
+                            Object.Equals(characterCombatHandler.deathHandler, deathHandler);
+        }
+        return false;
+    }
 }

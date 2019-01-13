@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using Moq;
 
 public class CharacterActionTest
@@ -15,4 +16,20 @@ public class CharacterActionTest
         Assert.AreSame(mockTarget, characterAction.Targets[0]);
     }
 
+    [Test]
+    public void TestUse()
+    {
+        bool actionRun = false;
+        Action testAction =()=> 
+        {
+            actionRun = true;
+        };
+        Character mockActor = new Mock<Character>("name", 100).Object;
+        Character mockTarget = new Mock<Character>("name", 100).Object;
+        CharacterAction characterAction = new CharacterAction(mockActor, testAction, mockTarget);
+
+        characterAction.Use();
+
+        Assert.True(actionRun);
+    }
 }
