@@ -32,7 +32,7 @@ public class CharacterManager : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    public void RegisterCharacter(Character character)
+    public virtual void RegisterCharacter(Character character)
     {
         if (character is Player)
         {

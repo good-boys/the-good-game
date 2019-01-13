@@ -68,7 +68,7 @@ public class Character
         characterCombatHandler.OnDamage(Health, MaxHealth, damage);
     }
 
-    public void SubscribeCombatHandler(CharacterCombatHandler characterCombatHandler)
+    public virtual void SubscribeCombatHandler(CharacterCombatHandler characterCombatHandler)
     {
         this.characterCombatHandler.Subscribe(characterCombatHandler);
     }
