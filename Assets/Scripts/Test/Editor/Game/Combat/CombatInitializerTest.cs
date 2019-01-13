@@ -33,8 +33,7 @@ public class CombatInitializerTest
                                 mockTurnManager.Object,
                                 mockGameFlowManager.Object);
     }
-
-    // TODO
+    
     [Test]
     public void TestStart()
     {
