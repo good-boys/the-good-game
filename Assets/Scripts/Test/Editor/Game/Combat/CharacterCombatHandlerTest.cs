@@ -17,7 +17,7 @@ public class CharacterCombatHandlerTest
     CharacterCombatHandler combatHandler;
 
     [SetUp]
-    public void SetUp()
+    public void Setup()
     {
         testAttackHandler = () =>
          {

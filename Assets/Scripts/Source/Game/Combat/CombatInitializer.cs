@@ -35,7 +35,7 @@ public class CombatInitializer : MonoBehaviour
         this.gameFlowManager = gameFlowManager;
     }
 
-    void Start()
+    public virtual void Start()
     {
         setupCharacterManager();
         setupCombatUI();
