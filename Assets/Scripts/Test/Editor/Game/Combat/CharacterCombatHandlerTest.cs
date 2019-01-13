@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Eppy;
 using NUnit.Framework;
 using Moq;

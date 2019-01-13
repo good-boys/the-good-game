@@ -1,4 +1,4 @@
-﻿
+
 public class Weapon : CharacterItem
 {
     public virtual int Damage

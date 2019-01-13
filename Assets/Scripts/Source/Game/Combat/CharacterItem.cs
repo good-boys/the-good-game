@@ -1,4 +1,4 @@
-﻿public class CharacterItem
+public class CharacterItem
 {
     public string Name
     {
