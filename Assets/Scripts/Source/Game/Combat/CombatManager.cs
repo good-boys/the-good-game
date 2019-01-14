@@ -60,7 +60,6 @@ public class CombatManager : MonoBehaviour
         {
             ProcessNextAction();
             yield return new WaitForSeconds(delayBetweenActions);
-            Debug.Log("HERE");
         }
     }
 }
