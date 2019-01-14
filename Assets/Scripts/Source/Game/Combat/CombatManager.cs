@@ -19,7 +19,7 @@ public class CombatManager : MonoBehaviour
         this.gameFlowManager = gameFlowManager;
     }
 
-    public void PlayerAttack() 
+    public void PlayerAttack()
     {
         Player player = characterManager.GetActivePlayer();
         turnManager.RegisterAction(player.Attack(characterManager.GetEnemies()));
@@ -55,11 +55,12 @@ public class CombatManager : MonoBehaviour
     }
 
     IEnumerator executeActions()
-    {
+    {   
         while(!turnManager.ShouldWaitForPlayerAction())
         {
             ProcessNextAction();
             yield return new WaitForSeconds(delayBetweenActions);
+            Debug.Log("HERE");
         }
     }
 }

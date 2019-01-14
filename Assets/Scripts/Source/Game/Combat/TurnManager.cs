@@ -1,21 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnManager : MonoBehaviour 
+public class TurnManager : MonoBehaviour
 {
     Queue<CharacterAction> characterActions = new Queue<CharacterAction>();
 
-    public void RegisterAction(CharacterAction characterAction)
+    public virtual void RegisterAction(CharacterAction characterAction)
     {
         characterActions.Enqueue(characterAction);
     }
 
-    public CharacterAction GetNextAction()
+    public virtual CharacterAction GetNextAction()
     {
         return characterActions.Dequeue();
     }
 
-    public bool ShouldWaitForPlayerAction()
+    public virtual bool ShouldWaitForPlayerAction()
     {
         // TODO
         return characterActions.Count == 0;

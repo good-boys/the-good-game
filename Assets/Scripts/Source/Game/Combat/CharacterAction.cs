@@ -9,7 +9,7 @@ public class CharacterAction
         get;
         private set;
     }
-	
+
     public Character[] Targets
     {
         get;
@@ -23,7 +23,7 @@ public class CharacterAction
         this.Targets = targets;
     }
 
-    public void Use()
+    public virtual void Use()
     {
         if(onUseHandler != null)
         {

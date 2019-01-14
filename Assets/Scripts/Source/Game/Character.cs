@@ -78,7 +78,7 @@ public class Character
         EquippedWeapon = weapon;
     }
 
-    public Attack Attack(params Character[] targets)
+    public virtual Attack Attack(params Character[] targets)
     {
         return new Attack(this, EquippedWeapon == null ? GetDefaultAttack() : EquippedWeapon.Damage, executeAttack, targets);
     }
@@ -88,7 +88,7 @@ public class Character
         characterCombatHandler.OnAttack();
     }
 
-    public Defend Defend(params Character[] targets)
+    public virtual Defend Defend(params Character[] targets)
     {
         return new Defend(this, EquippedWeapon == null ? GetDefaultDefense() : EquippedWeapon.Defense, executeDefense, targets);
     }

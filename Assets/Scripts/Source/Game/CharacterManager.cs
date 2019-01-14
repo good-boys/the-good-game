@@ -17,7 +17,7 @@ public class CharacterManager : MonoBehaviour
         enemies = new List<Enemy>();
     }
 
-    public CharacterAction RequestNextAction(Character character)
+    public virtual CharacterAction RequestNextAction(Character character)
     {
         if(players.Count == 0)
         {
@@ -44,7 +44,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public void ProcessAction(CharacterAction action)
+    public virtual void ProcessAction(CharacterAction action)
     {
         statManager.ProcessAction(action);
         if(action is Defend)
@@ -53,13 +53,13 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public Player GetActivePlayer()
+    public virtual Player GetActivePlayer()
     {
         // TODO
         return players[0];
     }
 
-    public Enemy[] GetEnemies()
+    public virtual Enemy[] GetEnemies()
     {
         return enemies.ToArray();
     }
