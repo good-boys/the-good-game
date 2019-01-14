@@ -10,7 +10,7 @@ public class CharacterAction
         private set;
     }
 
-    public Character[] Targets
+    public virtual Character[] Targets
     {
         get;
         private set;

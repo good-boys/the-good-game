@@ -38,7 +38,7 @@ public class Character
         private set;
     }
 
-    public CharacterAction ActiveAction
+    public virtual CharacterAction ActiveAction
     {
         get;
         private set;
@@ -62,7 +62,7 @@ public class Character
         this.Health = health;
     }
 
-    public void Damage(int damage)
+    public virtual void Damage(int damage)
     {
         this.Health -= damage;
         characterCombatHandler.OnDamage(Health, MaxHealth, damage);
@@ -103,7 +103,7 @@ public class Character
         ActiveAction = action;
     }
 
-    public CharacterAction UseActiveAction()
+    public virtual CharacterAction UseActiveAction()
     {
         CharacterAction activeAction = ActiveAction;
         ActiveAction = null;

@@ -16,6 +16,7 @@ public class CharacterInitializerTest
         mockCharacterManager = new Mock<CharacterManager>();
         mockStatManager = new Mock<StatManager>();
         mockEnemyActionManager = new Mock<EnemyActionManager>();
+        mockEnemyActionManager.Setup(enemyActionManager => enemyActionManager.Init(It.IsAny<RandomGenerator>()));
         mockCharacterManager.Setup(manager => manager.Init(mockStatManager.Object,
                                                            mockEnemyActionManager.Object));
         gameObject = new GameObject();
@@ -31,6 +32,7 @@ public class CharacterInitializerTest
     {
         characterInitializer.Awake();
 
+        mockEnemyActionManager.Verify(manager => manager.Init(It.IsAny<RandomGenerator>()));
         mockCharacterManager.Verify(manager => manager.Init(mockStatManager.Object,
                                                            mockEnemyActionManager.Object));
     }

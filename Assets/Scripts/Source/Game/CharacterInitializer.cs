@@ -22,6 +22,7 @@ public class CharacterInitializer : MonoBehaviour
 
     public void Awake()
     {
+        enemyActionManager.Init(new RandomGenerator());
         characterManager.Init(statManager, enemyActionManager);
     }
 }

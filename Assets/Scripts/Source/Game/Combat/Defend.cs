@@ -2,7 +2,7 @@ using System;
 
 public class Defend : CharacterAction 
 {
-    public int Defense
+    public virtual int Defense
     {
         get;
         private set;

@@ -5,6 +5,12 @@ public class TurnManager : MonoBehaviour
 {
     Queue<CharacterAction> characterActions = new Queue<CharacterAction>();
 
+    // Used to test functionality
+    public void Init(Queue<CharacterAction> characterActions)
+    {
+        this.characterActions = characterActions;
+    }
+
     public virtual void RegisterAction(CharacterAction characterAction)
     {
         characterActions.Enqueue(characterAction);
