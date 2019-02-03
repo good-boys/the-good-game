@@ -1,0 +1,229 @@
+fileFormatVersion: 2
+guid: ff90625f6bfef0f42bd0968e4af08928
+timeCreated: 1543544711
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: line-clipart-underline-19_0
+    21300002: line-clipart-underline-19_1
+    21300004: line-clipart-underline-19_2
+    21300006: line-clipart-underline-19_3
+    21300008: line-clipart-underline-19_4
+    21300010: line-clipart-underline-19_5
+    21300012: line-clipart-underline-19_6
+    21300014: line-clipart-underline-19_7
+    21300016: line-clipart-underline-19_8
+    21300018: line-clipart-underline-19_9
+    21300020: line-clipart-underline-19_10
+    21300022: line-clipart-underline-19_11
+    21300024: line-clipart-underline-19_12
+    21300026: line-clipart-underline-19_13
+    21300028: line-clipart-underline-19_14
+    21300030: line-clipart-underline-19_15
+    21300032: line-clipart-underline-19_16
+    21300034: line-clipart-underline-19_17
+    21300036: line-clipart-underline-19_18
+    21300038: line-clipart-underline-19_19
+    21300040: line-clipart-underline-19_20
+    21300042: line-clipart-underline-19_21
+    21300044: line-clipart-underline-19_22
+    21300046: line-clipart-underline-19_23
+    21300048: line-clipart-underline-19_24
+    21300050: line-clipart-underline-19_25
+    21300052: line-clipart-underline-19_26
+    21300054: line-clipart-underline-19_27
+    21300056: line-clipart-underline-19_28
+    21300058: line-clipart-underline-19_29
+    21300060: line-clipart-underline-19_30
+    21300062: line-clipart-underline-19_31
+    21300064: line-clipart-underline-19_32
+    21300066: line-clipart-underline-19_33
+    21300068: line-clipart-underline-19_34
+    21300070: line-clipart-underline-19_35
+    21300072: line-clipart-underline-19_36
+    21300074: line-clipart-underline-19_37
+    21300076: line-clipart-underline-19_38
+    21300078: line-clipart-underline-19_39
+    21300080: line-clipart-underline-19_40
+    21300082: line-clipart-underline-19_41
+    21300084: line-clipart-underline-19_42
+    21300086: line-clipart-underline-19_43
+    21300088: line-clipart-underline-19_44
+    21300090: line-clipart-underline-19_45
+    21300092: line-clipart-underline-19_46
+    21300094: line-clipart-underline-19_47
+    21300096: line-clipart-underline-19_48
+    21300098: line-clipart-underline-19_49
+    21300100: line-clipart-underline-19_50
+    21300102: line-clipart-underline-19_51
+    21300104: line-clipart-underline-19_52
+    21300106: line-clipart-underline-19_53
+    21300108: line-clipart-underline-19_54
+    21300110: line-clipart-underline-19_55
+    21300112: line-clipart-underline-19_56
+    21300114: line-clipart-underline-19_57
+    21300116: line-clipart-underline-19_58
+    21300118: line-clipart-underline-19_59
+    21300120: line-clipart-underline-19_60
+    21300122: line-clipart-underline-19_61
+    21300124: line-clipart-underline-19_62
+    21300126: line-clipart-underline-19_63
+    21300128: line-clipart-underline-19_64
+    21300130: line-clipart-underline-19_65
+    21300132: line-clipart-underline-19_66
+    21300134: line-clipart-underline-19_67
+    21300136: line-clipart-underline-19_68
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 1000
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: line-clipart-underline-19_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1267
+        width: 1629
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 3, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: line-clipart-underline-19_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 629
+        width: 1629
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: line-clipart-underline-19_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2
+        width: 1629
+        height: 264
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
