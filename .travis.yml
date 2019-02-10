@@ -16,11 +16,9 @@ jobs:
     - stage: "Test"
       name: "Unit Tests"
       script: "./Scripts/test.sh || travis_terminate 1"
-    - stage: "Build"
-      name: "Build Unity Executables"
-      script: "./Scripts/build.sh"
     - stage: "Deploy"
-      name: "Deploy to GitHub Releases"
+      name: "GitHub Release"
+      script: "./Scripts/build.sh"
       before_deploy:
       - git config --local user.name "imann24"
       - git config --local user.email "isaiahbmann@gmail.com"
