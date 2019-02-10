@@ -6,8 +6,9 @@ public class DefendTest
     public void TestInit()
     {
         int defense = 5;
+        int bonus = 5;
 
-        Defend defend = new Defend(null, defense, null, null);
+        Defend defend = new Defend(null, defense, bonus, null, null);
 
         Assert.AreEqual(defense, defend.Defense);
     }

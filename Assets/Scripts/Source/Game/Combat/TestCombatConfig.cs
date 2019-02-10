@@ -16,7 +16,13 @@ public class TestCombatConfig : AbstractCombatConfig
     int playerWeaponDamage;
 
     [SerializeField]
+    int playerWeaponBonusAttack;
+
+    [SerializeField]
     int playerWeaponDefense;
+
+    [SerializeField]
+    int playerWeaponBonusDefense;
 
     [Header("Enemy")]
     [SerializeField]
@@ -34,15 +40,21 @@ public class TestCombatConfig : AbstractCombatConfig
     [SerializeField]
     int enemyWeaponDefense;
 
+    [SerializeField]
+    int enemyWeaponBonusAttack;
+
+    [SerializeField]
+    int enemyWeaponBonusDefense;
+
     Player player;
     Enemy enemy;
 
     void Awake()
     {
         player = new Player(playerName, playerHealth);
-        player.EquipWeapon(new Weapon(playerWeaponName, playerWeaponDamage, playerWeaponDefense));
+        player.EquipWeapon(new Weapon(playerWeaponName, playerWeaponDamage, playerWeaponDefense, playerWeaponBonusAttack, playerWeaponBonusDefense));
         enemy = new Enemy(enemyName, enemyHealth);
-        enemy.EquipWeapon(new Weapon(enemyWeaponName, enemyWeaponDamage, enemyWeaponDefense));
+        enemy.EquipWeapon(new Weapon(enemyWeaponName, enemyWeaponDamage, enemyWeaponDefense, enemyWeaponBonusAttack, enemyWeaponBonusDefense));
     }
 
     public override Player GetPlayer()

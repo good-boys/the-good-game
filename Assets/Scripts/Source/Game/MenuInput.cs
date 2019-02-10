@@ -40,14 +40,20 @@ public class MenuInput : MonoBehaviour {
         //Do something when moving buttons
         if (movedMenu)
         {
-            if (lastSelectedObj.GetComponentInChildren<Text>() != null)
+            if (lastSelectedObj != null)
             {
-                lastSelectedObj.GetComponentInChildren<Text>().color = unSelectedColor;
+                if (lastSelectedObj.GetComponentInChildren<Text>() != null)
+                {
+                    lastSelectedObj.GetComponentInChildren<Text>().color = unSelectedColor;
+                }
             }
 
-            if (selectedObject.GetComponentInChildren<Text>() != null)
+            if (selectedObject != null)
             {
-                selectedObject.GetComponentInChildren<Text>().color = selectedColor;
+                if (selectedObject.GetComponentInChildren<Text>() != null)
+                {
+                    selectedObject.GetComponentInChildren<Text>().color = selectedColor;
+                }
             }
             
             movedMenu = false;
@@ -61,9 +67,12 @@ public class MenuInput : MonoBehaviour {
                 selectedObject = eventSystem.currentSelectedGameObject;
             }
 
-            if (selectedObject.GetComponentInChildren<Text>() != null)
+            if (selectedObject != null)
             {
-                selectedObject.GetComponentInChildren<Text>().color = selectedColor;
+                if (selectedObject.GetComponentInChildren<Text>() != null)
+                {
+                    selectedObject.GetComponentInChildren<Text>().color = selectedColor;
+                }
             }
 
             buttonSelected = true;

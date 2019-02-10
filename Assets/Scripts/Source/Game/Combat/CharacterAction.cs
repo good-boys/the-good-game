@@ -23,6 +23,14 @@ public class CharacterAction
         this.Targets = targets;
     }
 
+    public virtual void AddBonus()
+    {
+    }
+
+    public virtual void ResetAction()
+    {
+    }
+
     public virtual void Use()
     {
         if(onUseHandler != null)

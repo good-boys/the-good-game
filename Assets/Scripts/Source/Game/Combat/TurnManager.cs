@@ -21,6 +21,21 @@ public class TurnManager : MonoBehaviour
         return characterActions.Dequeue();
     }
 
+    public virtual Queue<CharacterAction> GetQueue()
+    {
+        return characterActions;
+    }
+
+    public virtual void ReplaceQueue (Queue<CharacterAction> queue)
+    {
+        characterActions = queue;
+    }
+
+    public virtual CharacterAction Peek()
+    {
+        return characterActions.Peek();
+    }
+
     public virtual bool ShouldWaitForPlayerAction()
     {
         // TODO

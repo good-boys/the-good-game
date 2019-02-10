@@ -306,13 +306,17 @@ MonoBehaviour:
   playerName: Player
   playerHealth: 100
   playerWeaponName: Great Sword
-  playerWeaponDamage: 10
+  playerWeaponDamage: 5
+  playerWeaponBonusAttack: 15
   playerWeaponDefense: 3
+  playerWeaponBonusDefense: 100
   enemyName: Troll
   enemyWeaponName: Club
   enemyHealth: 100
   enemyWeaponDamage: 10
   enemyWeaponDefense: 3
+  enemyWeaponBonusAttack: 2
+  enemyWeaponBonusDefense: 2
 --- !u!114 &27310880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,6 +346,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBetweenActions: 1
+  attackTimer: 2
+  defendTimer: 2
+  inputStart: 0
+  inputEnd: 1
+  missTimer: 0.1
 --- !u!4 &27310882
 Transform:
   m_ObjectHideFlags: 0
@@ -3103,10 +3112,10 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
+    m_FontStyle: 1
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 25
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3135,8 +3144,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -445.6}
-  m_SizeDelta: {x: 1720, y: 29.6}
+  m_AnchoredPosition: {x: 2.4, y: -107.6}
+  m_SizeDelta: {x: 685.6, y: 49.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1155575108
 GameObject:
@@ -6443,10 +6452,10 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
+    m_FontStyle: 1
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 25
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -6475,8 +6484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: -475.2}
-  m_SizeDelta: {x: 1720, y: 29.6}
+  m_AnchoredPosition: {x: 2.4, y: -157.3}
+  m_SizeDelta: {x: 685.6, y: 49.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2050795590
 GameObject:

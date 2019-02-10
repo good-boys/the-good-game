@@ -47,10 +47,7 @@ public class CharacterManager : MonoBehaviour
     public virtual void ProcessAction(CharacterAction action)
     {
         statManager.ProcessAction(action);
-        if(action is Defend)
-        {
-            action.Actor.SetActiveAction(action);
-        }
+        action.Actor.SetActiveAction(action);
     }
 
     public virtual Player GetActivePlayer()

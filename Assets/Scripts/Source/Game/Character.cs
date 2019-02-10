@@ -44,6 +44,8 @@ public class Character
         private set;
     }
 
+    public bool hitBonus;
+
     int _health;
 
     public Character(string name, int health)
@@ -80,7 +82,7 @@ public class Character
 
     public virtual Attack Attack(params Character[] targets)
     {
-        return new Attack(this, EquippedWeapon == null ? GetDefaultAttack() : EquippedWeapon.Damage, executeAttack, targets);
+        return new Attack(this, EquippedWeapon == null ? GetDefaultAttack() : EquippedWeapon.Damage, EquippedWeapon.BonusAttack, executeAttack, targets);
     }
 
     void executeAttack()
@@ -90,7 +92,7 @@ public class Character
 
     public virtual Defend Defend(params Character[] targets)
     {
-        return new Defend(this, EquippedWeapon == null ? GetDefaultDefense() : EquippedWeapon.Defense, executeDefense, targets);
+        return new Defend(this, EquippedWeapon == null ? GetDefaultDefense() : EquippedWeapon.Defense, EquippedWeapon.BonusDefense, executeDefense, targets);
     }
 
     void executeDefense()
@@ -118,5 +120,13 @@ public class Character
     protected virtual int GetDefaultDefense()
     {
         return 0;
+    }
+
+    public int GetAttackDirection()
+    {
+        Random random = new Random();
+        int attackDir = random.Next(0, 4);
+
+        return attackDir;
     }
 }
