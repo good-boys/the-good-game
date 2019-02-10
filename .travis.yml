@@ -2,34 +2,42 @@ if: tag IS blank
 language: objective-c
 rvm:
 - 2.2
+
 before_install:
 - chmod a+x ./Scripts/install.sh
 - chmod a+x ./Scripts/test.sh
 - chmod a+x ./Scripts/build.sh
+
 install:
 - "./Scripts/install.sh"
-script:
-- "./Scripts/test.sh"
-- "./Scripts/build.sh"
 
-before_deploy:
-- git config --local user.name "imann24"
-- git config --local user.email "isaiahbmann@gmail.com"
-- git_tag=$(git rev-parse --short HEAD)-$(date '+%F-%H%M')
-- git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build
-  $TRAVIS_BUILD_ID"
-- git push --quiet https://$GITHUB_TOKEN@github.com/good-boys/the-good-game $git_tag
-  > /dev/null 2>&1
-deploy:
-  provider: releases
-  api_key:
-    secure: L4k4TfRWZcRJrkYsnjS8chQmTgnqGf+JmR3vG2a80FUKK9A7ffp/X47tBl4T9YoGLlt4LCfDKg/INvSu45wCS3Tx/DaOSwptJe991+rDVshKDkVWC19r1ISvoLN2E7A85LfcOYtxu2EomVj8eO5kMXlLpLWDviJUx70H4Pi7vwswamTs5T/jbnUCflv6SCJomkGeQ2tmrUN0Ggd8G+K7TrZbX6KEXFEzuDejaszgsdruJumjiQcF7qmK82/OkIOk/FZ3/0WXsmureFDkQ5eMAatRHVbqzt6qUSgoEY/V4sTjAav+AkXFo4oaH4tyVNjKHOPCWrlofQeldT/tbjTuHLIm+XwXbMYmdlHkmh2sO7zgOoGlsYWecxai1gLYIS76GLY2k/PPb/1wrorV/ovDUtwrXUhE7ovYK9GC6uPibFtaQEE2TUro79cXn8K3D5UpTBHsxffX6Or6BTaIkMA+e7w+jz2pyfBLVWYqD1aI2YKb2q6srpKKptBwJxNVCeva9r8Qr6lXfyWiSiWKgJaoHczV8Dh4XJWpbkBktZtxCw1oeh0y2GXBe+k9Nhv88wqxG2CTLpsVl9VwDsNaoYaCkLha/OZXAQn8yRA91K9Z1lW8g47S/HW/Ve9zdDkIwI2EXRvJfScl/tYT9QyP6wmZLEQIRK/Qzg1lxSbBe0FZG2c=
-  file_glob: true
-  file: Build/*.zip
-  skip_cleanup: true
-  on:
-    repo: good-boys/the-good-game
-    all_branches: true
+jobs:
+  include:
+    - stage: "Test"
+      name: "Unit Tests"
+      script: "./Scripts/test.sh" || travis_terminate 1
+    - stage: "Build"
+      name: "Build Unity Executables"
+      script: "./Scripts/build.sh"
+    - stage: "Deploy"
+      name: "Deploy to GitHub Releases"
+      before_deploy:
+       - git config --local user.name "imann24"
+       - git config --local user.email "isaiahbmann@gmail.com"
+       - git_tag=$(git rev-parse --short HEAD)-$(date '+%F-%H%M')
+       - git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build $TRAVIS_BUILD_ID"
+      - git push --quiet https://$GITHUB_TOKEN@github.com/good-boys/the-good-game $git_tag > /dev/null 2>&1
+      deploy:
+        provider: releases
+        api_key:
+                secure: L4k4TfRWZcRJrkYsnjS8chQmTgnqGf+JmR3vG2a80FUKK9A7ffp/X47tBl4T9YoGLlt4LCfDKg/INvSu45wCS3Tx/DaOSwptJe991+rDVshKDkVWC19r1ISvoLN2E7A85LfcOYtxu2EomVj8eO5kMXlLpLWDviJUx70H4Pi7vwswamTs5T/jbnUCflv6SCJomkGeQ2tmrUN0Ggd8G+K7TrZbX6KEXFEzuDejaszgsdruJumjiQcF7qmK82/OkIOk/FZ3/0WXsmureFDkQ5eMAatRHVbqzt6qUSgoEY/V4sTjAav+AkXFo4oaH4tyVNjKHOPCWrlofQeldT/tbjTuHLIm+XwXbMYmdlHkmh2sO7zgOoGlsYWecxai1gLYIS76GLY2k/PPb/1wrorV/ovDUtwrXUhE7ovYK9GC6uPibFtaQEE2TUro79cXn8K3D5UpTBHsxffX6Or6BTaIkMA+e7w+jz2pyfBLVWYqD1aI2YKb2q6srpKKptBwJxNVCeva9r8Qr6lXfyWiSiWKgJaoHczV8Dh4XJWpbkBktZtxCw1oeh0y2GXBe+k9Nhv88wqxG2CTLpsVl9VwDsNaoYaCkLha/OZXAQn8yRA91K9Z1lW8g47S/HW/Ve9zdDkIwI2EXRvJfScl/tYT9QyP6wmZLEQIRK/Qzg1lxSbBe0FZG2c=
+        file_glob: true
+        file: Build/*.zip
+        skip_cleanup: true
+        on:
+          repo: good-boys/the-good-game
+          all_branches: true
+
 env:
   global:
     secure: d8TOj6fKUXvFIqFpQsVle1DpCLwFohSNBbge9fIHd30+GyyUbEOawwnIaWjjzx5QB6kPAwuNyS3qq/f1gEeTZhd4VG8vvHBWoZmu95/JDxZAc1hCWED1G8iI/6tIbJT5GFZY/TuQUWEbGuWLwmA+KnCNfIQs7o2uc7e1lnRMVWwkrbhNrY+mNOJy3vDvBaTlbRMyQi+s4ybMlt9AC8WRMabi38Qs0s75iEX6EwuC0TEjgKVYRfGO5I5lZYrepWdqlHgTAGvtl6F/kcTTYMOheHPro1nEPGu7rF/Q/Opbfc/1J9WgE7Jj8pT2G/6R11bna4PZLVC3qJCd9YYuUhWA5DAD082YsJRz1wvySCsU1duKCtYY9jLXBErSg745hnlbjKF7nix8SJ4x1GsWu1P0qAjGKiqiftXoW6G7uNTRRgU9QbEj+uT0TqEz3Rmsz+EDe9bGoMYVDDSh145ow3op4hjlPCtoeVBGXeMaNW0c+dU9jA9DX39v6aR0ZCwIjchhUODeBkHjkKiXwVD75j10kikQhgEo24j44fTISSQbRtiIiK8UwDVxh90BLtQsYd1Xr8pG4+GxKSziDHxIytJ1fajzcmA0xNwoms5NdMXy3BHZPk4U0dX/12aVMobwG7ZlJNzOF4bFIpiii3QoYefXNzZ+rE+i/LMB7s56Vgyz0Q0=

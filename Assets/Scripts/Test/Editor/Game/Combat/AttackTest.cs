@@ -11,4 +11,11 @@ public class AttackTest
 
         Assert.AreEqual(damage, attack.Damage);
     }
+
+    // TODO: Remove after verifying fail terminates Travis build
+    [Test]
+    public void AlwaysFail()
+    {
+        Assert.True(false);
+    }
 }
