@@ -15,17 +15,17 @@ jobs:
   include:
     - stage: "Test"
       name: "Unit Tests"
-      script: "./Scripts/test.sh" || travis_terminate 1
+      script: "./Scripts/test.sh || travis_terminate 1"
     - stage: "Build"
       name: "Build Unity Executables"
       script: "./Scripts/build.sh"
     - stage: "Deploy"
       name: "Deploy to GitHub Releases"
       before_deploy:
-       - git config --local user.name "imann24"
-       - git config --local user.email "isaiahbmann@gmail.com"
-       - git_tag=$(git rev-parse --short HEAD)-$(date '+%F-%H%M')
-       - git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build $TRAVIS_BUILD_ID"
+      - git config --local user.name "imann24"
+      - git config --local user.email "isaiahbmann@gmail.com"
+      - git_tag=$(git rev-parse --short HEAD)-$(date '+%F-%H%M')
+      - git tag -a "$git_tag" $(git rev-parse --short HEAD) -m "Created by Travis Build $TRAVIS_BUILD_ID"
       - git push --quiet https://$GITHUB_TOKEN@github.com/good-boys/the-good-game $git_tag > /dev/null 2>&1
       deploy:
         provider: releases
