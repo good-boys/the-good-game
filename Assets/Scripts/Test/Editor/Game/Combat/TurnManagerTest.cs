@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Linq;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -48,6 +48,20 @@ public class TurnManagerTest
     }
 
     [Test]
+    public void TestRegisterAction_Invalid_CharacterSpeed0()
+    {
+        Mock<CharacterAction> actionWithSpeed0 = new Mock<CharacterAction>(null, null, null);
+        Mock<Character> characterWithSpeed0 = new Mock<Character>("name", 100, 1);
+        actionWithSpeed0.Setup(action => action.Actor).Returns(characterWithSpeed0.Object);
+        characterWithSpeed0.Setup(character => character.Speed).Returns(0);
+
+        Assert.Throws<UnableToRegisterActionException>(delegate()
+        {
+            turnManager.RegisterAction(actionWithSpeed0.Object);
+        });
+    }
+
+    [Test]
     public void TestGetNextAction()
     {
         actionsQueue.First().Enqueue(mockCharacterAction.Object);
@@ -56,6 +70,17 @@ public class TurnManagerTest
 
         Assert.AreEqual(0, actionsQueue.Count);
         Assert.AreSame(mockCharacterAction.Object, action);
+    }
+
+    [Test]
+    public void TestGetNextAction_Invalid_NoActionExists()
+    {
+        actionsQueue.Clear();
+
+        Assert.Throws<NoCharacterActionExistsException>(delegate()
+        {
+            turnManager.GetNextAction();
+        });
     }
 
     [Test]
