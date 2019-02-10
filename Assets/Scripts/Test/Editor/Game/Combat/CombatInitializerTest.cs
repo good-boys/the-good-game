@@ -37,8 +37,8 @@ public class CombatInitializerTest
     [Test]
     public void TestStart()
     {
-        Mock<Player> mockPlayer = new Mock<Player>("name", 100);
-        Mock<Enemy> mockEnemy = new Mock<Enemy>("name", 100);
+        Mock<Player> mockPlayer = new Mock<Player>("name", 100, 1.0f);
+        Mock<Enemy> mockEnemy = new Mock<Enemy>("name", 100, 1.0f);
         Mock <CharacterCombatHandler> mockPlayerCombatHandler = new Mock<CharacterCombatHandler>();
         Mock<CharacterCombatHandler> mockEnemyCombatHandler = new Mock<CharacterCombatHandler>();
         mockCombatConfig.Setup(combatConfig => combatConfig.GetPlayer()).Returns(mockPlayer.Object);

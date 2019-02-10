@@ -28,8 +28,8 @@ public class CombatManagerTest
         mockCharacterManager = new Mock<CharacterManager>();
         mockTurnManager = new Mock<TurnManager>();
         mockGameFlowManager = new Mock<GameFlowManager>();
-        mockPlayer = new Mock<Player>("name", 100);
-        mockEnemy = new Mock<Enemy>("name", 100);
+        mockPlayer = new Mock<Player>("name", 100, 1.0f);
+        mockEnemy = new Mock<Enemy>("name", 100, 1.0f);
         mockEnemyAction = new Mock<CharacterAction>(mockEnemy.Object, null, null);
         mockPlayerAttack = new Mock<Attack>(null, 5, null, null);
         mockPlayerDefend = new Mock<Defend>(null, 5, null, null);

@@ -18,11 +18,13 @@ public class CharacterTest
     {
         string testName = "test";
         int testHealth = 100;
-        character = new Character(testName, testHealth);
+        float testSpeed = 1.0f;
+        character = new Character(testName, testHealth, testSpeed);
 
         Assert.AreEqual(testName, character.Name);
         Assert.AreEqual(testHealth, character.Health);
         Assert.AreEqual(testHealth, character.MaxHealth);
+        Assert.AreEqual(testSpeed, character.Speed);
     }
 
     [Test]
@@ -60,7 +62,7 @@ public class CharacterTest
     [Test]
     public void TestAttack()
     {
-        Character mockTarget = new Mock<Character>("name", 100).Object;
+        Character mockTarget = new Mock<Character>("name", 100, 1.0f).Object;
         Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0);
         int weaponDamage = 5;
         mockWeapon.Setup(weapon => weapon.Damage).Returns(weaponDamage);
@@ -78,7 +80,7 @@ public class CharacterTest
     [Test]
     public void TestDefend()
     {
-        Character mockTarget = new Mock<Character>("name", 100).Object;
+        Character mockTarget = new Mock<Character>("name", 100, 1.0f).Object;
         Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0);
         int weaponDefense = 5;
         mockWeapon.Setup(weapon => weapon.Defense).Returns(weaponDefense);
@@ -119,10 +121,11 @@ public class CharacterTest
     {
         string testName = "test";
         int testHealth = 100;
+        float testSpeed = 1.0f;
         mockCombatHandler = new Mock<CharacterCombatHandler>();
         mockCombatHandler.Setup(handler => handler.Subscribe(It.IsAny<CharacterCombatHandler>()));
         mockCombatHandler.Setup(handler => handler.OnAttack());
         mockCombatHandler.Setup(handler => handler.OnDefend());
-        return new Character(testName, testHealth, mockCombatHandler.Object);
+        return new Character(testName, testHealth, testSpeed, mockCombatHandler.Object);
     }
 }
