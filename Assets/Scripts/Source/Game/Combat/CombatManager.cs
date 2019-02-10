@@ -42,13 +42,17 @@ public class CombatManager : MonoBehaviour
 
     void onPlayerActionReceived()
     {
+        if(turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
+        {
+            return;
+        }
         generateEnemyActions();
         StartCoroutine(executeActions());
     }
 
     void generateEnemyActions()
     {
-        foreach (Enemy enemy in characterManager.GetEnemies())
+        foreach(Enemy enemy in characterManager.GetEnemies())
         {
             turnManager.RegisterAction(characterManager.RequestNextAction(enemy));
         }
