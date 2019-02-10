@@ -32,7 +32,7 @@ public class Character
         }
     }
 
-    public float Speed
+    public virtual int Speed
     {
         get
         {
@@ -40,6 +40,11 @@ public class Character
         }
         private set
         {
+            if(value < 0)
+            {
+                _speed = 0;
+                return;
+            }
             _speed = value;
         }
     }
@@ -57,9 +62,9 @@ public class Character
     }
 
     int _health;
-    float _speed;
+    int _speed;
 
-    public Character(string name, int health, float speed)
+    public Character(string name, int health, int speed)
     {
         characterCombatHandler = new CharacterCombatHandler();
         this.Name = name;
@@ -68,7 +73,7 @@ public class Character
         this.Speed = speed;
     }
 
-    public Character(string name, int health, float speed, CharacterCombatHandler characterCombatHandler)
+    public Character(string name, int health, int speed, CharacterCombatHandler characterCombatHandler)
     {
         this.characterCombatHandler = characterCombatHandler;
         this.Name = name;

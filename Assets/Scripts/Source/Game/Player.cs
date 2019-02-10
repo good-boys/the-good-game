@@ -1,6 +1,6 @@
 public class Player : Character
 {
-    public Player(string name, int health, float speed) : base(name, health, speed)
+    public Player(string name, int health, int speed) : base(name, health, speed)
     {
         
     }

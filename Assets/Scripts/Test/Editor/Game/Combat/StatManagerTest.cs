@@ -26,8 +26,8 @@ public class StatManagerTest
         mockAttack = new Mock<Attack>(null, attackDamage, null, null);
         mockDefend = new Mock<Defend>(null, defendDamageReduction, null, null);
         mockDefend_defenseTooHigh = new Mock<Defend>(null, tooHighDefendDamageReduction, null, null);
-        mockActor = new Mock<Character>("name", 100, 1.0f);
-        mockTarget = new Mock<Character>("name", 100, 1.0f);
+        mockActor = new Mock<Character>("name", 100, 1);
+        mockTarget = new Mock<Character>("name", 100, 1);
         
         mockAttack.Setup(attack => attack.Targets).Returns(new Character[] { mockTarget.Object });
         mockAttack.Setup(attack => attack.Actor).Returns(mockActor.Object);

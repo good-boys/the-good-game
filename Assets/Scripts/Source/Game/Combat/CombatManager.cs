@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CombatManager : MonoBehaviour
 {
-    // TODO: Replace permanent solution
+    // TODO: Replace with permanent solution
     [SerializeField]
     float delayBetweenActions = 1f;
 
@@ -56,7 +56,7 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator executeActions()
     {   
-        while(!turnManager.ShouldWaitForPlayerAction())
+        while(!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
         {
             ProcessNextAction();
             yield return new WaitForSeconds(delayBetweenActions);

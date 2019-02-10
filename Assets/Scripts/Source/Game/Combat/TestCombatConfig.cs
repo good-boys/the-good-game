@@ -19,7 +19,7 @@ public class TestCombatConfig : AbstractCombatConfig
     int playerWeaponDefense;
 
     [SerializeField]
-    float playerSpeed = 1.0f;
+    int playerSpeed = 1;
 
     [Header("Enemy")]
     [SerializeField]
@@ -38,7 +38,7 @@ public class TestCombatConfig : AbstractCombatConfig
     int enemyWeaponDefense;
 
     [SerializeField]
-    float enemySpeed = 1.0f;
+    int enemySpeed = 1;
 
     Player player;
     Enemy enemy;
