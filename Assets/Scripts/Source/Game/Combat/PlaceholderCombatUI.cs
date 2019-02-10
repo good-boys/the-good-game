@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlaceholderCombatUI : AbstractCombatUI
 {
+    int actionIndex = 1;
     [SerializeField]
     Image playerHealth, enemyHealth;
 
@@ -21,8 +21,8 @@ public class PlaceholderCombatUI : AbstractCombatUI
     {
         playerName = player.Name;
         return new CharacterCombatHandler(
-            ()=>{actionBar.text = string.Format("{0} is attacking with {1}", player.Name, player.EquippedWeapon.Name);},
-            ()=>{actionBar.text = string.Format("{0} is defending with {1}", player.Name, player.EquippedWeapon.Name);},
+            ()=>{actionBar.text = string.Format("({2}) {0} is attacking with {1}", player.Name, player.EquippedWeapon.Name, actionIndex++);},
+            ()=>{actionBar.text = string.Format("({2}) {0} is defending with {1}", player.Name, player.EquippedWeapon.Name, actionIndex++);},
             damagePlayer,
             killPlayer
         );
@@ -46,8 +46,8 @@ public class PlaceholderCombatUI : AbstractCombatUI
     {
         enemyName = enemy.Name;
         return new CharacterCombatHandler(
-            ()=>{actionBar.text = string.Format("{0} is attacking with {1}", enemy.Name, enemy.EquippedWeapon.Name);},
-            ()=>{actionBar.text = string.Format("{0} is defending with {1}", enemy.Name, enemy.EquippedWeapon.Name);},
+            ()=>{actionBar.text = string.Format("({2}) {0} is attacking with {1}", enemy.Name, enemy.EquippedWeapon.Name, actionIndex++);},
+            ()=>{actionBar.text = string.Format("({2}) {0} is defending with {1}", enemy.Name, enemy.EquippedWeapon.Name, actionIndex++);},
             damageEnemy,
             killEnemy
         );

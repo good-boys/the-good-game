@@ -99,13 +99,17 @@ public class TurnManager : MonoBehaviour
         {
             return true;
         }
-        if(roundActions.Last().Actor is Enemy && 
-            countsInRound.ContainsKey(player) &&
-            countsInRound[player] < player.Speed)
+        // CASE: Player hasn't taken a turn yet
+        if(!countsInRound.ContainsKey(player))
         {
             return true;
         }
-        return false;
+        // CASE: Player has used all their turns for the round
+        if(countsInRound[player] >= player.Speed)
+        {
+            return false;
+        }
+        return true;
     }
 }
 

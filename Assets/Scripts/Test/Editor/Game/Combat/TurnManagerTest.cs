@@ -114,7 +114,10 @@ public class TurnManagerTest
     [Test]
     public void TestShouldWaitForPlayerAction_HasNextAction()
     {
-        actionsQueue.First().Enqueue(mockCharacterAction.Object);
+        Mock<CharacterAction> mockPlayerAction = new Mock<CharacterAction>(null, null, null);
+        mockPlayerAction.Setup(action => action.Actor).Returns(mockPlayer.Object);
+        actionsQueue.First().Enqueue(mockPlayerAction.Object);
+        turnCounts.First()[mockPlayer.Object] = 1;
 
         bool shouldWaitForAction = turnManager.ShouldWaitForPlayerAction(mockPlayer.Object);
 
