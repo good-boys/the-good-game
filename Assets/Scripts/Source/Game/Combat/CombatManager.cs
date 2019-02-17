@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class CombatManager : MonoBehaviour
 {
-    // TODO: Replace permanent solution
+    // TODO: Replace with permanent solution
     [SerializeField]
     float delayBetweenActions = 1f;
 
@@ -37,7 +37,7 @@ public class CombatManager : MonoBehaviour
 
     public void PlayerAttack()
     {
-        if (!turnManager.ShouldWaitForPlayerAction())
+        if (!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
             return;
 
         Player player = characterManager.GetActivePlayer();
@@ -48,7 +48,7 @@ public class CombatManager : MonoBehaviour
 
     public void PlayerDefend()
     {
-        if (!turnManager.ShouldWaitForPlayerAction())
+        if (!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
             return;
 
         Player player = characterManager.GetActivePlayer();
@@ -66,13 +66,17 @@ public class CombatManager : MonoBehaviour
 
     void onPlayerActionReceived()
     {
+        if(turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
+        {
+            return;
+        }
         generateEnemyActions();
         StartCoroutine(executeActions());
     }
 
     void generateEnemyActions()
     {
-        foreach (Enemy enemy in characterManager.GetEnemies())
+        foreach(Enemy enemy in characterManager.GetEnemies())
         {
             turnManager.RegisterAction(characterManager.RequestNextAction(enemy));
         }
@@ -80,7 +84,7 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator executeActions()
     {
-        while(!turnManager.ShouldWaitForPlayerAction())
+        while(!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
         {
             float timer = 0.0f;
             float missDelay = 0.0f;
