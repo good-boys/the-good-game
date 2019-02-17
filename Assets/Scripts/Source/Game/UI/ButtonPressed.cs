@@ -39,7 +39,7 @@ public class ButtonPressed : MonoBehaviour {
         yield return new WaitForSeconds(0.2f);
         while (flickerTime < 1)
         {
-            flickerTime += Time.deltaTime;
+            flickerTime += 0.2f;
 
             if (active)
             {
