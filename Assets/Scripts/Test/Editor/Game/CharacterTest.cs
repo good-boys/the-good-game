@@ -66,7 +66,7 @@ public class CharacterTest
     [Test]
     public void TestEquipWeapon()
     {
-        Weapon mockWeapon = new Mock<Weapon>("name", 0, 0).Object;
+        Weapon mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0).Object;
 
         character.EquipWeapon(mockWeapon);
 
@@ -77,9 +77,11 @@ public class CharacterTest
     public void TestAttack()
     {
         Character mockTarget = new Mock<Character>("name", 100, 1).Object;
-        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0);
+        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0);
         int weaponDamage = 5;
+        int weaponBonus = 15;
         mockWeapon.Setup(weapon => weapon.Damage).Returns(weaponDamage);
+        mockWeapon.Setup(weapon => weapon.BonusAttack).Returns(weaponBonus);
         character.EquipWeapon(mockWeapon.Object);
 
         Attack attack = character.Attack(mockTarget);
@@ -88,6 +90,7 @@ public class CharacterTest
         Assert.AreSame(character, attack.Actor);
         Assert.AreSame(mockTarget, attack.Targets[0]);
         Assert.AreEqual(weaponDamage, attack.Damage);
+        Assert.AreEqual(weaponBonus, attack.Bonus);
         mockCombatHandler.Verify(handler => handler.OnAttack());
     }
 
@@ -95,9 +98,11 @@ public class CharacterTest
     public void TestDefend()
     {
         Character mockTarget = new Mock<Character>("name", 100, 1).Object;
-        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0);
+        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0);
         int weaponDefense = 5;
+        int weaponBonus = 15;
         mockWeapon.Setup(weapon => weapon.Defense).Returns(weaponDefense);
+        mockWeapon.Setup(weapon => weapon.BonusDefense).Returns(weaponBonus);
         character.EquipWeapon(mockWeapon.Object);
 
         Defend defend = character.Defend(mockTarget);
@@ -106,6 +111,7 @@ public class CharacterTest
         Assert.AreSame(character, defend.Actor);
         Assert.AreSame(mockTarget, defend.Targets[0]);
         Assert.AreEqual(weaponDefense, defend.Defense);
+        Assert.AreEqual(weaponBonus, defend.Bonus);
         mockCombatHandler.Verify(handler => handler.OnDefend());
     }
 

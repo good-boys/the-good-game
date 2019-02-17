@@ -31,8 +31,8 @@ public class CombatManagerTest
         mockPlayer = new Mock<Player>("name", 100, 1);
         mockEnemy = new Mock<Enemy>("name", 100, 1);
         mockEnemyAction = new Mock<CharacterAction>(mockEnemy.Object, null, null);
-        mockPlayerAttack = new Mock<Attack>(null, 5, null, null);
-        mockPlayerDefend = new Mock<Defend>(null, 5, null, null);
+        mockPlayerAttack = new Mock<Attack>(null, 5, 5, null, null);
+        mockPlayerDefend = new Mock<Defend>(null, 5, 5, null, null);
         mockCharacterManager.Setup(characterManager => characterManager.GetActivePlayer()).Returns(mockPlayer.Object);
         mockCharacterManager.Setup(characterManager => characterManager.GetEnemies()).Returns(new Enemy[] { mockEnemy.Object });
         mockCharacterManager.Setup(characterManager => characterManager.RequestNextAction(It.IsAny<Enemy>())).Returns(mockEnemyAction.Object);
