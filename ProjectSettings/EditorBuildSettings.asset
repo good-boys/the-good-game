@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/HelloWorldCombat.unity
-    guid: 76b53e25f55384297ba73b9476195c85
+    path: Assets/Scenes/Main.unity
+    guid: 6cad5653379265547a4fff1aebb75ac3
+  - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: 618c7e2f730127742a421ff019e495f4
