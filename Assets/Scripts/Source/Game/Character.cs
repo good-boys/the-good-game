@@ -32,6 +32,23 @@ public class Character
         }
     }
 
+    public virtual int Speed
+    {
+        get
+        {
+            return _speed;
+        }
+        private set
+        {
+            if(value < 0)
+            {
+                _speed = 0;
+                return;
+            }
+            _speed = value;
+        }
+    }
+
     public Weapon EquippedWeapon
     {
         get;
@@ -45,21 +62,24 @@ public class Character
     }
 
     int _health;
+    int _speed;
 
-    public Character(string name, int health)
+    public Character(string name, int health, int speed)
     {
         characterCombatHandler = new CharacterCombatHandler();
         this.Name = name;
         this.MaxHealth = health;
         this.Health = health;
+        this.Speed = speed;
     }
 
-    public Character(string name, int health, CharacterCombatHandler characterCombatHandler)
+    public Character(string name, int health, int speed, CharacterCombatHandler characterCombatHandler)
     {
         this.characterCombatHandler = characterCombatHandler;
         this.Name = name;
         this.MaxHealth = health;
         this.Health = health;
+        this.Speed = speed;
     }
 
     public virtual void Damage(int damage)

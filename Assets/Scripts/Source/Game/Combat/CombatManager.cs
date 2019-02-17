@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CombatManager : MonoBehaviour
 {
-    // TODO: Replace permanent solution
+    // TODO: Replace with permanent solution
     [SerializeField]
     float delayBetweenActions = 1f;
 
@@ -42,13 +42,17 @@ public class CombatManager : MonoBehaviour
 
     void onPlayerActionReceived()
     {
+        if(turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
+        {
+            return;
+        }
         generateEnemyActions();
         StartCoroutine(executeActions());
     }
 
     void generateEnemyActions()
     {
-        foreach (Enemy enemy in characterManager.GetEnemies())
+        foreach(Enemy enemy in characterManager.GetEnemies())
         {
             turnManager.RegisterAction(characterManager.RequestNextAction(enemy));
         }
@@ -56,7 +60,7 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator executeActions()
     {   
-        while(!turnManager.ShouldWaitForPlayerAction())
+        while(!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
         {
             ProcessNextAction();
             yield return new WaitForSeconds(delayBetweenActions);

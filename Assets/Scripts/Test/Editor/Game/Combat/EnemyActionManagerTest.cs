@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using NUnit.Framework;
 using Moq;
 
@@ -20,8 +20,8 @@ public class EnemyActionManagerTest
         enemyActionManager = gameObject.AddComponent<EnemyActionManager>();
 
         mockRandomGenerator = new Mock<RandomGenerator>();
-        mockPlayer = new Mock<Player>("name", 100);
-        mockEnemy = new Mock<Enemy>("name", 100);
+        mockPlayer = new Mock<Player>("name", 100, 1);
+        mockEnemy = new Mock<Enemy>("name", 100, 1);
         mockAttack = new Mock<Attack>(null, 5, null, null);
         mockDefend = new Mock<Defend>(null, 5, null, null);
 

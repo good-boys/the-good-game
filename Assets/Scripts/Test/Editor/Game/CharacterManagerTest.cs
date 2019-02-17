@@ -23,8 +23,8 @@ public class CharacterManagerTest
     [Test]
     public void TestRequestNextAction()
     {
-        Player mockPlayer = new Mock<Player>("name", 100).Object;
-        Enemy mockEnemy = new Mock<Enemy>("name", 100).Object;
+        Player mockPlayer = new Mock<Player>("name", 100, 1).Object;
+        Enemy mockEnemy = new Mock<Enemy>("name", 100, 1).Object;
         CharacterAction mockCharacterAction = new Mock<CharacterAction>(mockEnemy, null, null).Object;
         mockEnemyActionManager.Setup(manager => manager.RequestNextAction(It.IsAny<Enemy>(), It.IsAny<Player>())).Returns(mockCharacterAction);
         characterManager.RegisterCharacter(mockPlayer);
@@ -38,7 +38,7 @@ public class CharacterManagerTest
     [Test]
     public void TestRegisterCharacter_Player()
     {
-        Player mockPlayer = new Mock<Player>("name", 100).Object;
+        Player mockPlayer = new Mock<Player>("name", 100, 1).Object;
 
         characterManager.RegisterCharacter(mockPlayer);
 
@@ -48,7 +48,7 @@ public class CharacterManagerTest
     [Test]
     public void TestRegisterCharacter_Enemy()
     {
-        Enemy mockEnemy = new Mock<Enemy>("name", 100).Object;
+        Enemy mockEnemy = new Mock<Enemy>("name", 100, 1).Object;
 
         characterManager.RegisterCharacter(mockEnemy);
 
@@ -69,7 +69,7 @@ public class CharacterManagerTest
     public void TestProcessAction_Defend()
     {
         Mock<Defend> mockDefend = new Mock<Defend>(null, 5, null, null);
-        Mock<Character> mockActor = new Mock<Character>("name", 100);
+        Mock<Character> mockActor = new Mock<Character>("name", 100, 1);
         mockDefend.Setup(defend => defend.Actor).Returns(mockActor.Object);
         mockActor.Setup(actor => actor.SetActiveAction(It.IsAny<CharacterAction>()));
 

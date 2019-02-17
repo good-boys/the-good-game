@@ -7,8 +7,8 @@ public class CharacterActionTest
     [Test]
     public void TestInit()
     {
-        Character mockActor = new Mock<Character>("name", 100).Object;
-        Character mockTarget = new Mock<Character>("name", 100).Object;
+        Character mockActor = new Mock<Character>("name", 100, 1).Object;
+        Character mockTarget = new Mock<Character>("name", 100, 1).Object;
 
         CharacterAction characterAction = new CharacterAction(mockActor, null, mockTarget);
 
@@ -24,8 +24,8 @@ public class CharacterActionTest
         {
             actionRun = true;
         };
-        Character mockActor = new Mock<Character>("name", 100).Object;
-        Character mockTarget = new Mock<Character>("name", 100).Object;
+        Character mockActor = new Mock<Character>("name", 100, 1).Object;
+        Character mockTarget = new Mock<Character>("name", 100, 1).Object;
         CharacterAction characterAction = new CharacterAction(mockActor, testAction, mockTarget);
 
         characterAction.Use();

@@ -18,6 +18,9 @@ public class TestCombatConfig : AbstractCombatConfig
     [SerializeField]
     int playerWeaponDefense;
 
+    [SerializeField]
+    int playerSpeed = 1;
+
     [Header("Enemy")]
     [SerializeField]
     string enemyName = "Troll";
@@ -34,14 +37,17 @@ public class TestCombatConfig : AbstractCombatConfig
     [SerializeField]
     int enemyWeaponDefense;
 
+    [SerializeField]
+    int enemySpeed = 1;
+
     Player player;
     Enemy enemy;
 
     void Awake()
     {
-        player = new Player(playerName, playerHealth);
+        player = new Player(playerName, playerHealth, playerSpeed);
         player.EquipWeapon(new Weapon(playerWeaponName, playerWeaponDamage, playerWeaponDefense));
-        enemy = new Enemy(enemyName, enemyHealth);
+        enemy = new Enemy(enemyName, enemyHealth, enemySpeed);
         enemy.EquipWeapon(new Weapon(enemyWeaponName, enemyWeaponDamage, enemyWeaponDefense));
     }
 

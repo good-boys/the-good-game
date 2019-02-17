@@ -1201,11 +1201,13 @@ MonoBehaviour:
   playerWeaponName: Great Sword
   playerWeaponDamage: 10
   playerWeaponDefense: 3
+  playerSpeed: 3
   enemyName: Troll
   enemyWeaponName: Club
   enemyHealth: 100
   enemyWeaponDamage: 10
   enemyWeaponDefense: 3
+  enemySpeed: 1
 --- !u!114 &1156787234
 MonoBehaviour:
   m_ObjectHideFlags: 0

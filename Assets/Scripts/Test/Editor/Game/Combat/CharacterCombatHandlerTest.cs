@@ -1,7 +1,6 @@
 using System;
 using Eppy;
 using NUnit.Framework;
-using Moq;
 
 public class CharacterCombatHandlerTest
 {
