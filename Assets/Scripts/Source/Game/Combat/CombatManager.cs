@@ -33,8 +33,6 @@ public class CombatManager : MonoBehaviour
         this.characterManager = characterManager;
         this.turnManager = turnManager;
         this.gameFlowManager = gameFlowManager;
-
-        Debug.Log(characterManager);
     }
 
     public void PlayerAttack()
@@ -61,7 +59,6 @@ public class CombatManager : MonoBehaviour
 
     public void ProcessNextAction()
     {
-
         CharacterAction characterAction = turnManager.GetNextAction();
         characterManager.ProcessAction(characterAction);
         characterAction.Use();
