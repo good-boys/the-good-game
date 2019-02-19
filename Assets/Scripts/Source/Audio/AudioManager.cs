@@ -5,6 +5,11 @@ public class AudioManager : MonoBehaviour
 {
     Dictionary<string, AudioSource> sources = new Dictionary<string, AudioSource>();
 
+    public void Init(Dictionary<string, AudioSource> sources)
+    {
+        this.sources = sources;
+    }
+
     public void RegisterAudioSource(AudioSource source)
     {
         sources[source.gameObject.name] = source;
@@ -15,7 +20,7 @@ public class AudioManager : MonoBehaviour
         AudioSource source;
         if(!sources.TryGetValue(sourceName, out source))
         {
-            Debug.LogError("Source {0} not found. Unable to play clip.");
+            Debug.LogErrorFormat("Source {0} not found. Unable to play clip.", sourceName);
             return;
         }
 

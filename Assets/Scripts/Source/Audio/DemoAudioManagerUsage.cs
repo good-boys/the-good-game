@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TestAudioManager : MonoBehaviour 
+public class DemoAudioManagerUsage : MonoBehaviour 
 {
     [SerializeField]
     AudioSource musicSource;

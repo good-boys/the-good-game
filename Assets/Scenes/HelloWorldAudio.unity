@@ -232,7 +232,7 @@ GameObject:
   - component: {fileID: 200188785}
   - component: {fileID: 200188784}
   m_Layer: 0
-  m_Name: TestAudioManager
+  m_Name: DemoAudioManagerUsage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
