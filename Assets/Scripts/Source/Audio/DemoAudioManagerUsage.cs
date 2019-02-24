@@ -11,7 +11,7 @@ public class DemoAudioManagerUsage : MonoBehaviour
     [SerializeField]
     AudioClip music;
 
-	void Start()
+    void Start()
     {
         audioManager.RegisterAudioSource(musicSource);
         audioManager.Play("MusicSource", music);
