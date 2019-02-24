@@ -18,7 +18,9 @@ public class CombatManagerTest
     CombatManager combatManager;
     Queue<CharacterAction> testActionQueue;
     int testNumberEnemyTurns = 1;
+    int testNumberPlayerTurns = 1;
     int numberEnemyTurnsTaken = 0;
+    int numberPlayerTurnsTaken = 0;
     int millisecondsToWaitBeforeEnemyAction = 1000;
 
     [SetUp]
@@ -31,15 +33,26 @@ public class CombatManagerTest
         mockPlayer = new Mock<Player>("name", 100, 1);
         mockEnemy = new Mock<Enemy>("name", 100, 1);
         mockEnemyAction = new Mock<CharacterAction>(mockEnemy.Object, null, null);
-        mockPlayerAttack = new Mock<Attack>(null, 5, null, null);
-        mockPlayerDefend = new Mock<Defend>(null, 5, null, null);
+        mockPlayerAttack = new Mock<Attack>(null, 5, 5, null, null);
+        mockPlayerDefend = new Mock<Defend>(null, 5, 5, null, null);
         mockCharacterManager.Setup(characterManager => characterManager.GetActivePlayer()).Returns(mockPlayer.Object);
         mockCharacterManager.Setup(characterManager => characterManager.GetEnemies()).Returns(new Enemy[] { mockEnemy.Object });
         mockCharacterManager.Setup(characterManager => characterManager.RequestNextAction(It.IsAny<Enemy>())).Returns(mockEnemyAction.Object);
-        mockTurnManager.Setup(turnManager => turnManager.RegisterAction(It.IsAny<CharacterAction>())).Callback<CharacterAction>((action) => { testActionQueue.Enqueue(action); });
-        mockTurnManager.Setup(turnManager => turnManager.ShouldWaitForPlayerAction(It.IsAny<Player>())).Returns(() => numberEnemyTurnsTaken >= testNumberEnemyTurns);
+        mockTurnManager.Setup(turnManager => turnManager.RegisterAction(It.IsAny<CharacterAction>())).Callback<CharacterAction>((action) => { 
+            if (action == mockPlayerAttack.Object || action == mockPlayerDefend.Object)
+            {
+                numberPlayerTurnsTaken++;
+            }
+            testActionQueue.Enqueue(action);
+        });
+        mockTurnManager.Setup(turnManager => turnManager.ShouldWaitForPlayerAction(It.IsAny<Player>())).Returns(() => numberPlayerTurnsTaken == 0);
         mockTurnManager.Setup(turnManager => turnManager.GetNextAction()).Returns(() => testActionQueue.Count > 0 ? testActionQueue.Dequeue() : null);
+        mockTurnManager.Setup(turnManager => turnManager.Peek()).Returns(mockEnemyAction.Object);
+        mockEnemyAction.Setup(action => action.Actor).Returns(mockEnemy.Object);
         mockEnemyAction.Setup(action => action.Use()).Callback(() => { numberEnemyTurnsTaken++;});
+        mockEnemyAction.Setup(action => action.Targets).Returns(new Character[] { mockPlayer.Object });
+        mockPlayer.Setup(player => player.ActiveAction).Returns(mockPlayerDefend.Object);
+        mockPlayerAttack.Setup(action => action.Use()).Callback(() => { numberPlayerTurnsTaken++; });
         mockCharacterManager.Setup(characterManager => characterManager.ProcessAction(It.IsAny<CharacterAction>()));
         mockPlayer.Setup(player => player.Attack(It.IsAny<Enemy[]>())).Returns(mockPlayerAttack.Object);
         mockPlayer.Setup(player => player.Defend(It.IsAny<Enemy[]>())).Returns(mockPlayerDefend.Object);
@@ -57,6 +70,7 @@ public class CombatManagerTest
     [TearDown]
     public void TearDown()
     {
+        numberPlayerTurnsTaken = 0;
         numberEnemyTurnsTaken = 0;
     }
 

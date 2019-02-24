@@ -58,17 +58,20 @@ public class CharacterManagerTest
     [Test]
     public void TestProcessAction_Attack()
     {
-        Attack mockAttack = new Mock<Attack>(null, 5, null, null).Object;
+        Mock<Attack> mockAttack = new Mock<Attack>(null, 5, 5, null, null);
+        Mock<Character> mockActor = new Mock<Character>("name", 100, 1);
+        mockAttack.Setup(attack => attack.Actor).Returns(mockActor.Object);
+        mockActor.Setup(actor => actor.SetActiveAction(It.IsAny<CharacterAction>()));
 
-        characterManager.ProcessAction(mockAttack);
+        characterManager.ProcessAction(mockAttack.Object);
 
-        mockStatManager.Verify(manager => manager.ProcessAction(mockAttack));
+        mockStatManager.Verify(manager => manager.ProcessAction(mockAttack.Object));
     }
 
     [Test]
     public void TestProcessAction_Defend()
     {
-        Mock<Defend> mockDefend = new Mock<Defend>(null, 5, null, null);
+        Mock<Defend> mockDefend = new Mock<Defend>(null, 5, 5, null, null);
         Mock<Character> mockActor = new Mock<Character>("name", 100, 1);
         mockDefend.Setup(defend => defend.Actor).Returns(mockActor.Object);
         mockActor.Setup(actor => actor.SetActiveAction(It.IsAny<CharacterAction>()));

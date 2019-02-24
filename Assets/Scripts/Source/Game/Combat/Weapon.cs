@@ -13,9 +13,23 @@ public class Weapon : CharacterItem
         private set;
     }
 
-    public Weapon(string name, int damage, int defense) : base(name)
+    public virtual int BonusAttack
+    {
+        get;
+        private set;
+    }
+
+    public virtual int BonusDefense
+    {
+        get;
+        private set;
+    }
+
+    public Weapon(string name, int damage, int defense, int bonusAttack, int bonusDefense) : base(name)
     {
         this.Damage = damage;
         this.Defense = defense;
+        this.BonusAttack = bonusAttack;
+        this.BonusDefense = bonusDefense;
     }
 }

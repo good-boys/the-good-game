@@ -82,6 +82,16 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    public virtual Queue<CharacterAction> GetQueue()
+    {
+        return characterActionsByRound.First();
+    }
+
+    public virtual CharacterAction Peek()
+    {
+        return characterActionsByRound.First().Peek();
+    }
+
     public virtual bool ShouldWaitForPlayerAction(Player player)
     {
         if(player.Speed == 0)

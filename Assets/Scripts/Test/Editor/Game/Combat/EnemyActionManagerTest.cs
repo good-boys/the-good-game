@@ -22,8 +22,8 @@ public class EnemyActionManagerTest
         mockRandomGenerator = new Mock<RandomGenerator>();
         mockPlayer = new Mock<Player>("name", 100, 1);
         mockEnemy = new Mock<Enemy>("name", 100, 1);
-        mockAttack = new Mock<Attack>(null, 5, null, null);
-        mockDefend = new Mock<Defend>(null, 5, null, null);
+        mockAttack = new Mock<Attack>(null, 5, 5, null, null);
+        mockDefend = new Mock<Defend>(null, 5, 5, null, null);
 
         mockEnemy.Setup(enemy => enemy.Attack(mockPlayer.Object)).Returns(mockAttack.Object);
         mockEnemy.Setup(enemy => enemy.Defend(mockPlayer.Object)).Returns(mockDefend.Object);
