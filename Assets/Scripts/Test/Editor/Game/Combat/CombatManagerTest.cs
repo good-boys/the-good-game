@@ -48,6 +48,7 @@ public class CombatManagerTest
         mockTurnManager.Setup(turnManager => turnManager.ShouldWaitForPlayerAction(It.IsAny<Player>())).Returns(() => numberPlayerTurnsTaken == 0);
         mockTurnManager.Setup(turnManager => turnManager.GetNextAction()).Returns(() => testActionQueue.Count > 0 ? testActionQueue.Dequeue() : null);
         mockTurnManager.Setup(turnManager => turnManager.Peek()).Returns(mockEnemyAction.Object);
+        mockEnemyAction.Setup(action => action.Actor).Returns(mockEnemy.Object);
         mockEnemyAction.Setup(action => action.Use()).Callback(() => { numberEnemyTurnsTaken++;});
         mockEnemyAction.Setup(action => action.Targets).Returns(new Character[] { mockPlayer.Object });
         mockPlayer.Setup(player => player.ActiveAction).Returns(mockPlayerDefend.Object);
@@ -69,6 +70,7 @@ public class CombatManagerTest
     [TearDown]
     public void TearDown()
     {
+        numberPlayerTurnsTaken = 0;
         numberEnemyTurnsTaken = 0;
     }
 

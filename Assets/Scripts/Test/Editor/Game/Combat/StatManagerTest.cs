@@ -15,6 +15,8 @@ public class StatManagerTest
 
     int attackDamage = 10;
     int defendDamageReduction = 5;
+    int attackBonus = 10;
+    int defendBonusReduction = 5;
     int tooHighDefendDamageReduction = 15;
 
     [SetUp]
@@ -23,9 +25,9 @@ public class StatManagerTest
         gameObject = new GameObject();
         statManager = gameObject.AddComponent<StatManager>();
 
-        mockAttack = new Mock<Attack>(null, attackDamage, null, null);
-        mockDefend = new Mock<Defend>(null, defendDamageReduction, null, null);
-        mockDefend_defenseTooHigh = new Mock<Defend>(null, tooHighDefendDamageReduction, null, null);
+        mockAttack = new Mock<Attack>(null, attackDamage, attackBonus, null, null);
+        mockDefend = new Mock<Defend>(null, defendDamageReduction, defendBonusReduction, null, null);
+        mockDefend_defenseTooHigh = new Mock<Defend>(null, tooHighDefendDamageReduction, defendBonusReduction, null, null);
         mockActor = new Mock<Character>("name", 100, 1);
         mockTarget = new Mock<Character>("name", 100, 1);
         
