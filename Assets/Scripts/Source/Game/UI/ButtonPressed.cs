@@ -14,15 +14,15 @@ public class ButtonPressed : MonoBehaviour
     UnityEvent actions;
     
     void Start () {
-	btn = GetComponent<Button>();
-	btnText = GetComponentInChildren<Text>();
+	    btn = GetComponent<Button>();
+	    btnText = GetComponentInChildren<Text>();
 
-	if (btn != null)
-	{
-	    actions = btn.onClick;
-	    btn.onClick = new Button.ButtonClickedEvent();
-	    btn.onClick.AddListener(Flicker);
-	}
+	    if (btn != null)
+	    {
+	        actions = btn.onClick;
+	        btn.onClick = new Button.ButtonClickedEvent();
+	        btn.onClick.AddListener(Flicker);
+	    }
     }
 
     void Flicker()

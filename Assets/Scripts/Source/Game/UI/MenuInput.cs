@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public class MenuInput : MonoBehaviour {
+public class MenuInput : MonoBehaviour
+{
     public EventSystem eventSystem;
     public GameObject lastSelectedObj;
     public GameObject selectedObject;
