@@ -11,9 +11,13 @@ public class DemoAudioManagerUsage : MonoBehaviour
     [SerializeField]
     AudioClip music;
 
+    [SerializeField]
+    float fadeInTime;
+
     void Start()
     {
+        AudioOptions options = new AudioOptions(fadeInTime);
         audioManager.RegisterAudioSource(musicSource);
-        audioManager.Play("MusicSource", music);
+        audioManager.Play("MusicSource", music, options);
     }
 }

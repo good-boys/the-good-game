@@ -1,7 +1,10 @@
 ﻿using System;
 
-public class AudioOptions 
+public class AudioOptions
 {
+    private const float MAX_VOLUME = 1f;
+    private const float MIN_VOLUME = 0f;
+
     public bool HasFadeIn
     {
         get
@@ -18,8 +21,17 @@ public class AudioOptions
         }
     }
 
+    public bool HasEndHandler
+    {
+        get
+        {
+            return onEndHandler != null;
+        }
+    }
+
     public float FadeInTime { get; private set; }
     public float FadeOutTime { get; private set; }
+    public float Volume { get; private set; }
     public bool Looping { get; private set; }
     // Should the AudioSource cutover without fading out the AudioClip?
     public bool HardTransitionIn { get; private set; }
@@ -28,12 +40,14 @@ public class AudioOptions
 
     public AudioOptions(float fadeInTime = 0f,
                         float fadeOutTime = 0f,
+                        float volume = 1f,
                         bool shouldLoop = false,
                         bool hardTransitionIn = true,
                         Action onEndHandler = null)
     {
         this.FadeInTime = fadeInTime;
         this.FadeOutTime = FadeOutTime;
+        this.Volume = Math.Max(MIN_VOLUME, Math.Min(MAX_VOLUME, volume));
         this.Looping = shouldLoop;
         this.HardTransitionIn = hardTransitionIn;
         this.onEndHandler = onEndHandler;

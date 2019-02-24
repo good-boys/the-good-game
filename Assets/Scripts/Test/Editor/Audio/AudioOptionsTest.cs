@@ -8,6 +8,7 @@ public class AudioOptionsTest
     {
         float fadeInTime = 0.3f;
         float fadeOutTime = 0.0f;
+        float volume = 0.9f;
         bool shouldLoop = true;
         bool hardTransitionIn = false;
         Action onEndHandler = delegate {};
@@ -15,16 +16,62 @@ public class AudioOptionsTest
         AudioOptions options = new AudioOptions(
             fadeInTime,
             fadeOutTime,
+            volume,
             shouldLoop,
             hardTransitionIn,
             onEndHandler);
 
         Assert.AreEqual(fadeInTime, options.FadeInTime);
         Assert.AreEqual(fadeOutTime, options.FadeOutTime);
+        Assert.AreEqual(volume, options.Volume);
         Assert.AreEqual(shouldLoop, options.Looping);
         Assert.AreEqual(hardTransitionIn, options.HardTransitionIn);
         Assert.True(options.HasFadeIn);
         Assert.False(options.HasFadeOut);
+        Assert.True(options.HasEndHandler);
+    }
+
+
+    [Test]
+    public void TestInit_ClampVolumeMin()
+    {
+        float fadeInTime = 0.3f;
+        float fadeOutTime = 0.0f;
+        float volume = -100f;
+        bool shouldLoop = true;
+        bool hardTransitionIn = false;
+        Action onEndHandler = delegate { };
+
+        AudioOptions options = new AudioOptions(
+            fadeInTime,
+            fadeOutTime,
+            volume,
+            shouldLoop,
+            hardTransitionIn,
+            onEndHandler);
+
+        Assert.AreEqual(0, options.Volume);
+    }
+
+    [Test]
+    public void TestInit_ClampVolumeMax()
+    {
+        float fadeInTime = 0.3f;
+        float fadeOutTime = 0.0f;
+        float volume = 100f;
+        bool shouldLoop = true;
+        bool hardTransitionIn = false;
+        Action onEndHandler = delegate { };
+
+        AudioOptions options = new AudioOptions(
+            fadeInTime,
+            fadeOutTime,
+            volume,
+            shouldLoop,
+            hardTransitionIn,
+            onEndHandler);
+
+        Assert.AreEqual(1f, options.Volume);
     }
 
     [Test]
@@ -32,6 +79,7 @@ public class AudioOptionsTest
     {
         float fadeInTime = 0.3f;
         float fadeOutTime = 0.0f;
+        float volume = 0.85f;
         bool shouldLoop = true;
         bool hardTransitionIn = false;
         bool handlerRun = false;
@@ -42,6 +90,7 @@ public class AudioOptionsTest
         AudioOptions options = new AudioOptions(
             fadeInTime,
             fadeOutTime,
+            volume,
             shouldLoop,
             hardTransitionIn,
             onEndHandler);
@@ -62,5 +111,6 @@ public class AudioOptionsTest
         Assert.True(options.HardTransitionIn);
         Assert.False(options.HasFadeIn);
         Assert.False(options.HasFadeOut);
+        Assert.False(options.HasEndHandler);
     }
 }
