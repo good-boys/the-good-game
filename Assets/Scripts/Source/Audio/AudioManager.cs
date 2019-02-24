@@ -46,6 +46,7 @@ public class AudioManager : MonoBehaviour
         }
         IEnumerator fadeInCoroutine = null;
         IEnumerator endClipCoroutine = null;
+        IEnumerator loopClipCoroutine = null;
         Action endHandlerAction = delegate{ options.OnEnd(); };
         if(options.HasFadeIn)
         {
@@ -63,6 +64,13 @@ public class AudioManager : MonoBehaviour
         {
             endClipCoroutine = waitAndExecute(newClip.length, endHandlerAction);
         }
+        if(options.Looping)
+        {
+            loopClipCoroutine = waitAndExecute(newClip.length, delegate
+            {
+                Play(source.name, newClip, options);
+            });
+        }
         Action playClipAction = delegate
         {
             previousClipOptions.OnEnd();
@@ -71,6 +79,17 @@ public class AudioManager : MonoBehaviour
             {
                 source.volume = 0;
                 StartCoroutine(fadeInCoroutine);
+                registerClipCoroutine(source, newClip, fadeInCoroutine);
+            }
+            if(endClipCoroutine != null)
+            {
+                StartCoroutine(endClipCoroutine);
+                registerClipCoroutine(source, newClip, endClipCoroutine);
+            }
+            if(loopClipCoroutine != null)
+            {
+                StartCoroutine(loopClipCoroutine);
+                registerClipCoroutine(source, newClip, loopClipCoroutine);
             }
             source.Play();
         };
@@ -86,6 +105,7 @@ public class AudioManager : MonoBehaviour
         {
             IEnumerator fadeOutPrevious = getFadeOutCoroutine(source, previousClipOptions, playClipAction);
             StartCoroutine(fadeOutPrevious);
+            registerClipCoroutine(source, newClip, fadeOutPrevious);
         }
     }
 
@@ -116,12 +136,27 @@ public class AudioManager : MonoBehaviour
         {
             fadeEndHandler();
         }
+        source.volume = endVolume;
     }
 
     IEnumerator waitAndExecute(float waitTime, Action action)
     {
         yield return new WaitForSeconds(waitTime);
         action();
+    }
+
+    void registerClipCoroutine(AudioSource source, 
+                               AudioClip clip, 
+                               IEnumerator coroutine)
+    {
+        List<IEnumerator> clipCoroutines;
+        string clipIdentifier = getClipIdentifier(source, clip);
+        if(!clipCoroutinesMap.TryGetValue(clipIdentifier, out clipCoroutines))
+        {
+            clipCoroutines = new List<IEnumerator>();
+            clipCoroutinesMap[clipIdentifier] = clipCoroutines;
+        }
+        clipCoroutines.Add(coroutine);
     }
 
     void cleanUpClipCoroutines(AudioSource source, AudioClip clip)
@@ -140,7 +175,6 @@ public class AudioManager : MonoBehaviour
 
     string getClipIdentifier(AudioSource source, AudioClip clip)
     {
-        Debug.Log(string.Format("{0}{1}", source.name, clip.name));
         return string.Format("{0}{1}", source.name, clip.name);
     }
 }
