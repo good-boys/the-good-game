@@ -5,24 +5,25 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class ButtonPressed : MonoBehaviour {
+public class ButtonPressed : MonoBehaviour 
+{
 
     Button btn;
     Text btnText;
 
     UnityEvent actions;
-	// Use this for initialization
-	void Start () {
-        btn = GetComponent<Button>();
-        btnText = GetComponentInChildren<Text>();
+    
+    void Start () {
+	btn = GetComponent<Button>();
+	btnText = GetComponentInChildren<Text>();
 
-        if (btn != null)
-        {
-            actions = btn.onClick;
-            btn.onClick = new Button.ButtonClickedEvent();
-            btn.onClick.AddListener(Flicker);
-        }
+	if (btn != null)
+	{
+	    actions = btn.onClick;
+	    btn.onClick = new Button.ButtonClickedEvent();
+	    btn.onClick.AddListener(Flicker);
 	}
+    }
 
     void Flicker()
     {
@@ -41,14 +42,7 @@ public class ButtonPressed : MonoBehaviour {
         {
             flickerTime += 0.2f;
 
-            if (active)
-            {
-                color.a = 0;
-            }
-            else
-            {
-                color.a = 1;
-            }
+            color.a = active ? 0 : 1;
 
             btn.image.color = color;
             if (btnText != null)
