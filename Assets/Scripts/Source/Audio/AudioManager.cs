@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,6 +34,16 @@ public class AudioManager : MonoBehaviour
         }
         clipOptions[getClipIdentifier(source, clip)] = options;
         handleClipTransition(source, clip, options);
+    }
+
+    public List<AudioSource> GetPlayingSources()
+    {
+        return sources.Values.Where(source => source.isPlaying).ToList();
+    }
+
+    public List<AudioClip> GetPlayingClips()
+    {
+        return GetPlayingSources().Select(source => source.clip).ToList();
     }
 
     void handleClipTransition(AudioSource source, AudioClip newClip, AudioOptions options)

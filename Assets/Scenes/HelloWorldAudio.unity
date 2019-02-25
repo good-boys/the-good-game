@@ -252,6 +252,7 @@ MonoBehaviour:
   musicSource: {fileID: 179000668}
   audioManager: {fileID: 512415748}
   music: {fileID: 8300000, guid: 101babecd708643639345c98d5653dcb, type: 3}
+  fadeInTime: 3
 --- !u!4 &200188785
 Transform:
   m_ObjectHideFlags: 0
