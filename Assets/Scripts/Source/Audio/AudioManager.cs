@@ -66,7 +66,7 @@ public class AudioManager : MonoBehaviour
         if(options.HasFadeOut)
         {
             IEnumerator fadeOutCoroutine = getFadeOutCoroutine(source, options, options.HasEndHandler ? endHandlerAction : null);
-            endClipCoroutine = waitAndExecute(newClip.length - options.FadeOutTime, delegate
+            endClipCoroutine = waitAndExecute(Mathf.Max(0, newClip.length - options.FadeOutTime), delegate
             {
                 StartCoroutine(fadeOutCoroutine);
             });
@@ -122,20 +122,20 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator getFadeInCoroutine(AudioSource source, AudioOptions options, Action fadeEndHandler = null)
     {
-        return getFadeCoroutine(source, 0, options.Volume, options.FadeInTime, fadeEndHandler);
+        return getFadeCoroutine(source, options.Volume, options.FadeInTime, fadeEndHandler);
     }
 
     IEnumerator getFadeOutCoroutine(AudioSource source, AudioOptions options, Action fadeEndHandler = null)
     {
-        return getFadeCoroutine(source, source.volume, 0, options.FadeOutTime, fadeEndHandler);
+        return getFadeCoroutine(source, 0, options.FadeOutTime, fadeEndHandler);
     }
 
     IEnumerator getFadeCoroutine(AudioSource source, 
-                                 float startVolume, 
                                  float endVolume, 
                                  float time, 
                                  Action fadeEndHandler = null)
     {
+        float startVolume = source.volume;
         float timer = 0;
         while(timer <= time)
         {

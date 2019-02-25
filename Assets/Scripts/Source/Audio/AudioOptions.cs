@@ -46,7 +46,7 @@ public class AudioOptions
                         Action onEndHandler = null)
     {
         this.FadeInTime = fadeInTime;
-        this.FadeOutTime = FadeOutTime;
+        this.FadeOutTime = fadeOutTime;
         this.Volume = Math.Max(MIN_VOLUME, Math.Min(MAX_VOLUME, volume));
         this.Looping = shouldLoop;
         this.HardTransitionIn = hardTransitionIn;
