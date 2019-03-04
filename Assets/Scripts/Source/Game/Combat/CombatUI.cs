@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlaceholderCombatUI : AbstractCombatUI
+public class CombatUI : AbstractCombatUI
 {
     int actionIndex = 1;
     [SerializeField]
@@ -12,6 +12,26 @@ public class PlaceholderCombatUI : AbstractCombatUI
 
     [SerializeField]
     Text infoBar;
+
+    [SerializeField]
+    Text DamageNumber;
+
+    [SerializeField]
+    Text EnemyDamageNumber;
+
+    [SerializeField]
+    Image upArrow;
+
+    [SerializeField]
+    Image leftArrow;
+
+    [SerializeField]
+    Image rightArrow;
+
+    [SerializeField]
+    Image downArrow;
+
+    public Animator anim;
 
     string playerName, enemyName;
 
@@ -30,7 +50,10 @@ public class PlaceholderCombatUI : AbstractCombatUI
 
     void damagePlayer(int remainingHealth, int maxHealth, int damage)
     {
-        if(slain) return;
+        DamageNumber.text = damage.ToString();
+        DamageNumber.GetComponent<Animator>().SetTrigger("Hit");
+        HideDirection();
+        if (slain) return;
         infoBar.text = string.Format("{0} dealt {1} damage to {2}", enemyName, damage, playerName);
         damageCharacter(playerHealth, remainingHealth, maxHealth, damage);
     }
@@ -53,8 +76,38 @@ public class PlaceholderCombatUI : AbstractCombatUI
         );
     }
 
+    public void ShowEnemyDirection(int dir)
+    {
+        if (dir == 0)
+        {
+            rightArrow.enabled = true;
+        }
+        else if (dir == 1)
+        {
+            leftArrow.enabled = true;
+        }
+        else if (dir == 2)
+        {
+            upArrow.enabled = true;
+        }
+        else if (dir == 3)
+        {
+            downArrow.enabled = true;
+        }
+    }
+
+    void HideDirection()
+    {
+        rightArrow.enabled = false;
+        leftArrow.enabled = false;
+        upArrow.enabled = false;
+        downArrow.enabled = false;
+    }
+
     void damageEnemy(int remainingHealth, int maxHealth, int damage)
     {
+        EnemyDamageNumber.text = damage.ToString();
+        EnemyDamageNumber.GetComponent<Animator>().Play("Hit");
         if(slain) return;
         infoBar.text = string.Format("{0} dealt {1} damage to {2}", playerName, damage, enemyName);
         damageCharacter(enemyHealth, remainingHealth, maxHealth, damage);
