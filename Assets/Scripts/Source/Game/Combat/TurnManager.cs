@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
+    Action onActionQueueUpdated = delegate { };
     List<Queue<CharacterAction>> characterActionsByRound = new List<Queue<CharacterAction>>();
     List<Dictionary<Character, int>> turnCountByRound = new List<Dictionary<Character, int>>();
 
     // Used to test functionality
-    public void Init(List<Queue<CharacterAction>> characterActions, List<Dictionary<Character, int>> turnsInRound)
+    public void Init(List<Queue<CharacterAction>> characterActions,
+                     List<Dictionary<Character, int>> turnsInRound)
     {
         this.characterActionsByRound = characterActions;
         this.turnCountByRound = turnsInRound;
@@ -33,6 +35,12 @@ public class TurnManager : MonoBehaviour
         int turnIndex = getFirstRoundForAction(actor);
         characterActionsByRound[turnIndex].Enqueue(characterAction);
         turnCountByRound[turnIndex][actor]++;
+        onActionQueueUpdated();
+    }
+
+    public virtual void HandleActionsUpdated(Action action)
+    {
+        onActionQueueUpdated += action;
     }
 
     int getFirstRoundForAction(Character character)
@@ -61,6 +69,12 @@ public class TurnManager : MonoBehaviour
         return roundIndex;
     }
 
+    public virtual bool HasNextAction()
+    {
+        return characterActionsByRound.Count > 0 &&
+                characterActionsByRound.First().Count > 0;
+    }
+
     public virtual CharacterAction GetNextAction()
     {
         cleanupQueue();
@@ -70,6 +84,7 @@ public class TurnManager : MonoBehaviour
         }
         CharacterAction nextAction = characterActionsByRound.First().Dequeue();
         cleanupQueue();
+        onActionQueueUpdated();
         return nextAction;
     }
 
@@ -84,7 +99,11 @@ public class TurnManager : MonoBehaviour
 
     public virtual Queue<CharacterAction> GetQueue()
     {
-        return characterActionsByRound.First();
+        if(characterActionsByRound.Count == 0)
+        {
+            return new Queue<CharacterAction>();
+        }
+        return new Queue<CharacterAction>(characterActionsByRound.SelectMany(action => action));
     }
 
     public virtual CharacterAction Peek()

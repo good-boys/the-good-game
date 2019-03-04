@@ -59,6 +59,11 @@ public class CombatManager : MonoBehaviour
 
     public void ProcessNextAction()
     {
+        if(!turnManager.HasNextAction())
+        {
+            Debug.LogWarning("Unable to process. TurnManager has no remaining actions");
+            return;
+        }
         CharacterAction characterAction = turnManager.GetNextAction();
         characterManager.ProcessAction(characterAction);
         characterAction.Use();
@@ -150,7 +155,7 @@ public class CombatManager : MonoBehaviour
                     {
                         action = enemyAction;
                         int attackDir = enemyAction.Actor.GetAttackDirection(); //TODO: Make better system for choosing enemy attack direction
-                        Debug.Log(attackDir);
+                        //Debug.Log(attackDir);
                         //Debug.Log("Enemy turn player defended");
                         bool hitDirection = false;
                         while (timer < defendTimer && !hitDirection)

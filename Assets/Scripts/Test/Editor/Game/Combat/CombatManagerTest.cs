@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TestTools;
 using System.Threading;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -46,6 +47,7 @@ public class CombatManagerTest
             testActionQueue.Enqueue(action);
         });
         mockTurnManager.Setup(turnManager => turnManager.ShouldWaitForPlayerAction(It.IsAny<Player>())).Returns(() => numberPlayerTurnsTaken == 0);
+        mockTurnManager.Setup(turnManager => turnManager.HasNextAction()).Returns(() => testActionQueue.Count > 0);
         mockTurnManager.Setup(turnManager => turnManager.GetNextAction()).Returns(() => testActionQueue.Count > 0 ? testActionQueue.Dequeue() : null);
         mockTurnManager.Setup(turnManager => turnManager.Peek()).Returns(mockEnemyAction.Object);
         mockEnemyAction.Setup(action => action.Actor).Returns(mockEnemy.Object);
@@ -130,5 +132,18 @@ public class CombatManagerTest
         mockTurnManager.Verify(turns => turns.GetNextAction());
         mockCharacterManager.Verify(manager => manager.ProcessAction(mockEnemyAction.Object));
         mockEnemyAction.Verify(action => action.Use());
+    }
+
+    [Test]
+    public void TestProcessNextAction_NoAction()
+    {
+        LogAssert.Expect(LogType.Warning, "Unable to process. TurnManager has no remaining actions");
+
+        combatManager.ProcessNextAction();
+
+        mockTurnManager.Verify(turns => turns.GetNextAction(), Times.Never());
+        mockCharacterManager.Verify(manager => manager.ProcessAction(It.IsAny<CharacterAction>()), Times.Never());
+
+        // UnityConsole.Clear();
     }
 }

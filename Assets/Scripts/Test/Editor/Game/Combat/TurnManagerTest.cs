@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -41,8 +42,16 @@ public class TurnManagerTest
     [Test]
     public void TestRegisterAction()
     {
+        bool delegateRun = false;
+        Action testAction = delegate
+        {
+            delegateRun = true;
+        };
+        turnManager.HandleActionsUpdated(testAction);
+
         turnManager.RegisterAction(mockCharacterAction.Object);
 
+        Assert.True(delegateRun);
         Assert.AreEqual(1, actionsQueue.First().Count);
         Assert.AreEqual(mockCharacterAction.Object, actionsQueue.First().Peek());
     }
@@ -64,10 +73,17 @@ public class TurnManagerTest
     [Test]
     public void TestGetNextAction()
     {
+        bool delegateRun = false;
+        Action testAction = delegate
+        {
+            delegateRun = true;
+        };
+        turnManager.HandleActionsUpdated(testAction);
         actionsQueue.First().Enqueue(mockCharacterAction.Object);
 
         CharacterAction action = turnManager.GetNextAction();
 
+        Assert.True(delegateRun);
         Assert.AreEqual(0, actionsQueue.Count);
         Assert.AreSame(mockCharacterAction.Object, action);
     }
@@ -140,6 +156,63 @@ public class TurnManagerTest
         bool shouldWaitForAction = turnManager.ShouldWaitForPlayerAction(mockPlayer.Object);
 
         Assert.False(shouldWaitForAction);
+    }
+
+    [Test]
+    public void TestGetQueue_SingleQueue()
+    {
+        actionsQueue.Add(new Queue<CharacterAction>());
+        actionsQueue.First().Enqueue(mockCharacterAction.Object);
+
+        Queue<CharacterAction> resultQueue = turnManager.GetQueue();
+
+        Assert.AreEqual(1, resultQueue.Count);
+        Assert.AreEqual(mockCharacterAction.Object, resultQueue.First());
+    }
+
+    [Test]
+    public void TestGetQueue_MultipleQueues()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            actionsQueue.Add(new Queue<CharacterAction>());
+            actionsQueue.Last().Enqueue(mockCharacterAction.Object);
+        }
+
+        Queue<CharacterAction> resultQueue = turnManager.GetQueue();
+
+        Assert.AreEqual(2, resultQueue.Count);
+        Assert.AreEqual(mockCharacterAction.Object, resultQueue.Dequeue());
+        Assert.AreEqual(mockCharacterAction.Object, resultQueue.Dequeue());
+    }
+
+    [Test]
+    public void TestGetQueue_Empty()
+    {
+        Assert.AreEqual(new Queue<CharacterAction>(), turnManager.GetQueue());
+    }
+
+    [Test]
+    public void TestHasNextAction_NoQueue()
+    {
+        actionsQueue.Add(new Queue<CharacterAction>());
+
+        Assert.False(turnManager.HasNextAction());
+    }
+
+    [Test]
+    public void TestHasNextAction_EmptyQueue()
+    {
+        Assert.False(turnManager.HasNextAction());
+    }
+
+    [Test]
+    public void TestHasNextAction_True()
+    {
+        actionsQueue.Add(new Queue<CharacterAction>());
+        actionsQueue.First().Enqueue(mockCharacterAction.Object);
+
+        Assert.True(turnManager.HasNextAction());
     }
 
     Mock<Player> givenPlayerWithSpeed(int speed)
