@@ -144,6 +144,6 @@ public class CombatManagerTest
         mockTurnManager.Verify(turns => turns.GetNextAction(), Times.Never());
         mockCharacterManager.Verify(manager => manager.ProcessAction(It.IsAny<CharacterAction>()), Times.Never());
 
-        // UnityConsole.Clear();
+        UnityConsole.Clear();
     }
 }
