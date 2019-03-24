@@ -84,7 +84,10 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator executeActions()
     {
-        gameFlowManager.combatUI.anim.Play("HideSide");
+        if (gameFlowManager != null)
+        {
+            gameFlowManager.combatUI.anim.Play("HideSide");
+        }
 
         while (!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
         {
