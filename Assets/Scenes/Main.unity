@@ -1090,8 +1090,8 @@ MonoBehaviour:
   enemyHealth: {fileID: 1400197904}
   actionBar: {fileID: 1153752088}
   infoBar: {fileID: 2037895068}
-  DamageNumber: {fileID: 195133573}
-  EnemyDamageNumber: {fileID: 1422340982}
+  damageNumber: {fileID: 195133573}
+  enemyDamageNumber: {fileID: 1422340982}
   upArrow: {fileID: 551798043}
   leftArrow: {fileID: 1571209588}
   rightArrow: {fileID: 595820625}
