@@ -32,6 +32,15 @@ public class AudioManager : MonoBehaviour
         {
             options = AudioOptions.GetDefault();
         }
+        if (clip == null)
+        {
+            clip = source.clip;
+        }
+        if (clip == null)
+        {
+            Debug.LogErrorFormat("Clip {0} not found.", sourceName);
+            return;
+        }
         clipOptions[getClipIdentifier(source, clip)] = options;
         handleClipTransition(source, clip, options);
     }

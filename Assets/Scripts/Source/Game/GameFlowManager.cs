@@ -7,6 +7,7 @@ public class GameFlowManager : MonoBehaviour
     public GameObject camera;
 
     public static GameFlowManager instance = null;
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -33,5 +34,7 @@ public class GameFlowManager : MonoBehaviour
             combatUI.gameObject.SetActive(true);
             camera.SetActive(true);
         }
+
+        audioManager.Play("Music 1", null);
     }
 }
