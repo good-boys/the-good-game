@@ -84,7 +84,12 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator executeActions()
     {
-        while(!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
+        if (gameFlowManager != null)
+        {
+            gameFlowManager.combatUI.anim.Play("HideSide");
+        }
+
+        while (!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
         {
             float timer = 0.0f;
             float missDelay = 0.0f;
@@ -150,7 +155,7 @@ public class CombatManager : MonoBehaviour
                     {
                         action = enemyAction;
                         int attackDir = enemyAction.Actor.GetAttackDirection(); //TODO: Make better system for choosing enemy attack direction
-                        Debug.Log(attackDir);
+                        gameFlowManager.combatUI.ShowEnemyDirection(attackDir);
                         //Debug.Log("Enemy turn player defended");
                         bool hitDirection = false;
                         while (timer < defendTimer && !hitDirection)
@@ -202,5 +207,7 @@ public class CombatManager : MonoBehaviour
             ProcessNextAction();
             yield return new WaitForSeconds(delayBetweenActions);
         }
+
+        gameFlowManager.combatUI.anim.Play("ReturnSide");
     }
 }
