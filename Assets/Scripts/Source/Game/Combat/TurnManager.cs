@@ -106,6 +106,34 @@ public class TurnManager : MonoBehaviour
         return new Queue<CharacterAction>(characterActionsByRound.SelectMany(action => action));
     }
 
+    public virtual List<CharacterAction> PredictActions(int count)
+    {
+        List<CharacterAction> futureActions = GetQueue().ToList();
+        if(count <= futureActions.Count)
+        {
+            return futureActions.GetRange(0, count);
+        }
+        Character dummyPlayer = new Player("DummyPlayer", 1, 1);
+        Character dummyEnemy = new Enemy("DummyEnemy", 1, 1);
+        if(futureActions.Count == 0)
+        {
+            futureActions.Add(new CharacterAction(dummyPlayer));
+            futureActions.Add(new CharacterAction(dummyEnemy));
+        }
+        else if(futureActions.Count == 1)
+        {
+            futureActions.Add(new CharacterAction(futureActions[0].Actor is Player ? dummyEnemy : dummyPlayer));
+        }
+        List<CharacterAction> prediction = new List<CharacterAction>();
+        while(count > 0)
+        {
+            int sampleSize = Math.Min(futureActions.Count, count);
+            prediction.AddRange(futureActions.GetRange(0, sampleSize));
+            count -= sampleSize;
+        }
+        return prediction;
+    }
+
     public virtual CharacterAction Peek()
     {
         return characterActionsByRound.First().Peek();

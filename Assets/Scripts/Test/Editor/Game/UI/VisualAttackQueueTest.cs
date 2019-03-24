@@ -44,10 +44,10 @@ public class VisualAttackQueueTest
         mockEnemyAction = new Mock<CharacterAction>(mockEnemy.Object, null, null);
         mockPlayerAction.Setup(action => action.Actor).Returns(mockPlayer.Object);
         mockEnemyAction.Setup(action => action.Actor).Returns(mockEnemy.Object);
-        Queue<CharacterAction> queue = new Queue<CharacterAction>();
-        queue.Enqueue(mockPlayerAction.Object);
-        queue.Enqueue(mockEnemyAction.Object);
-        mockTurnManager.Setup(turns => turns.GetQueue()).Returns(queue);
+        List<CharacterAction> list = new List<CharacterAction>();
+        list.Add(mockPlayerAction.Object);
+        list.Add(mockEnemyAction.Object);
+        mockTurnManager.Setup(turns => turns.PredictActions(It.IsAny<int>())).Returns(list);
 	}
 
 	[Test]

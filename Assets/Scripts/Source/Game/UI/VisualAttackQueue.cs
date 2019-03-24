@@ -21,9 +21,17 @@ public class VisualAttackQueue : MonoBehaviour
     public virtual void Awake()
     {
         hideAllBlocks();
-        if (turnManager)
+        if(turnManager)
         {
             turnManager.HandleActionsUpdated(UpdateDisplay);
+        }
+    }
+
+    public virtual void Start()
+    {
+        if(turnManager)
+        {
+            UpdateDisplay();
         }
     }
 
@@ -41,7 +49,7 @@ public class VisualAttackQueue : MonoBehaviour
 
     public void UpdateDisplay()
     {
-        List<CharacterAction> upcomingActions = turnManager.GetQueue().ToList();
+        List<CharacterAction> upcomingActions = turnManager.PredictActions(attackBlocks.Length);
         int blocksToFill = Mathf.Min(attackBlocks.Length, upcomingActions.Count);
         for(int i = 0; i < blocksToFill; i++)
         {
