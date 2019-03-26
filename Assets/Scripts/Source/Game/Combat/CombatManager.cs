@@ -59,6 +59,11 @@ public class CombatManager : MonoBehaviour
 
     public void ProcessNextAction()
     {
+        if(!turnManager.HasNextAction())
+        {
+            Debug.LogWarning("Unable to process. TurnManager has no remaining actions");
+            return;
+        }
         CharacterAction characterAction = turnManager.GetNextAction();
         characterManager.ProcessAction(characterAction);
         characterAction.Use();
@@ -96,7 +101,7 @@ public class CombatManager : MonoBehaviour
             bool missed = false;
             CharacterAction action = turnManager.Peek();
             CharacterAction enemyAction = action.Targets[0].ActiveAction; //TODO: Maybe add target enemy incase of multiple enemies
-            
+
             if (action.Actor is Player)
             {
                 if (action is Attack)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 154652540}
-  m_IndirectSpecularColor: {r: 0.47181135, g: 0.5140352, b: 0.5493945, a: 1}
+  m_IndirectSpecularColor: {r: 0.47181135, g: 0.5140349, b: 0.5493936, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4556,6 +4556,7 @@ GameObject:
   - component: {fileID: 1352977487}
   - component: {fileID: 1352977490}
   - component: {fileID: 1352977488}
+  - component: {fileID: 1352977489}
   m_Layer: 5
   m_Name: Queue
   m_TagString: Untagged
@@ -4595,6 +4596,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &1352977489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352977486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913451d77997a462d9c19f2686ac1de1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerColor: {r: 0, g: 1, b: 0, a: 1}
+  enemyColor: {r: 1, g: 0, b: 0, a: 1}
+  attackBlocks:
+  - {fileID: 593112493}
+  - {fileID: 2079268001}
+  - {fileID: 766784196}
+  - {fileID: 1793239487}
+  turnManager: {fileID: 27310878}
 --- !u!222 &1352977490
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6155,7 +6175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7191837b0a32443d968ceb2e3e9cf38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatCanvas: {fileID: 0}
   combatUI: {fileID: 268153299}
   camera: {fileID: 163672221}
 --- !u!4 &1882590012
