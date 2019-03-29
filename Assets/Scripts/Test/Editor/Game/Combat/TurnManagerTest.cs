@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -9,8 +10,11 @@ public class TurnManagerTest
     List<Queue<CharacterAction>> actionsQueue;
     List<Dictionary<Character, int>> turnCounts;
     Mock<CharacterAction> mockCharacterAction;
+    Mock<CharacterAction> mockPlayerAction;
+    Mock<CharacterAction> mockEnemyAction;
     Mock<Character> mockCharacter;
     Mock<Player> mockPlayer;
+    Mock<Enemy> mockEnemy;
     GameObject gameObject;
     TurnManager turnManager;
 
@@ -20,8 +24,11 @@ public class TurnManagerTest
         actionsQueue = new List<Queue<CharacterAction>>();
         turnCounts = new List<Dictionary<Character, int>>();
         mockCharacterAction = new Mock<CharacterAction>(null, null, null);
+        mockPlayerAction = new Mock<CharacterAction>(null, null, null);
+        mockEnemyAction = new Mock<CharacterAction>(null, null, null);
         mockCharacter = new Mock<Character>("name", 100, 1);
         mockPlayer = givenPlayerWithSpeed(1);
+        mockEnemy = new Mock<Enemy>("name", 100, 1);
 
         gameObject = new GameObject();
         
@@ -29,6 +36,8 @@ public class TurnManagerTest
         turnManager.Init(actionsQueue, turnCounts);
 
         mockCharacterAction.Setup(action => action.Actor).Returns(mockCharacter.Object);
+        mockPlayerAction.Setup(action => action.Actor).Returns(mockPlayer.Object);
+        mockEnemyAction.Setup(action => action.Actor).Returns(mockEnemy.Object);
         mockCharacter.Setup(character => character.Speed).Returns(1);
     }
 
@@ -41,8 +50,16 @@ public class TurnManagerTest
     [Test]
     public void TestRegisterAction()
     {
+        bool delegateRun = false;
+        Action testAction = delegate
+        {
+            delegateRun = true;
+        };
+        turnManager.HandleActionsUpdated(testAction);
+
         turnManager.RegisterAction(mockCharacterAction.Object);
 
+        Assert.True(delegateRun);
         Assert.AreEqual(1, actionsQueue.First().Count);
         Assert.AreEqual(mockCharacterAction.Object, actionsQueue.First().Peek());
     }
@@ -64,10 +81,17 @@ public class TurnManagerTest
     [Test]
     public void TestGetNextAction()
     {
+        bool delegateRun = false;
+        Action testAction = delegate
+        {
+            delegateRun = true;
+        };
+        turnManager.HandleActionsUpdated(testAction);
         actionsQueue.First().Enqueue(mockCharacterAction.Object);
 
         CharacterAction action = turnManager.GetNextAction();
 
+        Assert.True(delegateRun);
         Assert.AreEqual(0, actionsQueue.Count);
         Assert.AreSame(mockCharacterAction.Object, action);
     }
@@ -140,6 +164,120 @@ public class TurnManagerTest
         bool shouldWaitForAction = turnManager.ShouldWaitForPlayerAction(mockPlayer.Object);
 
         Assert.False(shouldWaitForAction);
+    }
+
+    [Test]
+    public void TestGetQueue_SingleQueue()
+    {
+        actionsQueue.Add(new Queue<CharacterAction>());
+        actionsQueue.First().Enqueue(mockCharacterAction.Object);
+
+        Queue<CharacterAction> resultQueue = turnManager.GetQueue();
+
+        Assert.AreEqual(1, resultQueue.Count);
+        Assert.AreEqual(mockCharacterAction.Object, resultQueue.First());
+    }
+
+    [Test]
+    public void TestGetQueue_MultipleQueues()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            actionsQueue.Add(new Queue<CharacterAction>());
+            actionsQueue.Last().Enqueue(mockCharacterAction.Object);
+        }
+
+        Queue<CharacterAction> resultQueue = turnManager.GetQueue();
+
+        Assert.AreEqual(2, resultQueue.Count);
+        Assert.AreEqual(mockCharacterAction.Object, resultQueue.Dequeue());
+        Assert.AreEqual(mockCharacterAction.Object, resultQueue.Dequeue());
+    }
+
+    [Test]
+    public void TestGetQueue_Empty()
+    {
+        Assert.AreEqual(new Queue<CharacterAction>(), turnManager.GetQueue());
+    }
+
+    [Test]
+    public void TestHasNextAction_NoQueue()
+    {
+        actionsQueue.Add(new Queue<CharacterAction>());
+
+        Assert.False(turnManager.HasNextAction());
+    }
+
+    [Test]
+    public void TestHasNextAction_EmptyQueue()
+    {
+        Assert.False(turnManager.HasNextAction());
+    }
+
+    [Test]
+    public void TestHasNextAction_True()
+    {
+        actionsQueue.Add(new Queue<CharacterAction>());
+        actionsQueue.First().Enqueue(mockCharacterAction.Object);
+
+        Assert.True(turnManager.HasNextAction());
+    }
+
+    [Test]
+    public void TestPredictActions_HasActions()
+    {
+        int actionCount = 3;
+        actionsQueue.Add(new Queue<CharacterAction>());
+        actionsQueue.First().Enqueue(mockPlayerAction.Object);
+        actionsQueue.First().Enqueue(mockEnemyAction.Object);
+        actionsQueue.First().Enqueue(mockPlayerAction.Object);
+
+        List<CharacterAction> actions = turnManager.PredictActions(actionCount);
+
+        Assert.AreEqual(actionCount, actions.Count);
+        Assert.AreSame(mockPlayerAction.Object, actions[0]);
+        Assert.AreSame(mockEnemyAction.Object, actions[1]);
+        Assert.AreSame(mockPlayerAction.Object, actions[2]);
+    }
+
+    [Test]
+    public void TestPredictActions_HasNoActions()
+    {
+        int actionCount = 2;
+
+        List<CharacterAction> actions = turnManager.PredictActions(actionCount);
+
+        Assert.AreEqual(actionCount, actions.Count);
+        Assert.True(actions[0].Actor is Player);
+        Assert.True(actions[1].Actor is Enemy);
+    }
+
+    [Test]
+    public void TestPredictActions_HasOneActionPlayer()
+    {
+        int actionCount = 2;
+        actionsQueue.Add(new Queue<CharacterAction>());
+        actionsQueue.First().Enqueue(mockPlayerAction.Object);
+
+        List<CharacterAction> actions = turnManager.PredictActions(actionCount);
+
+        Assert.AreEqual(actionCount, actions.Count);
+        Assert.True(actions[0].Actor is Player);
+        Assert.True(actions[1].Actor is Enemy);
+    }
+
+    [Test]
+    public void TestPredictActions_HasOneActionEnemy()
+    {
+        int actionCount = 2;
+        actionsQueue.Add(new Queue<CharacterAction>());
+        actionsQueue.First().Enqueue(mockEnemyAction.Object);
+
+        List<CharacterAction> actions = turnManager.PredictActions(actionCount);
+
+        Assert.AreEqual(actionCount, actions.Count);
+        Assert.True(actions[0].Actor is Enemy);
+        Assert.True(actions[1].Actor is Player);
     }
 
     Mock<Player> givenPlayerWithSpeed(int speed)

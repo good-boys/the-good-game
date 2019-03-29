@@ -59,6 +59,11 @@ public class CombatManager : MonoBehaviour
 
     public void ProcessNextAction()
     {
+        if(!turnManager.HasNextAction())
+        {
+            Debug.LogWarning("Unable to process. TurnManager has no remaining actions");
+            return;
+        }
         CharacterAction characterAction = turnManager.GetNextAction();
         characterManager.ProcessAction(characterAction);
         characterAction.Use();
@@ -84,14 +89,19 @@ public class CombatManager : MonoBehaviour
 
     IEnumerator executeActions()
     {
-        while(!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
+        if (gameFlowManager != null)
+        {
+            gameFlowManager.combatUI.anim.Play("HideSide");
+        }
+
+        while (!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
         {
             float timer = 0.0f;
             float missDelay = 0.0f;
             bool missed = false;
             CharacterAction action = turnManager.Peek();
             CharacterAction enemyAction = action.Targets[0].ActiveAction; //TODO: Maybe add target enemy incase of multiple enemies
-            
+
             if (action.Actor is Player)
             {
                 if (action is Attack)
@@ -150,7 +160,7 @@ public class CombatManager : MonoBehaviour
                     {
                         action = enemyAction;
                         int attackDir = enemyAction.Actor.GetAttackDirection(); //TODO: Make better system for choosing enemy attack direction
-                        Debug.Log(attackDir);
+                        gameFlowManager.combatUI.ShowEnemyDirection(attackDir);
                         //Debug.Log("Enemy turn player defended");
                         bool hitDirection = false;
                         while (timer < defendTimer && !hitDirection)
@@ -202,5 +212,7 @@ public class CombatManager : MonoBehaviour
             ProcessNextAction();
             yield return new WaitForSeconds(delayBetweenActions);
         }
+
+        gameFlowManager.combatUI.anim.Play("ReturnSide");
     }
 }

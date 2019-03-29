@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
+    Action onActionQueueUpdated = delegate { };
     List<Queue<CharacterAction>> characterActionsByRound = new List<Queue<CharacterAction>>();
     List<Dictionary<Character, int>> turnCountByRound = new List<Dictionary<Character, int>>();
 
     // Used to test functionality
-    public void Init(List<Queue<CharacterAction>> characterActions, List<Dictionary<Character, int>> turnsInRound)
+    public void Init(List<Queue<CharacterAction>> characterActions,
+                     List<Dictionary<Character, int>> turnsInRound)
     {
         this.characterActionsByRound = characterActions;
         this.turnCountByRound = turnsInRound;
@@ -33,6 +35,12 @@ public class TurnManager : MonoBehaviour
         int turnIndex = getFirstRoundForAction(actor);
         characterActionsByRound[turnIndex].Enqueue(characterAction);
         turnCountByRound[turnIndex][actor]++;
+        onActionQueueUpdated();
+    }
+
+    public virtual void HandleActionsUpdated(Action action)
+    {
+        onActionQueueUpdated += action;
     }
 
     int getFirstRoundForAction(Character character)
@@ -61,6 +69,12 @@ public class TurnManager : MonoBehaviour
         return roundIndex;
     }
 
+    public virtual bool HasNextAction()
+    {
+        return characterActionsByRound.Count > 0 &&
+                characterActionsByRound.First().Count > 0;
+    }
+
     public virtual CharacterAction GetNextAction()
     {
         cleanupQueue();
@@ -70,6 +84,7 @@ public class TurnManager : MonoBehaviour
         }
         CharacterAction nextAction = characterActionsByRound.First().Dequeue();
         cleanupQueue();
+        onActionQueueUpdated();
         return nextAction;
     }
 
@@ -84,7 +99,39 @@ public class TurnManager : MonoBehaviour
 
     public virtual Queue<CharacterAction> GetQueue()
     {
-        return characterActionsByRound.First();
+        if(characterActionsByRound.Count == 0)
+        {
+            return new Queue<CharacterAction>();
+        }
+        return new Queue<CharacterAction>(characterActionsByRound.SelectMany(action => action));
+    }
+
+    public virtual List<CharacterAction> PredictActions(int count)
+    {
+        List<CharacterAction> futureActions = GetQueue().ToList();
+        if(count <= futureActions.Count)
+        {
+            return futureActions.GetRange(0, count);
+        }
+        Character dummyPlayer = new Player("DummyPlayer", 1, 1);
+        Character dummyEnemy = new Enemy("DummyEnemy", 1, 1);
+        if(futureActions.Count == 0)
+        {
+            futureActions.Add(new CharacterAction(dummyPlayer));
+            futureActions.Add(new CharacterAction(dummyEnemy));
+        }
+        else if(futureActions.Count == 1)
+        {
+            futureActions.Add(new CharacterAction(futureActions[0].Actor is Player ? dummyEnemy : dummyPlayer));
+        }
+        List<CharacterAction> prediction = new List<CharacterAction>();
+        while(count > 0)
+        {
+            int sampleSize = Math.Min(futureActions.Count, count);
+            prediction.AddRange(futureActions.GetRange(0, sampleSize));
+            count -= sampleSize;
+        }
+        return prediction;
     }
 
     public virtual CharacterAction Peek()

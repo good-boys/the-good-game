@@ -2,9 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameFlowManager : MonoBehaviour 
 {
-
-    public GameObject combatCanvas;
-    public GameObject combatUI;
+    
+    public CombatUI combatUI;
     public GameObject camera;
 
     public static GameFlowManager instance = null;
@@ -18,9 +17,8 @@ public class GameFlowManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
-
-        combatCanvas.SetActive(false);
-        combatUI.SetActive(false);
+        
+        combatUI.gameObject.SetActive(false);
         camera.SetActive(false);
 
         SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
@@ -32,8 +30,7 @@ public class GameFlowManager : MonoBehaviour
 
         if (sceneName == "Intro")
         {
-            combatCanvas.SetActive(true);
-            combatUI.SetActive(true);
+            combatUI.gameObject.SetActive(true);
             camera.SetActive(true);
         }
     }
