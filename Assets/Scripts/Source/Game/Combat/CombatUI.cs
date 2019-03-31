@@ -14,10 +14,10 @@ public class CombatUI : AbstractCombatUI
     Text infoBar;
 
     [SerializeField]
-    Text DamageNumber;
+    Text damageNumber;
 
     [SerializeField]
-    Text EnemyDamageNumber;
+    Text enemyDamageNumber;
 
     [SerializeField]
     Image upArrow;
@@ -50,8 +50,8 @@ public class CombatUI : AbstractCombatUI
 
     void damagePlayer(int remainingHealth, int maxHealth, int damage)
     {
-        DamageNumber.text = damage.ToString();
-        DamageNumber.GetComponent<Animator>().SetTrigger("Hit");
+        damageNumber.text = damage.ToString();
+        damageNumber.GetComponent<Animator>().SetTrigger("Hit");
         HideDirection();
         if (slain) return;
         infoBar.text = string.Format("{0} dealt {1} damage to {2}", enemyName, damage, playerName);
@@ -106,8 +106,8 @@ public class CombatUI : AbstractCombatUI
 
     void damageEnemy(int remainingHealth, int maxHealth, int damage)
     {
-        EnemyDamageNumber.text = damage.ToString();
-        EnemyDamageNumber.GetComponent<Animator>().Play("Hit");
+        enemyDamageNumber.text = damage.ToString();
+        enemyDamageNumber.GetComponent<Animator>().Play("Hit");
         if(slain) return;
         infoBar.text = string.Format("{0} dealt {1} damage to {2}", playerName, damage, enemyName);
         damageCharacter(enemyHealth, remainingHealth, maxHealth, damage);
