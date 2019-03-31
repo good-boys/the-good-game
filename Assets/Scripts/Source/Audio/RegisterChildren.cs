@@ -10,7 +10,5 @@ public class RegisterChildren : MonoBehaviour {
         {
             GameFlowManager.instance.audioManager.RegisterAudioSource(transform.GetChild(i).GetComponent<AudioSource>());
         }
-
-        transform.parent = GameFlowManager.instance.camera.transform;
 	}
 }

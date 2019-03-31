@@ -1,5 +1,6 @@
 ﻿using System;
 
+[Serializable]
 public class AudioOptions
 {
     private const float MAX_VOLUME = 1f;
@@ -29,12 +30,12 @@ public class AudioOptions
         }
     }
 
-    public float FadeInTime { get; private set; }
-    public float FadeOutTime { get; private set; }
-    public float Volume { get; private set; }
-    public bool Looping { get; private set; }
+    public float FadeInTime;
+    public float FadeOutTime;
+    public float Volume;
+    public bool Looping;
     // Should the AudioSource cutover without fading out the AudioClip?
-    public bool HardTransitionIn { get; private set; }
+    public bool HardTransitionIn;
 
     private Action onEndHandler;
 
