@@ -3,10 +3,10 @@
 [Serializable]
 public class GameSave
 {
-    Random random;
+    public Random Random { get; private set; }
 
     public GameSave(int seed)
     {
-        random = new Random(seed);
+        Random = new Random(seed);
     }
 }

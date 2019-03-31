@@ -21,7 +21,7 @@ public class SaveManager
 
     public GameSave Load()
     {
-        if(!File.Exists(filePath))
+        if(!HasSave())
         {
             throw new FileNotFoundException();
         }
@@ -29,5 +29,10 @@ public class SaveManager
         GameSave save = binaryFormatter.Deserialize(file) as GameSave;
         file.Close();
         return save;
+    }
+
+    public bool HasSave()
+    {
+        return File.Exists(filePath);
     }
 }
