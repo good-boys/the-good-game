@@ -353,6 +353,8 @@ MonoBehaviour:
   inputStart: 0
   inputEnd: 1
   missTimer: 0.1
+  playerHit: {fileID: 371580544}
+  enemyHit: {fileID: 1013824630}
 --- !u!4 &27310882
 Transform:
   m_ObjectHideFlags: 0
@@ -1197,8 +1199,6 @@ MonoBehaviour:
   leftArrow: {fileID: 1571209588}
   rightArrow: {fileID: 595820625}
   downArrow: {fileID: 848459417}
-  playerHit: {fileID: 371580544}
-  enemyHit: {fileID: 1013824630}
   anim: {fileID: 268153304}
 --- !u!114 &268153300
 MonoBehaviour:
