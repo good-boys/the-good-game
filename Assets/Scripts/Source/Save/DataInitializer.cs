@@ -12,17 +12,30 @@ public class DataInitializer : MonoBehaviour
     [SerializeField]
     int seed = 0;
 
+    [SerializeField]
+    CharacterConfig startingPlayer;
 
-    void Awake()
+    public void Init(string saveFile, int seed, CharacterConfig startingPlayer, SaveManager saveManager)
     {
-        SaveManager = new SaveManager(getSavePath());
+        this.saveFile = saveFile;
+        this.seed = seed;
+        this.startingPlayer = startingPlayer;
+        SaveManager = saveManager;
+    }
+
+    public void Awake()
+    {
+        if(SaveManager == null)
+        {
+            SaveManager = new SaveManager(getSavePath());
+        }
         if(SaveManager.HasSave())
         {
             GameSave = SaveManager.Load();
         }
         else
         {
-            GameSave = new GameSave(seed);
+            GameSave = new GameSave(seed, new Player(startingPlayer));
         }
     }
 

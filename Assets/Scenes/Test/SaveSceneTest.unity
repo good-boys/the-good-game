@@ -142,6 +142,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveFile: test.dat
   seed: 0
+  startingPlayer:
+    name: Tom
+    health: 100
+    speed: 1
 --- !u!4 &1816598748
 Transform:
   m_ObjectHideFlags: 0

@@ -1,38 +1,48 @@
 ﻿using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveManager
 {
     string filePath;
-    BinaryFormatter binaryFormatter;
+    IOManager ioManager;
 
-    public SaveManager(string filePath)
+    public SaveManager(string filePath) : this(filePath, new IOManager()) {}
+
+    public SaveManager(string filePath, IOManager ioManager)
     {
         this.filePath = filePath;
-        binaryFormatter = new BinaryFormatter();
+        this.ioManager = ioManager;
     }
 
     public void Save(GameSave save)
     {
-        FileStream file = File.OpenWrite(filePath);
-        binaryFormatter.Serialize(file, save);
+        Stream file = ioManager.OpenWrite(filePath);
+        ioManager.Serialize(file, save);
         file.Close();
     }
 
-    public GameSave Load()
+    public virtual GameSave Load()
     {
         if(!HasSave())
         {
             throw new FileNotFoundException();
         }
-        FileStream file = File.OpenRead(filePath);
-        GameSave save = binaryFormatter.Deserialize(file) as GameSave;
+        Stream file = ioManager.OpenRead(filePath);
+        GameSave save = ioManager.Deserialize(file) as GameSave;
         file.Close();
         return save;
     }
 
-    public bool HasSave()
+    public virtual bool HasSave()
     {
-        return File.Exists(filePath);
+        return ioManager.Exists(filePath);
+    }
+
+    public void Erase()
+    {
+        if(!HasSave())
+        {
+            return;
+        }
+        ioManager.Delete(filePath);
     }
 }

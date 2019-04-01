@@ -1,7 +1,9 @@
 using System;
 
+[Serializable]
 public class Character
 {
+    [NonSerialized]
     CharacterCombatHandler characterCombatHandler;
 
     public string Name
@@ -49,22 +51,31 @@ public class Character
         }
     }
 
+    public CharacterConfig Config
+    {
+        get { return new CharacterConfig(Name, MaxHealth, Speed); }
+    }
+
     public Weapon EquippedWeapon
     {
         get;
         private set;
     }
 
-    public virtual CharacterAction ActiveAction
+    public virtual CharacterAction ActiveAction 
     {
-        get;
-        private set;
+        get { return _activeAction; }
+        private set { _activeAction = value; }
     }
 
     public bool hitBonus;
 
     int _health;
     int _speed;
+    [NonSerialized]
+    CharacterAction _activeAction;
+         
+    public Character(CharacterConfig config) : this(config.Name, config.Health, config.Speed) {}
 
     public Character(string name, int health, int speed)
     {
@@ -148,5 +159,15 @@ public class Character
         int attackDir = random.Next(0, 4);
 
         return attackDir;
+    }
+
+    public override string ToString()
+    {
+        return string.Format("([{0}] name:{1}, health:{2}, speed:{3})", GetType(), Name, Health, Speed);
+    }
+
+    public object CopyConfig()
+    {
+        return new Character(Config);
     }
 }
