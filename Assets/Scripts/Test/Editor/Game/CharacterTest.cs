@@ -13,7 +13,7 @@ public class CharacterTest
     }
 
     [Test]
-	public void TestInitCharacter() 
+    public void TestInitCharacter()
     {
         string testName = "test";
         int testHealth = 100;

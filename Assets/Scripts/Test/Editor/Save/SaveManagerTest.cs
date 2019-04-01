@@ -16,14 +16,17 @@ public class SaveManagerTest
     {
         mockIOManager = new Mock<IOManager>();
         mockFile = new Mock<Stream>();
-        GameSave save = new GameSave(1, new Player("test player", 34, 1));
+        save = new GameSave(1, new Player("test player", 34, 1));
 
         saveManager = new SaveManager(filePath,
                                       mockIOManager.Object);
 
         mockIOManager.Setup(
-            files => files.Serialize(It.IsAny<FileStream>(), It.IsAny<object>())
+            files => files.Serialize(It.IsAny<Stream>(), It.IsAny<object>())
         );
+        mockIOManager.Setup(
+            files => files.Deserialize(It.IsAny<Stream>())
+        ).Returns(save);
         mockIOManager.Setup(
             files => files.OpenWrite(It.IsAny<string>())
         ).Returns(mockFile.Object);
