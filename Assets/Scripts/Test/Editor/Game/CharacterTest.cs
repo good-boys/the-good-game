@@ -12,13 +12,13 @@ public class CharacterTest
         character = givenCharacter();
     }
 
-
-   [Test]
-	public void TestInitCharacter() 
+    [Test]
+    public void TestInitCharacter()
     {
         string testName = "test";
         int testHealth = 100;
         int testSpeed = 1;
+
         character = new Character(testName, testHealth, testSpeed);
 
         Assert.AreEqual(testName, character.Name);
@@ -28,17 +28,41 @@ public class CharacterTest
     }
 
     [Test]
+    public void TestInitCharacter_Config()
+    {
+        CharacterConfig config = new CharacterConfig("test", 99, 7);
+
+        character = new Character(config);
+
+        Assert.AreEqual(config.Name, character.Name);
+        Assert.AreEqual(config.Health, character.Health);
+        Assert.AreEqual(config.Health, character.MaxHealth);
+        Assert.AreEqual(config.Speed, character.Speed);
+    }
+
+    [Test]
     public void TestInitCharacter_SpeedLessThanZero()
     {
         string testName = "test";
         int testHealth = 100;
         int testSpeed = -1;
+
         character = new Character(testName, testHealth, testSpeed);
 
         Assert.AreEqual(testName, character.Name);
         Assert.AreEqual(testHealth, character.Health);
         Assert.AreEqual(testHealth, character.MaxHealth);
         Assert.AreEqual(0, character.Speed);
+    }
+
+    [Test]
+    public void TestGetConfig()
+    {
+        CharacterConfig config = character.Config;
+
+        Assert.AreEqual(character.Name, config.Name);
+        Assert.AreEqual(character.MaxHealth, config.Health);
+        Assert.AreEqual(character.Speed, config.Speed);
     }
 
     [Test]
@@ -135,6 +159,17 @@ public class CharacterTest
 
         Assert.IsNull(character.ActiveAction);
         Assert.AreSame(mockAction, usedAction);
+    }
+
+    [Test]
+    public void TestCopyConfig()
+    {
+        Character copy = character.CopyConfig() as Character;
+
+        Assert.AreEqual(character.Name, copy.Name);
+        Assert.AreEqual(character.MaxHealth, copy.Health);
+        Assert.AreEqual(character.MaxHealth, copy.MaxHealth);
+        Assert.AreEqual(character.Speed, copy.Speed);
     }
 
     Character givenCharacter()
