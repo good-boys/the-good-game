@@ -35,7 +35,7 @@ public class GameFlowManager : MonoBehaviour
             camera.SetActive(true);
         }
 
-        audioManager.Stop("Trees", null, 3);
-        audioManager.Play("Music 1", null, new AudioOptions(3,0,0.5f,true,false));
+        audioManager.Stop("Trees", 3);
+        audioManager.Play("Music 1", new AudioOptions(3,0,0.5f,true,false));
     }
 }

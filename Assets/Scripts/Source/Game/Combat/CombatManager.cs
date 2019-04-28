@@ -151,7 +151,6 @@ public class CombatManager : MonoBehaviour
 
                         yield return null;
                     }
-
                     enemyHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the player weapon type
                     enemyHit.PlaySFX("sword_whoosh_01");
                 }
@@ -203,17 +202,16 @@ public class CombatManager : MonoBehaviour
                                 }
                             }
 
-                            playerHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the enemy
-                            if (action.Actor.hitBonus)
-                            {
-                                playerHit.PlaySFX("sword_strike_armor_chain_04");
-                            }
-                            else
-                            {
-                                playerHit.PlaySFX("sword_whoosh_06");
-                            }
-
                             yield return null;
+                        }
+                        playerHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the enemy
+                        if (action.Actor.hitBonus)
+                        {
+                            playerHit.PlaySFX("sword_strike_armor_chain_04");
+                        }
+                        else
+                        {
+                            playerHit.PlaySFX("sword_whoosh_06");
                         }
                     }
                 }
