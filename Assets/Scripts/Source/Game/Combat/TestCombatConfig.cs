@@ -52,6 +52,9 @@ public class TestCombatConfig : AbstractCombatConfig
     [SerializeField]
     int enemySpeed = 1;
 
+    [SerializeField]
+    CharacterActionPattern enemyActionPattern;
+
     Player player;
     Enemy enemy;
 
@@ -61,6 +64,7 @@ public class TestCombatConfig : AbstractCombatConfig
         player.EquipWeapon(new Weapon(playerWeaponName, playerWeaponDamage, playerWeaponDefense, playerWeaponBonusAttack, playerWeaponBonusDefense));
         enemy = new Enemy(enemyName, enemyHealth, enemySpeed);
         enemy.EquipWeapon(new Weapon(enemyWeaponName, enemyWeaponDamage, enemyWeaponDefense, enemyWeaponBonusAttack, enemyWeaponBonusDefense));
+        enemy.SetActionPattern(enemyActionPattern);
     }
 
     public override Player GetPlayer()

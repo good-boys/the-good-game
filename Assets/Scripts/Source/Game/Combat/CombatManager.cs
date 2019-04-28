@@ -159,7 +159,7 @@ public class CombatManager : MonoBehaviour
                     if (enemyAction.Actor.ActiveAction is Defend)
                     {
                         action = enemyAction;
-                        int attackDir = enemyAction.Actor.GetAttackDirection(); //TODO: Make better system for choosing enemy attack direction
+                        AttackDirection attackDir = enemyAction.Actor.GetAttackDirection(); //TODO: Make better system for choosing enemy attack direction
                         gameFlowManager.combatUI.ShowEnemyDirection(attackDir);
                         //Debug.Log("Enemy turn player defended");
                         bool hitDirection = false;
@@ -176,19 +176,19 @@ public class CombatManager : MonoBehaviour
 
                             if (timer > inputStart && timer < inputEnd)
                             {
-                                if (dir.x > 0 && attackDir == 0)
+                                if (dir.x > 0 && attackDir == AttackDirection.Right)
                                 {
                                     action.Actor.hitBonus = true;
                                 }
-                                else if (dir.x < 0 && attackDir == 1)
+                                else if (dir.x < 0 && attackDir == AttackDirection.Left)
                                 {
                                     action.Actor.hitBonus = true;
                                 }
-                                else if (dir.y > 0 && attackDir == 2)
+                                else if (dir.y > 0 && attackDir == AttackDirection.Up)
                                 {
                                     action.Actor.hitBonus = true;
                                 }
-                                else if (dir.y < 0 && attackDir == 3)
+                                else if (dir.y < 0 && attackDir == AttackDirection.Down)
                                 {
                                     action.Actor.hitBonus = true;
                                 }
