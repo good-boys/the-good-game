@@ -3380,11 +3380,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 935036577}
   audioOptions:
-    FadeInTime: 1
-    FadeOutTime: 0
-    Volume: 0.5
-    Looping: 1
-    HardTransitionIn: 0
+    fadeIn: 5
+    fadeOut: 3
+    vol: 1
+    looping: 1
+    hardTransition: 1
   playOnStart: 1
 --- !u!1001 &1013824628
 Prefab:

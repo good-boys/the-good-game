@@ -62,7 +62,7 @@ public class AudioManager : MonoBehaviour
         Play(sourceName, clip, options);
     }
 
-    public void Stop(string sourceName, AudioClip clip, float fadeOutTime = 0f)
+    public void Stop(string sourceName, AudioClip clip)
     {
         AudioSource source;
         if (!sources.TryGetValue(sourceName, out source))
@@ -79,8 +79,6 @@ public class AudioManager : MonoBehaviour
 
         AudioOptions options = clipOptions[getClipIdentifier(source, clip)];
         Action endHandlerAction = delegate { options.OnEnd(); };
-
-        options.FadeOutTime = fadeOutTime;
         IEnumerator fadeOutCoroutine = getFadeOutCoroutine(source, options, options.HasEndHandler ? endHandlerAction : null);
         if (options.HasEndHandler)
         {
@@ -95,7 +93,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Stop(string sourceName, float fadeOutTime = 0f)
+    public void Stop(string sourceName)
     {
         AudioSource source;
         if (!sources.TryGetValue(sourceName, out source))
@@ -111,7 +109,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        Stop(sourceName, clip, fadeOutTime);
+        Stop(sourceName, clip);
     }
 
     public List<AudioSource> GetPlayingSources()

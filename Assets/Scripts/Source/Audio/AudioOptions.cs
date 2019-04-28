@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class AudioOptions
@@ -30,12 +31,25 @@ public class AudioOptions
         }
     }
 
-    public float FadeInTime;
-    public float FadeOutTime;
-    public float Volume;
-    public bool Looping;
-    // Should the AudioSource cutover without fading out the AudioClip?
-    public bool HardTransitionIn;
+    public float FadeInTime { get { return fadeIn; } private set { fadeIn = value; } }
+    [SerializeField]
+    private float fadeIn;
+
+    public float FadeOutTime { get { return fadeOut; } private set { fadeOut = value; } }
+    [SerializeField]
+    private float fadeOut;
+
+    public float Volume { get { return vol; } private set { vol = value; } }
+    [SerializeField]
+    private float vol;
+
+    public bool Looping { get { return looping; } private set { looping = value; } }
+    [SerializeField]
+    private bool looping;
+
+    public bool HardTransitionIn { get { return hardTransition; } private set { hardTransition = value; } }
+    [SerializeField]
+    private bool hardTransition;
 
     private Action onEndHandler;
 
