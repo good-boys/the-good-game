@@ -23,6 +23,12 @@ public class CombatManager : MonoBehaviour
     [SerializeField]
     float missTimer = 0.1f;
 
+    [SerializeField]
+    PlayAttackVFX playerHit;
+
+    [SerializeField]
+    PlayAttackVFX enemyHit;
+
     CharacterManager characterManager;
     TurnManager turnManager;
     GameFlowManager gameFlowManager;
@@ -145,6 +151,8 @@ public class CombatManager : MonoBehaviour
 
                         yield return null;
                     }
+                    enemyHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the player weapon type
+                    enemyHit.PlaySFX("sword_whoosh_01");
                 }
                 else
                 {
@@ -195,6 +203,15 @@ public class CombatManager : MonoBehaviour
                             }
 
                             yield return null;
+                        }
+                        playerHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the enemy
+                        if (action.Actor.hitBonus)
+                        {
+                            playerHit.PlaySFX("sword_strike_armor_chain_04");
+                        }
+                        else
+                        {
+                            playerHit.PlaySFX("sword_whoosh_06");
                         }
                     }
                 }

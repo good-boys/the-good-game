@@ -58,7 +58,7 @@ public class CombatUI : AbstractCombatUI
         damageCharacter(playerHealth, remainingHealth, maxHealth, damage);
     }
 
-    void killPlayer() 
+    void killPlayer()
     {
         infoBar.text = string.Format("{0} has been defeated", playerName);
         playerHealth.fillAmount = 0;
@@ -107,7 +107,7 @@ public class CombatUI : AbstractCombatUI
     {
         enemyDamageNumber.text = damage.ToString();
         enemyDamageNumber.GetComponent<Animator>().Play("Hit");
-        if(slain) return;
+        if (slain) return;
         infoBar.text = string.Format("{0} dealt {1} damage to {2}", playerName, damage, enemyName);
         damageCharacter(enemyHealth, remainingHealth, maxHealth, damage);
     }

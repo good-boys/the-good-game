@@ -28,12 +28,88 @@ public class AudioManager : MonoBehaviour
             Debug.LogErrorFormat("Source {0} not found. Unable to play clip.", sourceName);
             return;
         }
+
         if(options == null)
         {
             options = AudioOptions.GetDefault();
         }
+
+        if (clip == null)
+        {
+            Debug.LogErrorFormat("Clip {0} not found.", sourceName);
+            return;
+        }
         clipOptions[getClipIdentifier(source, clip)] = options;
         handleClipTransition(source, clip, options);
+    }
+
+    public void Play(string sourceName, AudioOptions options = null)
+    {
+        AudioSource source;
+        if (!sources.TryGetValue(sourceName, out source))
+        {
+            Debug.LogErrorFormat("Source {0} not found. Unable to stop clip.", sourceName);
+            return;
+        }
+
+        AudioClip clip = source.clip;
+        if (clip == null)
+        {
+            Debug.LogErrorFormat("Clip {0} not found.", sourceName);
+            return;
+        }
+
+        Play(sourceName, clip, options);
+    }
+
+    public void Stop(string sourceName, AudioClip clip)
+    {
+        AudioSource source;
+        if (!sources.TryGetValue(sourceName, out source))
+        {
+            Debug.LogErrorFormat("Source {0} not found. Unable to stop clip.", sourceName);
+            return;
+        }
+
+        if (!clipOptions.ContainsKey(getClipIdentifier(source, clip)))
+        {
+            Debug.LogErrorFormat("Source {0} options not found. Unable to stop clip.", sourceName);
+            return;
+        }
+
+        AudioOptions options = clipOptions[getClipIdentifier(source, clip)];
+        Action endHandlerAction = delegate { options.OnEnd(); };
+        IEnumerator fadeOutCoroutine = getFadeOutCoroutine(source, options, options.HasEndHandler ? endHandlerAction : null);
+        if (options.HasEndHandler)
+        {
+            IEnumerator endClipCoroutine = waitAndExecute(Mathf.Max(0, options.FadeOutTime), delegate
+            {
+                StartCoroutine(fadeOutCoroutine);
+            });
+        }
+        else
+        {
+            StartCoroutine(fadeOutCoroutine);
+        }
+    }
+
+    public void Stop(string sourceName)
+    {
+        AudioSource source;
+        if (!sources.TryGetValue(sourceName, out source))
+        {
+            Debug.LogErrorFormat("Source {0} not found. Unable to stop clip.", sourceName);
+            return;
+        }
+
+        AudioClip clip = source.clip;
+        if (clip == null)
+        {
+            Debug.LogErrorFormat("Clip {0} not found.", sourceName);
+            return;
+        }
+
+        Stop(sourceName, clip);
     }
 
     public List<AudioSource> GetPlayingSources()

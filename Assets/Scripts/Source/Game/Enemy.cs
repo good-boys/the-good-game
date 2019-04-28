@@ -1,4 +1,4 @@
-public class Enemy : Character 
+public class Enemy : Character
 {
     public virtual bool HasPattern { get { return pattern != null; } }
 
@@ -9,6 +9,8 @@ public class Enemy : Character
     {
 
     }
+
+    public Enemy(CharacterConfig config) : base(config) { }
 
     public void SetActionPattern(CharacterActionPattern pattern)
     {
@@ -35,7 +37,7 @@ public class Enemy : Character
             return attack;
         }
         throw new NoCharacterActionExistsException(string.Format(
-            "Unsupported template of type {0}", 
+            "Unsupported template of type {0}",
             templateAction.GetType()));
     }
 }
