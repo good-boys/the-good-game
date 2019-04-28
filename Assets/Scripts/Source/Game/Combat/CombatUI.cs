@@ -29,7 +29,7 @@ public class CombatUI : AbstractCombatUI
     Image rightArrow;
 
     [SerializeField]
-    Image downArrow;
+    Image downArrow;    
 
     public Animator anim;
 
@@ -108,7 +108,7 @@ public class CombatUI : AbstractCombatUI
     {
         enemyDamageNumber.text = damage.ToString();
         enemyDamageNumber.GetComponent<Animator>().Play("Hit");
-        if(slain) return;
+        if (slain) return;
         infoBar.text = string.Format("{0} dealt {1} damage to {2}", playerName, damage, enemyName);
         damageCharacter(enemyHealth, remainingHealth, maxHealth, damage);
     }
