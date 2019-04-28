@@ -14,4 +14,10 @@ public class CharacterActionPattern : ScriptableObject
 
     [SerializeField]
     CharacterActionTemplate[] actions;
+
+    public CharacterActionPattern Init(CharacterActionTemplate[] actions)
+    {
+        this.actions = actions;
+        return this;
+    }
 }

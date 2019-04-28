@@ -1,6 +1,6 @@
 public class Enemy : Character 
 {
-    public bool HasPattern { get { return pattern != null; } }
+    public virtual bool HasPattern { get { return pattern != null; } }
 
     CharacterActionPattern pattern;
     int patternIndex = 0;
@@ -15,7 +15,7 @@ public class Enemy : Character
         this.pattern = pattern;
     }
 
-    public CharacterAction NextActionFromPattern(params Character[] targets)
+    public virtual CharacterAction NextActionFromPattern(params Character[] targets)
     {
         if(pattern.Length == 0)
         {
