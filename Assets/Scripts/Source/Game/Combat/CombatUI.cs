@@ -29,7 +29,7 @@ public class CombatUI : AbstractCombatUI
     Image rightArrow;
 
     [SerializeField]
-    Image downArrow;    
+    Image downArrow;
 
     public Animator anim;
 
@@ -58,7 +58,7 @@ public class CombatUI : AbstractCombatUI
         damageCharacter(playerHealth, remainingHealth, maxHealth, damage);
     }
 
-    void killPlayer() 
+    void killPlayer()
     {
         infoBar.text = string.Format("{0} has been defeated", playerName);
         playerHealth.fillAmount = 0;
@@ -76,23 +76,22 @@ public class CombatUI : AbstractCombatUI
         );
     }
 
-    public void ShowEnemyDirection(int dir)
+    public void ShowEnemyDirection(AttackDirection dir)
     {
-        if (dir == 0)
+        switch(dir)
         {
-            rightArrow.enabled = true;
-        }
-        else if (dir == 1)
-        {
-            leftArrow.enabled = true;
-        }
-        else if (dir == 2)
-        {
-            upArrow.enabled = true;
-        }
-        else if (dir == 3)
-        {
-            downArrow.enabled = true;
+            case AttackDirection.Right:
+                rightArrow.enabled = true;
+                break;
+            case AttackDirection.Left:
+                leftArrow.enabled = true;
+                break;
+            case AttackDirection.Up:
+                upArrow.enabled = true;
+                break;
+            case AttackDirection.Down:
+                downArrow.enabled = true;
+                break;
         }
     }
 

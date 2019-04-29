@@ -319,6 +319,7 @@ MonoBehaviour:
   enemyWeaponBonusAttack: 2
   enemyWeaponBonusDefense: 2
   enemySpeed: 1
+  enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5, type: 2}
 --- !u!114 &27310880
 MonoBehaviour:
   m_ObjectHideFlags: 0

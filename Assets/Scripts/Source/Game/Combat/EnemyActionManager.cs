@@ -11,7 +11,11 @@ public class EnemyActionManager : MonoBehaviour
 
     public virtual CharacterAction RequestNextAction(Enemy enemy, Player opponent)
     {
-        // TODO: implement actual AI logic
+
+        if(enemy.HasPattern)
+        {
+            return enemy.NextActionFromPattern(opponent);
+        }
         return random.Generate(0f, 1f) > 0.5f ? enemy.Attack(opponent) : (CharacterAction) enemy.Defend(opponent);
     }
 }

@@ -11,5 +11,6 @@ public class AttackTest
         Attack attack = new Attack(null, damage, bonus, null, null);
 
         Assert.AreEqual(damage, attack.Damage);
+        Assert.AreEqual(AttackDirection.None, attack.Direction);
     }
 }

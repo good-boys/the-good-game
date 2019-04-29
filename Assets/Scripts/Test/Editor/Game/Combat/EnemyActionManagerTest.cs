@@ -11,6 +11,7 @@ public class EnemyActionManagerTest
     Mock<Player> mockPlayer;
     Mock<Attack> mockAttack;
     Mock<Defend> mockDefend;
+    Mock<CharacterAction> mockPatternAction;
 
     [SetUp]
     public void Setup()
@@ -24,9 +25,12 @@ public class EnemyActionManagerTest
         mockEnemy = new Mock<Enemy>("name", 100, 1);
         mockAttack = new Mock<Attack>(null, 5, 5, null, null);
         mockDefend = new Mock<Defend>(null, 5, 5, null, null);
+        mockPatternAction = new Mock<CharacterAction>(null, null, null);
 
         mockEnemy.Setup(enemy => enemy.Attack(mockPlayer.Object)).Returns(mockAttack.Object);
         mockEnemy.Setup(enemy => enemy.Defend(mockPlayer.Object)).Returns(mockDefend.Object);
+        mockEnemy.Setup(enemy => enemy.NextActionFromPattern(mockPlayer.Object))
+            .Returns(mockPatternAction.Object);
 
         enemyActionManager.Init(mockRandomGenerator.Object);
     }
@@ -51,5 +55,16 @@ public class EnemyActionManagerTest
 
         Assert.AreSame(mockDefend.Object, defend);
         mockEnemy.Verify(enemy => enemy.Defend(mockPlayer.Object));
+    }
+
+    [Test]
+    public void TestRequestNextAction_Pattern()
+    {
+        mockEnemy.SetupGet(enemy => enemy.HasPattern).Returns(true);
+
+        CharacterAction pattern = enemyActionManager.RequestNextAction(mockEnemy.Object, mockPlayer.Object);
+
+        Assert.AreSame(mockPatternAction.Object, pattern);
+        mockEnemy.Verify(enemy => enemy.NextActionFromPattern(mockPlayer.Object));
     }
 }
