@@ -1,0 +1,417 @@
+fileFormatVersion: 2
+guid: 31a357264f543ee4ebf554c3bc51dfb7
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Hi poly_LOD0
+    100002: //RootNode
+    100004: LL_Rig
+    100006: Low poly_LOD1
+    100008: tenticle 01.L.004
+    100010: tenticle 01.L.005
+    100012: tenticle 01.L.006
+    100014: tenticle 01.L.007
+    100016: tenticle 01.L.007_end
+    100018: tenticle 01.L.IK
+    100020: tenticle 01.L.IK_end
+    100022: tenticle 01.R
+    100024: tenticle 01.R.001
+    100026: tenticle 01.R.002
+    100028: tenticle 01.R.003
+    100030: tenticle 01.R.003_end
+    100032: tenticle 01.R.IK
+    100034: tenticle 01.R.IK_end
+    100036: tenticle 02.L.004
+    100038: tenticle 02.L.005
+    100040: tenticle 02.L.006
+    100042: tenticle 02.L.007
+    100044: tenticle 02.L.007_end
+    100046: tenticle 02.L.IK
+    100048: tenticle 02.L.IK_end
+    100050: tenticle 02.R
+    100052: tenticle 02.R.001
+    100054: tenticle 02.R.002
+    100056: tenticle 02.R.003
+    100058: tenticle 02.R.003_end
+    100060: tenticle 02.R.IK
+    100062: tenticle 02.R.IK_end
+    100064: tenticle 03.L.004
+    100066: tenticle 03.L.005
+    100068: tenticle 03.L.006
+    100070: tenticle 03.L.007
+    100072: tenticle 03.L.007_end
+    100074: tenticle 03.L.IK
+    100076: tenticle 03.L.IK_end
+    100078: tenticle 03.R
+    100080: tenticle 03.R.001
+    100082: tenticle 03.R.002
+    100084: tenticle 03.R.003
+    100086: tenticle 03.R.003_end
+    100088: tenticle 03.R.IK
+    100090: tenticle 03.R.IK_end
+    100092: tenticle 04.L.004
+    100094: tenticle 04.L.005
+    100096: tenticle 04.L.006
+    100098: tenticle 04.L.007
+    100100: tenticle 04.L.007_end
+    100102: tenticle 04.L.IK
+    100104: tenticle 04.L.IK_end
+    100106: tenticle 04.R
+    100108: tenticle 04.R.001
+    100110: tenticle 04.R.002
+    100112: tenticle 04.R.003
+    100114: tenticle 04.R.003_end
+    100116: tenticle 04.R.IK
+    100118: tenticle 04.R.IK_end
+    100120: tenticle 05.L.004
+    100122: tenticle 05.L.005
+    100124: tenticle 05.L.006
+    100126: tenticle 05.L.007
+    100128: tenticle 05.L.007_end
+    100130: tenticle 05.L.IK
+    100132: tenticle 05.L.IK_end
+    100134: tenticle 05.R
+    100136: tenticle 05.R.001
+    100138: tenticle 05.R.002
+    100140: tenticle 05.R.003
+    100142: tenticle 05.R.003_end
+    100144: tenticle 05.R.IK
+    100146: tenticle 05.R.IK_end
+    100148: tenticle 06.L.004
+    100150: tenticle 06.L.005
+    100152: tenticle 06.L.006
+    100154: tenticle 06.L.007
+    100156: tenticle 06.L.007_end
+    100158: tenticle 06.L.IK
+    100160: tenticle 06.L.IK_end
+    100162: tenticle 06.R
+    100164: tenticle 06.R.001
+    100166: tenticle 06.R.002
+    100168: tenticle 06.R.003
+    100170: tenticle 06.R.003_end
+    100172: tenticle 06.R.IK
+    100174: tenticle 06.R.IK_end
+    100176: Torso
+    400000: Hi poly_LOD0
+    400002: //RootNode
+    400004: LL_Rig
+    400006: Low poly_LOD1
+    400008: tenticle 01.L.004
+    400010: tenticle 01.L.005
+    400012: tenticle 01.L.006
+    400014: tenticle 01.L.007
+    400016: tenticle 01.L.007_end
+    400018: tenticle 01.L.IK
+    400020: tenticle 01.L.IK_end
+    400022: tenticle 01.R
+    400024: tenticle 01.R.001
+    400026: tenticle 01.R.002
+    400028: tenticle 01.R.003
+    400030: tenticle 01.R.003_end
+    400032: tenticle 01.R.IK
+    400034: tenticle 01.R.IK_end
+    400036: tenticle 02.L.004
+    400038: tenticle 02.L.005
+    400040: tenticle 02.L.006
+    400042: tenticle 02.L.007
+    400044: tenticle 02.L.007_end
+    400046: tenticle 02.L.IK
+    400048: tenticle 02.L.IK_end
+    400050: tenticle 02.R
+    400052: tenticle 02.R.001
+    400054: tenticle 02.R.002
+    400056: tenticle 02.R.003
+    400058: tenticle 02.R.003_end
+    400060: tenticle 02.R.IK
+    400062: tenticle 02.R.IK_end
+    400064: tenticle 03.L.004
+    400066: tenticle 03.L.005
+    400068: tenticle 03.L.006
+    400070: tenticle 03.L.007
+    400072: tenticle 03.L.007_end
+    400074: tenticle 03.L.IK
+    400076: tenticle 03.L.IK_end
+    400078: tenticle 03.R
+    400080: tenticle 03.R.001
+    400082: tenticle 03.R.002
+    400084: tenticle 03.R.003
+    400086: tenticle 03.R.003_end
+    400088: tenticle 03.R.IK
+    400090: tenticle 03.R.IK_end
+    400092: tenticle 04.L.004
+    400094: tenticle 04.L.005
+    400096: tenticle 04.L.006
+    400098: tenticle 04.L.007
+    400100: tenticle 04.L.007_end
+    400102: tenticle 04.L.IK
+    400104: tenticle 04.L.IK_end
+    400106: tenticle 04.R
+    400108: tenticle 04.R.001
+    400110: tenticle 04.R.002
+    400112: tenticle 04.R.003
+    400114: tenticle 04.R.003_end
+    400116: tenticle 04.R.IK
+    400118: tenticle 04.R.IK_end
+    400120: tenticle 05.L.004
+    400122: tenticle 05.L.005
+    400124: tenticle 05.L.006
+    400126: tenticle 05.L.007
+    400128: tenticle 05.L.007_end
+    400130: tenticle 05.L.IK
+    400132: tenticle 05.L.IK_end
+    400134: tenticle 05.R
+    400136: tenticle 05.R.001
+    400138: tenticle 05.R.002
+    400140: tenticle 05.R.003
+    400142: tenticle 05.R.003_end
+    400144: tenticle 05.R.IK
+    400146: tenticle 05.R.IK_end
+    400148: tenticle 06.L.004
+    400150: tenticle 06.L.005
+    400152: tenticle 06.L.006
+    400154: tenticle 06.L.007
+    400156: tenticle 06.L.007_end
+    400158: tenticle 06.L.IK
+    400160: tenticle 06.L.IK_end
+    400162: tenticle 06.R
+    400164: tenticle 06.R.001
+    400166: tenticle 06.R.002
+    400168: tenticle 06.R.003
+    400170: tenticle 06.R.003_end
+    400172: tenticle 06.R.IK
+    400174: tenticle 06.R.IK_end
+    400176: Torso
+    2100000: Material.001
+    4300000: Hi poly_LOD0
+    4300002: Low poly_LOD1
+    7400000: LL_Rig|0reset pose
+    7400002: LL_Rig|Attack
+    7400004: LL_Rig|Hit
+    7400006: LL_Rig|Idle
+    7400008: LL_Rig|Idle damaged
+    9500000: //RootNode
+    13700000: Hi poly_LOD0
+    13700002: Low poly_LOD1
+    20500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: LL_Rig|0reset pose
+      takeName: LL_Rig|0reset pose
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LL_Rig|Attack
+      takeName: LL_Rig|Attack
+      firstFrame: 0
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LL_Rig|Hit
+      takeName: LL_Rig|Hit
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LL_Rig|Idle
+      takeName: LL_Rig|Idle
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: LL_Rig|Idle damaged
+      takeName: LL_Rig|Idle damaged
+      firstFrame: 0
+      lastFrame: 50
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages:
+    - 0.25
+    - 0.01
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
