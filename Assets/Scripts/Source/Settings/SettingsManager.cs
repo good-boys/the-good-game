@@ -37,7 +37,7 @@ public class SettingsManager
         set
         {
             value = Mathf.Clamp(value, MIN_VOLUME, MAX_VOLUME);
-            settingsSerializer.SerializeMusicVolume(_musicVolume);
+            settingsSerializer.SerializeMusicVolume(value);
             onMusicChange(value);
         }
     }
@@ -51,7 +51,7 @@ public class SettingsManager
         set
         {
             value = Mathf.Clamp(value, MIN_VOLUME, MAX_VOLUME);
-            settingsSerializer.SerializeSFXVolume(_sfxVolume);
+            settingsSerializer.SerializeSFXVolume(value);
             onSFXChange(value);
         }
     }

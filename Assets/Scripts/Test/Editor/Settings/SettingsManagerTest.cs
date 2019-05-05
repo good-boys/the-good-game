@@ -54,8 +54,8 @@ public class SettingsManagerTest
 
         settings.MusicVolume = newMusicVolume;
 
-        Assert.AreEqual(0, settings.MusicVolume);
-        mockSerializer.Verify(s => s.SerializeMusicVolume(0));
+        Assert.AreEqual(0.001f, settings.MusicVolume);
+        mockSerializer.Verify(s => s.SerializeMusicVolume(0.001f));
     }
 
     [Test]
