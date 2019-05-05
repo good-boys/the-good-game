@@ -20,8 +20,10 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         settings = new SettingsManager(new UnitySettingsSerializer());
-        handleMusicChanged();
-        handleSFXChanged();
+        handleMusicChanged(settings.MusicVolume);
+        handleSFXChanged(settings.SFXVolume);
+        settings.SubscribeMusicChange(handleMusicChanged);
+        settings.SubscribeSFXChange(handleSFXChanged);
     }
 
     public void Init(Dictionary<string, AudioSource> sources)
@@ -246,14 +248,14 @@ public class AudioManager : MonoBehaviour
         action();
     }
 
-    void handleMusicChanged()
+    void handleMusicChanged(float volume)
     {
-        masterMixer.SetFloat("MusicVolume", Mathf.Log(settings.MusicVolume) * LOGARITHMIC_VOLUME_SCALER);
+        masterMixer.SetFloat("MusicVolume", Mathf.Log(volume) * LOGARITHMIC_VOLUME_SCALER);
     }
 
-    void handleSFXChanged()
+    void handleSFXChanged(float volume)
     {
-        masterMixer.SetFloat("SFXVolume", Mathf.Log(settings.SFXVolume) * LOGARITHMIC_VOLUME_SCALER);
+        masterMixer.SetFloat("SFXVolume", Mathf.Log(volume) * LOGARITHMIC_VOLUME_SCALER);
     }
 
     void registerClipCoroutine(AudioSource source, 
