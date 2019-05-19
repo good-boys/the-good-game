@@ -32,6 +32,7 @@ public class CombatUI : AbstractCombatUI
     Image downArrow;
 
     public Animator anim;
+    public CanvasGroup canvasGroup;
 
     string playerName, enemyName;
 
@@ -46,6 +47,12 @@ public class CombatUI : AbstractCombatUI
             damagePlayer,
             killPlayer
         );
+    }
+
+    public void Reset()
+    {
+        slain = false;
+        enemyHealth.fillAmount = 100f;
     }
 
     void damagePlayer(int remainingHealth, int maxHealth, int damage)
@@ -63,6 +70,7 @@ public class CombatUI : AbstractCombatUI
         infoBar.text = string.Format("{0} has been defeated", playerName);
         playerHealth.fillAmount = 0;
         slain = true;
+        GameFlowManager.instance.RestartLevel();
     }
 
     public override CharacterCombatHandler GetEnemyCombatHandler(Enemy enemy)
@@ -95,6 +103,17 @@ public class CombatUI : AbstractCombatUI
         }
     }
 
+    public void DoFadeOut()
+    {
+        canvasGroup.alpha = 1;
+        anim.Play("FadeOut");
+    }
+
+    public void DoFadeIn()
+    {
+        anim.Play("FadeIn");
+    }
+
     void HideDirection()
     {
         rightArrow.enabled = false;
@@ -117,6 +136,7 @@ public class CombatUI : AbstractCombatUI
         infoBar.text = string.Format("{0} is slain", enemyName);
         enemyHealth.fillAmount = 0;
         slain = true;
+        GameFlowManager.instance.NextLevel();
     }
 
     void damageCharacter(Image healthBar, int remainingHealth, int maxHealth, int dammage)

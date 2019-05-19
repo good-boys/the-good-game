@@ -36,10 +36,12 @@ public class CharacterManager : MonoBehaviour
     {
         if (character is Player)
         {
+            players.Clear();
             players.Add(character as Player);
         }
         else if(character is Enemy)
         {
+            enemies.Clear();
             enemies.Add(character as Enemy);
         }
     }

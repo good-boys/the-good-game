@@ -36,6 +36,7 @@ public class DataInitializer : MonoBehaviour
         else
         {
             GameSave = new GameSave(seed, new Player(startingPlayer));
+            GameSave.Player.EquipWeapon(new Weapon("Default", 5, 5, 2, 2));
         }
     }
 

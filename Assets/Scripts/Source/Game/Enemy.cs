@@ -17,6 +17,11 @@ public class Enemy : Character
         this.pattern = pattern;
     }
 
+    public CharacterActionPattern GetActionPattern()
+    {
+        return pattern;
+    }
+
     public virtual CharacterAction NextActionFromPattern(params Character[] targets)
     {
         if(pattern.Length == 0)
