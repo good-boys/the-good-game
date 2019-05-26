@@ -1,4 +1,5 @@
 #! /bin/sh
+# requires gtimeout from coreutils
 
 TEST_FILE=test.xml
 touch $TEST_FILE
@@ -12,8 +13,9 @@ echo "Running Editor tests"
   -runEditorTests \
   -editorTestsResultFile $(pwd)/$TEST_FILE
 rc0=$?
+echo "STATUS: $rc0"
 echo "Unit test results:"
-cat $(pwd)/test.xml
+gtimeout 10 cat $(pwd)/test.xml
 # exit if tests failed
 echo ""
 if [ $rc0 -ne 0 ]; then { echo "===Unit tests failed==="; exit $rc0; } fi
