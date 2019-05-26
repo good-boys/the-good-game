@@ -27,11 +27,32 @@ public class Weapon : CharacterItem
         private set;
     }
 
-    public Weapon(string name, int damage, int defense, int bonusAttack, int bonusDefense) : base(name)
+    public virtual float GoalSize
+    {
+        get;
+        private set;
+    }
+
+    public virtual float GoalPos
+    {
+        get;
+        private set;
+    }
+
+    public virtual float TimerSpeed
+    {
+        get;
+        private set;
+    }
+
+    public Weapon(string name, int damage, int defense, int bonusAttack, int bonusDefense, float goalSize, float goalPos, float timerSpeed) : base(name)
     {
         this.Damage = damage;
         this.Defense = defense;
         this.BonusAttack = bonusAttack;
         this.BonusDefense = bonusDefense;
+        this.GoalSize = goalSize;
+        this.GoalPos = goalPos;
+        this.TimerSpeed = timerSpeed;
     }
 }

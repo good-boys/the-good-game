@@ -40,7 +40,7 @@ public class Level
     {
         Enemy enemy = new Enemy(enemyName, enemyHealth, enemySpeed);
 
-        enemy.EquipWeapon(new Weapon(enemyWeaponName, enemyWeaponDamage, enemyWeaponDefense, enemyWeaponBonusAttack, enemyWeaponBonusDefense));
+        enemy.EquipWeapon(new Weapon(enemyWeaponName, enemyWeaponDamage, enemyWeaponDefense, enemyWeaponBonusAttack, enemyWeaponBonusDefense, 0, 0, 0));
 
         enemy.SetActionPattern(enemyActionPattern);
 

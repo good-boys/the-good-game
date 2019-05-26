@@ -113,6 +113,7 @@ public class CombatManager : MonoBehaviour
                 if (action is Attack)
                 {
                     //Debug.Log("Player turn attack");
+                    gameFlowManager.combatUI.ShowAttackTimer(action.Actor.EquippedWeapon.GoalSize, action.Actor.EquippedWeapon.GoalPos, action.Actor.EquippedWeapon.TimerSpeed);
                     while (timer < attackTimer && !action.Actor.hitBonus)
                     {
                         timer += Time.deltaTime;

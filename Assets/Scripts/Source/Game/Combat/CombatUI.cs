@@ -31,6 +31,9 @@ public class CombatUI : AbstractCombatUI
     [SerializeField]
     Image downArrow;
 
+    [SerializeField]
+    RadialMarker radialMarker;
+
     public Animator anim;
     public CanvasGroup canvasGroup;
 
@@ -82,6 +85,11 @@ public class CombatUI : AbstractCombatUI
             damageEnemy,
             killEnemy
         );
+    }
+
+    public void ShowAttackTimer(float goalSize, float goalPos, float speed)
+    {
+        radialMarker.Spin(goalSize, goalPos, speed);
     }
 
     public void ShowEnemyDirection(AttackDirection dir)
