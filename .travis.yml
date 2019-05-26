@@ -3,9 +3,6 @@ language: objective-c
 rvm:
 - 2.2
 
-before_install:
-- brew install coreutils
-
 install:
 - "./Scripts/install.sh"
 
