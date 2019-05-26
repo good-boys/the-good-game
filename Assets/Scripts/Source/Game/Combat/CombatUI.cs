@@ -92,6 +92,11 @@ public class CombatUI : AbstractCombatUI
         radialMarker.Spin(goalSize, goalPos, speed);
     }
 
+    public void EndAttackTimer()
+    {
+        radialMarker.EndTimer();
+    }
+
     public void ShowEnemyDirection(AttackDirection dir)
     {
         switch(dir)

@@ -9,9 +9,6 @@ public class CombatManager : MonoBehaviour
     float delayBetweenActions = 1f;
 
     [SerializeField]
-    float attackTimer = 1f;
-
-    [SerializeField]
     float defendTimer = 1f;
 
     [SerializeField]
@@ -112,46 +109,35 @@ public class CombatManager : MonoBehaviour
             {
                 if (action is Attack)
                 {
-                    //Debug.Log("Player turn attack");
                     gameFlowManager.combatUI.ShowAttackTimer(action.Actor.EquippedWeapon.GoalSize, action.Actor.EquippedWeapon.GoalPos, action.Actor.EquippedWeapon.TimerSpeed);
-                    while (timer < attackTimer && !action.Actor.hitBonus)
+                    float delta = action.Actor.EquippedWeapon.GoalSize * action.Actor.EquippedWeapon.TimerSpeed;
+                    float minTimer = -action.Actor.EquippedWeapon.GoalPos / 360 * action.Actor.EquippedWeapon.TimerSpeed;
+                    float maxTimer = minTimer + delta;
+                    Debug.Log(minTimer + " " + maxTimer);
+                    while (timer < action.Actor.EquippedWeapon.TimerSpeed && !action.Actor.hitBonus && !missed)
                     {
                         timer += Time.deltaTime;
-                        if (missed)
-                        {
-                            missDelay += Time.deltaTime;
+                        Debug.Log(timer);
 
+                        if (timer > minTimer && timer < maxTimer)
+                        {
                             if (Input.GetButton("Fire1"))
                             {
-                                missDelay = 0.0f;
+                                action.Actor.hitBonus = true;
                             }
                         }
                         else
                         {
-                            if (timer > inputStart && timer < inputEnd)
+                            if (Input.GetButton("Fire1"))
                             {
-                                if (Input.GetButton("Fire1"))
-                                {
-                                    action.Actor.hitBonus = true;
-                                }
-                            }
-                            else
-                            {
-                                if (Input.GetButton("Fire1"))
-                                {
-                                    missed = true;
-                                }
+                                missed = true;
                             }
                         }
-
-                        if (missDelay > missTimer)
-                        {
-                            missed = false;
-                            missDelay = 0f;
-                        }
+                            
 
                         yield return null;
                     }
+                    gameFlowManager.combatUI.EndAttackTimer();
                     enemyHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the player weapon type
                     enemyHit.PlaySFX("sword_whoosh_01");
                 }

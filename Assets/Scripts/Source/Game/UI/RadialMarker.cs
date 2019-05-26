@@ -44,4 +44,10 @@ public class RadialMarker : MonoBehaviour {
 
         radialFill.gameObject.SetActive(false);
     }
+
+    public void EndTimer()
+    {
+        StopAllCoroutines();
+        radialFill.gameObject.SetActive(false);
+    }
 }

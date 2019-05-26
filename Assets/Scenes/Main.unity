@@ -332,7 +332,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayBetweenActions: 1
-  attackTimer: 2
   defendTimer: 2
   inputStart: 0
   inputEnd: 1
@@ -3015,6 +3014,25 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255675399912800, guid: afb3a99c8a98b0148b3983f40574a570, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224613327971987574, guid: afb3a99c8a98b0148b3983f40574a570,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.95371693
+      objectReference: {fileID: 0}
+    - target: {fileID: 224613327971987574, guid: afb3a99c8a98b0148b3983f40574a570,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.30070582
+      objectReference: {fileID: 0}
+    - target: {fileID: 224613327971987574, guid: afb3a99c8a98b0148b3983f40574a570,
+        type: 2}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -145
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114695255601844170, guid: afb3a99c8a98b0148b3983f40574a570, type: 2}
