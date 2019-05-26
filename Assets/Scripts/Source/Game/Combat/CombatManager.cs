@@ -113,11 +113,9 @@ public class CombatManager : MonoBehaviour
                     float delta = action.Actor.EquippedWeapon.GoalSize * action.Actor.EquippedWeapon.TimerSpeed;
                     float minTimer = -action.Actor.EquippedWeapon.GoalPos / 360 * action.Actor.EquippedWeapon.TimerSpeed;
                     float maxTimer = minTimer + delta;
-                    Debug.Log(minTimer + " " + maxTimer);
                     while (timer < action.Actor.EquippedWeapon.TimerSpeed && !action.Actor.hitBonus && !missed)
                     {
                         timer += Time.deltaTime;
-                        Debug.Log(timer);
 
                         if (timer > minTimer && timer < maxTimer)
                         {
