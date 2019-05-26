@@ -77,17 +77,19 @@ public class GameFlowManager : MonoBehaviour
         combatUI.gameObject.SetActive(false);
         camera.SetActive(false);
 
-        dataInitializer.SaveManager.Erase();
+        
 
         StartCoroutine(FirstLoad());
     }
 
     IEnumerator FirstLoad()
     {
-        if (combatConfig == null || combatInitializer == null)
+        if (combatConfig == null || combatInitializer == null || dataInitializer.SaveManager == null)
         {
             yield return null;
         }
+
+        dataInitializer.SaveManager.Erase();
 
         if (combatUI.GetPlayerCombatHandler(dataInitializer.GameSave.Player) == null)
         {
