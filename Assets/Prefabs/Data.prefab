@@ -57,3 +57,8 @@ MonoBehaviour:
     name: Tom
     health: 100
     speed: 1
+  combatTutorial:
+    steps:
+    - receiverId: Attack
+    - receiverId: Defend
+    - receiverId: AttackCombo
