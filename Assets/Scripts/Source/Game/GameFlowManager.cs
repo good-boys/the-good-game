@@ -53,7 +53,9 @@ public class GameFlowManager : MonoBehaviour
 
     public List<Level> levels = new List<Level>();
     public CombatUI combatUI;
+    public CombatManager combatManager;
     public GameObject camera;
+    public bool inBattle;
 
     public static GameFlowManager instance = null;
     public AudioManager audioManager;
@@ -98,6 +100,7 @@ public class GameFlowManager : MonoBehaviour
 
         combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
         combatInitializer.Initialize();
+        inBattle = true;
         SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
     }
 
@@ -113,6 +116,12 @@ public class GameFlowManager : MonoBehaviour
 
         audioManager.Stop("Trees");
         audioManager.Play("Music 1", new AudioOptions(3,0,0.5f,true,false));
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("You Lost");
+        RestartLevel();
     }
 
     public void RestartLevel()
@@ -145,6 +154,7 @@ public class GameFlowManager : MonoBehaviour
     {
         loading = true;
         combatUI.DoFadeOut();
+        combatManager.Reset();
 
         yield return new WaitForSeconds(1f);
         
@@ -156,6 +166,7 @@ public class GameFlowManager : MonoBehaviour
         combatUI.DoFadeIn();
         combatInitializer.Initialize();
         loading = false;
+        inBattle = true;
     }
 
     //OnEnemyDefeated function

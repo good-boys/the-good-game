@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public class MenuInput : MonoBehaviour
 {
-    public EventSystem eventSystem;
     public GameObject lastSelectedObj;
     public GameObject selectedObject;
 
@@ -19,20 +18,25 @@ public class MenuInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!gameObject.activeInHierarchy)
+        {
+            return;
+        }
+
         if (buttonSelected)
         {
             //If user clicks off of currently selected object
-            if (eventSystem.currentSelectedGameObject == null && selectedObject != eventSystem.currentSelectedGameObject && Input.GetAxisRaw("Vertical") == 0 && !Input.GetMouseButtonDown(0))
+            if (EventSystem.current.currentSelectedGameObject == null && selectedObject != EventSystem.current.currentSelectedGameObject && Input.GetAxisRaw("Vertical") == 0 && !Input.GetMouseButtonDown(0))
             {
-                eventSystem.SetSelectedGameObject(selectedObject);
+                EventSystem.current.SetSelectedGameObject(selectedObject);
             }
 
             //If there is a current button selected and the user inputs vertical
-            if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetMouseButtonDown(0)) && eventSystem.currentSelectedGameObject != selectedObject && eventSystem.currentSelectedGameObject != null)
+            if ((Input.GetAxisRaw("Vertical") != 0 || Input.GetMouseButtonDown(0)) && EventSystem.current.currentSelectedGameObject != selectedObject && EventSystem.current.currentSelectedGameObject != null)
             {
                 lastSelectedObj = selectedObject;
 
-                selectedObject = eventSystem.currentSelectedGameObject;
+                selectedObject = EventSystem.current.currentSelectedGameObject;
 
                 movedMenu = true;
             }
@@ -65,7 +69,18 @@ public class MenuInput : MonoBehaviour
         {
             if (selectedObject != null && Input.GetMouseButtonDown(0))
             {
-                selectedObject = eventSystem.currentSelectedGameObject;
+                selectedObject = EventSystem.current.currentSelectedGameObject;
+            }
+
+            if (selectedObject == null)
+            {
+                List<Button> btns = new List<Button>();
+                btns.AddRange(FindObjectsOfType<Button>());
+                if (btns.Count > 0)
+                {
+                    EventSystem.current.SetSelectedGameObject(btns[0].gameObject);
+                    selectedObject = EventSystem.current.currentSelectedGameObject;
+                }
             }
 
             if (selectedObject != null)

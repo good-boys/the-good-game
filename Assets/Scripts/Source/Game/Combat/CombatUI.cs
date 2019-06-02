@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.EventSystems;
 
 public class CombatUI : AbstractCombatUI
 {
@@ -33,6 +35,9 @@ public class CombatUI : AbstractCombatUI
 
     [SerializeField]
     RadialMarker radialMarker;
+
+    public GameObject winPanel;
+    public GameObject winBtn;
 
     public Animator anim;
     public CanvasGroup canvasGroup;
@@ -73,7 +78,8 @@ public class CombatUI : AbstractCombatUI
         infoBar.text = string.Format("{0} has been defeated", playerName);
         playerHealth.fillAmount = 0;
         slain = true;
-        GameFlowManager.instance.RestartLevel();
+        GameFlowManager.instance.inBattle = true;
+        GameFlowManager.instance.GameOver();
     }
 
     public override CharacterCombatHandler GetEnemyCombatHandler(Enemy enemy)
@@ -149,6 +155,25 @@ public class CombatUI : AbstractCombatUI
         infoBar.text = string.Format("{0} is slain", enemyName);
         enemyHealth.fillAmount = 0;
         slain = true;
+        GameFlowManager.instance.inBattle = false;
+        StartCoroutine(WinScreen());
+    }
+
+    IEnumerator WinScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        winPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(winBtn);
+        anim.Play("WinPanel");
+    }
+
+    public void Rest()
+    {
+        GameFlowManager.instance.NextLevel();
+    }
+
+    public void Upgrade()
+    {
         GameFlowManager.instance.NextLevel();
     }
 

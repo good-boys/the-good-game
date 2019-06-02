@@ -90,6 +90,19 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        if (playerHit != null)
+        {
+            playerHit.Reset();
+        }
+
+        if (enemyHit != null)
+        {
+            enemyHit.Reset();
+        }
+    }
+
     IEnumerator executeActions()
     {
         if (gameFlowManager != null)
@@ -100,7 +113,6 @@ public class CombatManager : MonoBehaviour
         while (!turnManager.ShouldWaitForPlayerAction(characterManager.GetActivePlayer()))
         {
             float timer = 0.0f;
-            float missDelay = 0.0f;
             bool missed = false;
             CharacterAction action = turnManager.Peek();
             CharacterAction enemyAction = action.Targets[0].ActiveAction; //TODO: Maybe add target enemy incase of multiple enemies
@@ -215,6 +227,9 @@ public class CombatManager : MonoBehaviour
             yield return new WaitForSeconds(delayBetweenActions);
         }
 
-        gameFlowManager.combatUI.anim.Play("ReturnSide");
+        if (gameFlowManager.inBattle)
+        {
+            gameFlowManager.combatUI.anim.Play("ReturnSide");
+        }
     }
 }
