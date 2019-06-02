@@ -3,12 +3,28 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour 
 {
+    const float LOGARITHMIC_VOLUME_SCALER = 20f;
+
+    [SerializeField]
+    AudioMixer masterMixer;
+
+    SettingsManager settings;
     Dictionary<string, AudioSource> sources = new Dictionary<string, AudioSource>();
     Dictionary<string, AudioOptions> clipOptions = new Dictionary<string, AudioOptions>();
     Dictionary<string, List<IEnumerator>> clipCoroutinesMap = new Dictionary<string, List<IEnumerator>>();
+
+    private void Start()
+    {
+        settings = new SettingsManager(new UnitySettingsSerializer());
+        handleMusicChanged(settings.MusicVolume);
+        handleSFXChanged(settings.SFXVolume);
+        settings.SubscribeMusicChange(handleMusicChanged);
+        settings.SubscribeSFXChange(handleSFXChanged);
+    }
 
     public void Init(Dictionary<string, AudioSource> sources)
     {
@@ -230,6 +246,16 @@ public class AudioManager : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         action();
+    }
+
+    void handleMusicChanged(float volume)
+    {
+        masterMixer.SetFloat("MusicVolume", Mathf.Log(volume) * LOGARITHMIC_VOLUME_SCALER);
+    }
+
+    void handleSFXChanged(float volume)
+    {
+        masterMixer.SetFloat("SFXVolume", Mathf.Log(volume) * LOGARITHMIC_VOLUME_SCALER);
     }
 
     void registerClipCoroutine(AudioSource source, 

@@ -9,6 +9,7 @@ public class MenuInput : MonoBehaviour
 {
     public GameObject lastSelectedObj;
     public GameObject selectedObject;
+    public GameObject onEnableObject;
 
     public Color selectedColor;
     public Color unSelectedColor;
@@ -21,6 +22,17 @@ public class MenuInput : MonoBehaviour
         if (!gameObject.activeInHierarchy)
         {
             return;
+        }
+
+        if (selectedObject != null)
+        {
+            if (!selectedObject.activeInHierarchy)
+            {
+                lastSelectedObj = selectedObject;
+                selectedObject = null;
+                buttonSelected = false;
+                movedMenu = true;
+            }
         }
 
         if (buttonSelected)
@@ -95,8 +107,39 @@ public class MenuInput : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (onEnableObject != null)
+        {
+            FirstSelectObject();
+        }
+    }
+
+    public void FirstSelectObject()
+    {
+        if (lastSelectedObj != null)
+        {
+            EventSystem.current.SetSelectedGameObject(lastSelectedObj);
+            selectedObject = EventSystem.current.currentSelectedGameObject;
+            movedMenu = true;
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(onEnableObject);
+            selectedObject = EventSystem.current.currentSelectedGameObject;
+            movedMenu = true;
+        }
+
+        selectedObject.GetComponent<Button>().OnSelect(null);
+    }
+
     private void OnDisable()
     {
         buttonSelected = false;
+        if (selectedObject != null)
+        {
+            lastSelectedObj = selectedObject;
+            selectedObject = null;
+        }
     }
 }
