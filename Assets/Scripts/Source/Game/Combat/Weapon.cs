@@ -1,8 +1,10 @@
 using System;
+using UnityEngine;
 
 [Serializable]
 public class Weapon : CharacterItem
 {
+    [SerializeField]
     public virtual int Damage
     {
         get;

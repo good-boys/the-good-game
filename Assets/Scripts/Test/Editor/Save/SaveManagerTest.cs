@@ -16,7 +16,7 @@ public class SaveManagerTest
     {
         mockIOManager = new Mock<IOManager>();
         mockFile = new Mock<Stream>();
-        save = new GameSave(1, new Player("test player", 34, 1));
+        save = new GameSave(1, new Player("test player", 34, 1), 0, 0);
 
         saveManager = new SaveManager(filePath,
                                       mockIOManager.Object);

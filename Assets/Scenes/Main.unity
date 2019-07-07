@@ -3661,6 +3661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastSelectedObj: {fileID: 0}
   selectedObject: {fileID: 1746712812}
+  onEnableObject: {fileID: 0}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   unSelectedColor: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!1 &928673307 stripped
@@ -5028,6 +5029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastSelectedObj: {fileID: 0}
   selectedObject: {fileID: 1570768492}
+  onEnableObject: {fileID: 0}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   unSelectedColor: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!4 &1247509732 stripped
@@ -7723,6 +7725,23 @@ MonoBehaviour:
     enemySpeed: 1
     enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
       type: 2}
+  Weapons:
+  - Name: Default
+    Damage: 5
+    Defense: 5
+    BonusAttack: 2
+    BonusDefense: 2
+    GoalSize: 0.2
+    GoalPos: -145
+    TimerSpeed: 5
+  - Name: 1
+    Damage: 10
+    Defense: 6
+    BonusAttack: 3
+    BonusDefense: 3
+    GoalSize: 0.1
+    GoalPos: -145
+    TimerSpeed: 5
   combatUI: {fileID: 268153299}
   combatManager: {fileID: 27310881}
   camera: {fileID: 163672221}
@@ -7731,6 +7750,7 @@ MonoBehaviour:
   combatInitializer: {fileID: 27310880}
   combatConfig: {fileID: 27310879}
   dataInitializer: {fileID: 1882590013}
+  currentWeapon: 0
 --- !u!4 &1882590012
 Transform:
   m_ObjectHideFlags: 0

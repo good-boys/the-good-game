@@ -48,10 +48,45 @@ public class Level
     }
 }
 
+[Serializable]
+public class WeaponStats
+{
+    [SerializeField]
+    string Name;
+
+    [SerializeField]
+    int Damage = 0;
+
+    [SerializeField]
+    int Defense = 0;
+
+    [SerializeField]
+    int BonusAttack = 0;
+
+    [SerializeField]
+    int BonusDefense = 0;
+
+    [SerializeField]
+    float GoalSize = 0;
+
+    [SerializeField]
+    float GoalPos = 0;
+
+    [SerializeField]
+    float TimerSpeed = 0;
+
+    public Weapon GetWeapon(int weaponID)
+    {
+        return new Weapon(Name, Damage, Damage, BonusAttack, BonusDefense, GoalSize, GoalPos, TimerSpeed);
+    }
+}
+
 public class GameFlowManager : MonoBehaviour 
 {
 
     public List<Level> levels = new List<Level>();
+    public List<WeaponStats> Weapons = new List<WeaponStats>();
+
     public CombatUI combatUI;
     public CombatManager combatManager;
     public GameObject camera;
@@ -63,7 +98,8 @@ public class GameFlowManager : MonoBehaviour
     public CombatConfig combatConfig;
     public DataInitializer dataInitializer;
 
-    int currentLevel;
+    public int currentWeapon = 0;
+    public int currentLevel;
     bool loading;
 
     private void Awake()
@@ -171,7 +207,19 @@ public class GameFlowManager : MonoBehaviour
 
     //OnEnemyDefeated function
 
-    //Heal function
+    void Rest()
+    {
 
-    //Weapon selection screen
+    }
+
+    void Upgrade()
+    {
+        int upgrade = currentWeapon++;
+        Mathf.Clamp(upgrade, 0, Weapons.Count);
+        combatConfig.GetPlayer().EquipWeapon(Weapons[upgrade].GetWeapon(upgrade));
+        dataInitializer.SaveManager.Save(dataInitializer.GameSave);
+
+        NextLevel();
+    }
+
 }
