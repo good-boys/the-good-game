@@ -92,4 +92,10 @@ public class PlayAttackVFX : MonoBehaviour {
         currentImage.color = newColor;
         currentImage.enabled = false;
     }
+
+    public void Reset()
+    {
+        currentImage.enabled = false;
+
+    }
 }

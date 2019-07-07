@@ -3,11 +3,6 @@ language: objective-c
 rvm:
 - 2.2
 
-before_install:
-- chmod a+x ./Scripts/install.sh
-- chmod a+x ./Scripts/test.sh
-- chmod a+x ./Scripts/build.sh
-
 install:
 - "./Scripts/install.sh"
 
@@ -15,7 +10,7 @@ jobs:
   include:
     - stage: "Test"
       name: "Unit Tests"
-      script: "./Scripts/test.sh || travis_terminate 1"
+      script: "./Scripts/test.sh"
     - stage: "Deploy"
       name: "GitHub Release"
       script: "travis_wait 30 ./Scripts/build.sh"

@@ -43,7 +43,7 @@ public class CombatInitializerTest
         Mock<CharacterCombatHandler> mockEnemyCombatHandler = new Mock<CharacterCombatHandler>();
         mockCombatConfig.Setup(combatConfig => combatConfig.GetPlayer()).Returns(mockPlayer.Object);
         mockCharacterManager.Setup(characterManager => characterManager.RegisterCharacter(It.IsAny<Player>()));
-        mockCombatConfig.Setup(combatConfig => combatConfig.GetEnemies()).Returns(new Enemy[]{mockEnemy.Object});
+        mockCombatConfig.Setup(combatConfig => combatConfig.GetEnemy()).Returns(mockEnemy.Object);
         mockCharacterManager.Setup(characterManager => characterManager.RegisterCharacter(It.IsAny<Enemy>()));
         mockPlayer.Setup(player => player.SubscribeCombatHandler(It.IsAny<CharacterCombatHandler>()));
         mockCombatUI.Setup(combatUI => combatUI.GetPlayerCombatHandler(It.IsAny<Player>())).Returns(mockPlayerCombatHandler.Object);
@@ -52,14 +52,14 @@ public class CombatInitializerTest
                                                                     It.IsAny<TurnManager>(),
                                                                     It.IsAny<GameFlowManager>()));
 
-        combatInitializer.Start();
+        combatInitializer.Initialize();
 
         mockCharacterManager.Verify(characterManager => characterManager.RegisterCharacter(mockPlayer.Object));
-        mockCombatConfig.Verify(combatConfig => combatConfig.GetEnemies());
+        mockCombatConfig.Verify(combatConfig => combatConfig.GetEnemy());
         mockCharacterManager.Verify(characterManager => characterManager.RegisterCharacter(mockEnemy.Object));
         mockCombatConfig.Verify(combatConfig => combatConfig.GetPlayer());
         mockPlayer.Verify(player => player.SubscribeCombatHandler(mockPlayerCombatHandler.Object));
-        mockCombatConfig.Verify(combatConfig => combatConfig.GetEnemies());
+        mockCombatConfig.Verify(combatConfig => combatConfig.GetEnemy());
         mockEnemy.Verify(enemy => enemy.SubscribeCombatHandler(mockEnemyCombatHandler.Object));
         mockCombatManager.Verify(combatManager => combatManager.Init(mockCharacterManager.Object,
                                                                      mockTurnManager.Object,

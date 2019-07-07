@@ -17,6 +17,11 @@ public class Enemy : Character
         this.pattern = pattern;
     }
 
+    public CharacterActionPattern GetActionPattern()
+    {
+        return pattern;
+    }
+
     public virtual CharacterAction NextActionFromPattern(params Character[] targets)
     {
         if(pattern.Length == 0)
@@ -39,5 +44,21 @@ public class Enemy : Character
         throw new NoCharacterActionExistsException(string.Format(
             "Unsupported template of type {0}",
             templateAction.GetType()));
+    }
+
+    private Enemy copyActionPattern(Enemy copy)
+    {
+        if(HasPattern)
+        {
+            copy.SetActionPattern(UnityEngine.Object.Instantiate(pattern));
+        }
+        return copy;
+    }
+
+    public new object CopyConfig()
+    {
+        Enemy copy = new Enemy(Config);
+        copy = copyActionPattern(copy);
+        return copyWeapon(copy);
     }
 }

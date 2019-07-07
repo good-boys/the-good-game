@@ -35,7 +35,7 @@ public class CombatInitializer : MonoBehaviour
         this.gameFlowManager = gameFlowManager;
     }
 
-    public virtual void Start()
+    public void Initialize()
     {
         setupCharacterManager();
         setupCombatUI();
@@ -45,19 +45,14 @@ public class CombatInitializer : MonoBehaviour
     void setupCharacterManager()
     {
         characterManager.RegisterCharacter(combatConfig.GetPlayer());
-        foreach (Enemy enemy in combatConfig.GetEnemies())
-        {
-            characterManager.RegisterCharacter(enemy);
-        }
+        characterManager.RegisterCharacter(combatConfig.GetEnemy());
     }
 
     void setupCombatUI()
     {
         Player player = combatConfig.GetPlayer();
+        Enemy enemy = combatConfig.GetEnemy();
         player.SubscribeCombatHandler(combatUI.GetPlayerCombatHandler(player));
-        foreach (Enemy enemy in combatConfig.GetEnemies())
-        {
-            enemy.SubscribeCombatHandler(combatUI.GetEnemyCombatHandler(enemy));
-        }
+        enemy.SubscribeCombatHandler(combatUI.GetEnemyCombatHandler(enemy));
     }
 }

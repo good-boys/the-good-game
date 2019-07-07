@@ -1,8 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using System.Collections;
+using UnityEngine.EventSystems;
 
 public class CombatUI : AbstractCombatUI
 {
+    private const string FADE_IN_CLIP = "FadeIn";
+    private const string FADE_OUT_CLIP = "FadeOut";
+    private const float FADE_TRANSITION_DELAY = 0.5f;
+
     int actionIndex = 1;
     [SerializeField]
     Image playerHealth, enemyHealth;
@@ -31,7 +38,14 @@ public class CombatUI : AbstractCombatUI
     [SerializeField]
     Image downArrow;
 
+    [SerializeField]
+    RadialMarker radialMarker;
+
+    public GameObject winPanel;
+    public GameObject winBtn;
+
     public Animator anim;
+    public CanvasGroup canvasGroup;
 
     string playerName, enemyName;
 
@@ -46,6 +60,12 @@ public class CombatUI : AbstractCombatUI
             damagePlayer,
             killPlayer
         );
+    }
+
+    public void Reset()
+    {
+        slain = false;
+        enemyHealth.fillAmount = 100f;
     }
 
     void damagePlayer(int remainingHealth, int maxHealth, int damage)
@@ -63,6 +83,8 @@ public class CombatUI : AbstractCombatUI
         infoBar.text = string.Format("{0} has been defeated", playerName);
         playerHealth.fillAmount = 0;
         slain = true;
+        GameFlowManager.instance.inBattle = true;
+        GameFlowManager.instance.GameOver();
     }
 
     public override CharacterCombatHandler GetEnemyCombatHandler(Enemy enemy)
@@ -74,6 +96,16 @@ public class CombatUI : AbstractCombatUI
             damageEnemy,
             killEnemy
         );
+    }
+
+    public void ShowAttackTimer(float goalSize, float goalPos, float speed)
+    {
+        radialMarker.Spin(goalSize, goalPos, speed);
+    }
+
+    public void EndAttackTimer()
+    {
+        radialMarker.EndTimer();
     }
 
     public void ShowEnemyDirection(AttackDirection dir)
@@ -93,6 +125,25 @@ public class CombatUI : AbstractCombatUI
                 downArrow.enabled = true;
                 break;
         }
+    }
+
+    public float DoFadeOut()
+    {
+        canvasGroup.alpha = 1;
+        anim.Play(FADE_OUT_CLIP);
+        return anim.runtimeAnimatorController.animationClips
+                    .ToList()
+                    .Find(clip => clip.name == FADE_OUT_CLIP).length;
+    }
+
+    public float GetFadeTransitionDelay()
+    {
+        return FADE_TRANSITION_DELAY;
+    }
+
+    public void DoFadeIn()
+    {
+        anim.Play(FADE_IN_CLIP);
     }
 
     void HideDirection()
@@ -117,6 +168,26 @@ public class CombatUI : AbstractCombatUI
         infoBar.text = string.Format("{0} is slain", enemyName);
         enemyHealth.fillAmount = 0;
         slain = true;
+        GameFlowManager.instance.inBattle = false;
+        StartCoroutine(WinScreen());
+    }
+
+    IEnumerator WinScreen()
+    {
+        yield return new WaitForSeconds(1f);
+        winPanel.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(winBtn);
+        anim.Play("WinPanel");
+    }
+
+    public void Rest()
+    {
+        GameFlowManager.instance.NextLevel();
+    }
+
+    public void Upgrade()
+    {
+        GameFlowManager.instance.NextLevel();
     }
 
     void damageCharacter(Image healthBar, int remainingHealth, int maxHealth, int dammage)
