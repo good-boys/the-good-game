@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using System.Collections;
 using UnityEngine.EventSystems;
 
 public class CombatUI : AbstractCombatUI
 {
+    private const string FADE_IN_CLIP = "FadeIn";
+    private const string FADE_OUT_CLIP = "FadeOut";
+    private const float FADE_TRANSITION_DELAY = 0.5f;
+
     int actionIndex = 1;
     [SerializeField]
     Image playerHealth, enemyHealth;
@@ -122,15 +127,23 @@ public class CombatUI : AbstractCombatUI
         }
     }
 
-    public void DoFadeOut()
+    public float DoFadeOut()
     {
         canvasGroup.alpha = 1;
-        anim.Play("FadeOut");
+        anim.Play(FADE_OUT_CLIP);
+        return anim.runtimeAnimatorController.animationClips
+                    .ToList()
+                    .Find(clip => clip.name == FADE_OUT_CLIP).length;
+    }
+
+    public float GetFadeTransitionDelay()
+    {
+        return FADE_TRANSITION_DELAY;
     }
 
     public void DoFadeIn()
     {
-        anim.Play("FadeIn");
+        anim.Play(FADE_IN_CLIP);
     }
 
     void HideDirection()

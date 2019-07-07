@@ -153,10 +153,10 @@ public class GameFlowManager : MonoBehaviour
     IEnumerator ReloadLevel()
     {
         loading = true;
-        combatUI.DoFadeOut();
+        float fadeOutTime = combatUI.DoFadeOut();
+        float fadeInDelay = combatUI.GetFadeTransitionDelay();
         combatManager.Reset();
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(fadeOutTime + fadeInDelay);
         
         Level level = levels[currentLevel];
 
@@ -169,9 +169,9 @@ public class GameFlowManager : MonoBehaviour
         inBattle = true;
     }
 
-    //OnEnemyDefeated function
+    // TODO: OnEnemyDefeated function
 
-    //Heal function
+    // TODO: Heal function
 
-    //Weapon selection screen
+    // TODO: Weapon selection screen
 }

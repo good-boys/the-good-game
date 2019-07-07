@@ -9,6 +9,7 @@ public class Player : Character
 
     public new object CopyConfig()
     {
-        return new Player(Config);
+        Player copy = new Player(Config);
+        return copyWeapon(copy);
     }
 }
