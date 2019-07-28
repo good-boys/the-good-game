@@ -48,10 +48,38 @@ public class Level
     }
 }
 
+[Serializable]
+public class WeaponSelect
+{
+    public string Name;
+    public int Damage;
+    public int Defense;
+    public int BonusAttack;
+    public int BonusDefense;
+    public float GoalSize;
+    public float GoalPos;
+    public float TimerSpeed;
+
+    Weapon GetWeapon()
+    {
+        return new Weapon(
+            Name,
+            Damage,
+            Defense,
+            BonusAttack,
+            BonusDefense,
+            GoalSize,
+            GoalPos,
+            TimerSpeed
+            );
+    }
+}
+
 public class GameFlowManager : MonoBehaviour 
 {
 
     public List<Level> levels = new List<Level>();
+    public List<WeaponSelect> weapons = new List<WeaponSelect>();
     public CombatUI combatUI;
     public CombatManager combatManager;
     public GameObject camera;
@@ -162,7 +190,7 @@ public class GameFlowManager : MonoBehaviour
         Level level = levels[currentLevel];
 
         combatConfig.Initialize(dataInitializer.GameSave.Player, level.GetEnemy());
-
+        dataInitializer.SaveManager.Save(dataInitializer.GameSave);
         combatUI.Reset();
         combatUI.DoFadeIn();
         combatInitializer.Initialize();
@@ -170,9 +198,13 @@ public class GameFlowManager : MonoBehaviour
         inBattle = true;
     }
 
-    // TODO: OnEnemyDefeated function
+    public void DoRest()
+    {
+        //Heal player 10
+    }
 
-    // TODO: Heal function
-
-    // TODO: Weapon selection screen
+    public void DoUpgrade()
+    {
+        //Upgrade weapon by 1
+    }
 }
