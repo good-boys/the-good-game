@@ -86,4 +86,21 @@ public class EnemyTest
             enemy.NextActionFromPattern(player);
         });
     }
+
+    [Test]
+    public void TestCopyConfig()
+    {
+        Weapon weapon = new Weapon("test_weapon", 1, 1, 1, 1, 1f, 1f, 1f);
+        enemy.SetActionPattern(mockPattern.Object);
+        enemy.EquipWeapon(weapon);
+
+        Enemy copy = enemy.CopyConfig() as Enemy;
+
+        Assert.AreEqual(enemy.Name, copy.Name);
+        Assert.AreEqual(enemy.MaxHealth, copy.Health);
+        Assert.AreEqual(enemy.MaxHealth, copy.MaxHealth);
+        Assert.AreEqual(enemy.Speed, copy.Speed);
+        Assert.True(copy.HasPattern);
+        Assert.AreEqual(weapon, copy.EquippedWeapon);
+    }
 }

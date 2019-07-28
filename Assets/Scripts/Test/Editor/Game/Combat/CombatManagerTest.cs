@@ -18,8 +18,6 @@ public class CombatManagerTest
     GameObject gameObject;
     CombatManager combatManager;
     Queue<CharacterAction> testActionQueue;
-    int testNumberEnemyTurns = 1;
-    int testNumberPlayerTurns = 1;
     int numberEnemyTurnsTaken = 0;
     int numberPlayerTurnsTaken = 0;
     int millisecondsToWaitBeforeEnemyAction = 1000;

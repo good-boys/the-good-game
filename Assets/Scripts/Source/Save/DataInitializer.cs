@@ -33,21 +33,36 @@ public class DataInitializer : MonoBehaviour
 
     public void SetUp()
     {
+        bool unableToLoad = false;
         if (SaveManager == null)
         {
             SaveManager = new SaveManager(getSavePath());
         }
-        if (SaveManager.HasSave())
+        if(SaveManager.HasSave())
         {
-            GameSave = SaveManager.Load();
+            try
+            {
+                GameSave = SaveManager.Load();
+            }
+            catch(System.Exception e)
+            {
+                Debug.LogError(e);
+                unableToLoad = true;
+            }
         }
         else
+        {
+            unableToLoad = true;
+        }
+
+        if(unableToLoad)
         {
             attackTutorial.SetName(Tutorial.ATTACK_TUTORIAL);
             defendTutorial.SetName(Tutorial.DEFEND_TUTORIAL);
             comboTutorial.SetName(Tutorial.COMBO_TUTORIAL);
             Tutorial[] newTutorials = { attackTutorial, defendTutorial, comboTutorial };
             GameSave = new GameSave(seed, new Player(startingPlayer), newTutorials);
+            GameSave.Player.EquipWeapon(new Weapon("Default", 5, 5, 2, 2, .2f, -145f, 5f));
         }
     }
 

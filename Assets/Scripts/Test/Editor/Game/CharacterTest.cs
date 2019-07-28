@@ -90,7 +90,7 @@ public class CharacterTest
     [Test]
     public void TestEquipWeapon()
     {
-        Weapon mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0).Object;
+        Weapon mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0, 0, 0, 0).Object;
 
         character.EquipWeapon(mockWeapon);
 
@@ -101,7 +101,7 @@ public class CharacterTest
     public void TestAttack()
     {
         Character mockTarget = new Mock<Character>("name", 100, 1).Object;
-        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0);
+        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0, 0, 0, 0);
         int weaponDamage = 5;
         int weaponBonus = 15;
         mockWeapon.Setup(weapon => weapon.Damage).Returns(weaponDamage);
@@ -122,7 +122,7 @@ public class CharacterTest
     public void TestDefend()
     {
         Character mockTarget = new Mock<Character>("name", 100, 1).Object;
-        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0);
+        Mock<Weapon> mockWeapon = new Mock<Weapon>("name", 0, 0, 0, 0, 0, 0, 0);
         int weaponDefense = 5;
         int weaponBonus = 15;
         mockWeapon.Setup(weapon => weapon.Defense).Returns(weaponDefense);
@@ -164,12 +164,16 @@ public class CharacterTest
     [Test]
     public void TestCopyConfig()
     {
-        Character copy = character.CopyConfig() as Character;
+        Weapon weapon = new Weapon("test_weapon", 1, 1, 1, 1, 1f, 1f, 1f);
+        character.EquipWeapon(weapon);
 
+        Character copy = character.CopyConfig() as Character;
+        
         Assert.AreEqual(character.Name, copy.Name);
         Assert.AreEqual(character.MaxHealth, copy.Health);
         Assert.AreEqual(character.MaxHealth, copy.MaxHealth);
         Assert.AreEqual(character.Speed, copy.Speed);
+        Assert.AreEqual(weapon, copy.EquippedWeapon);
     }
 
     Character givenCharacter()
