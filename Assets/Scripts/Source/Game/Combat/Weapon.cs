@@ -1,10 +1,8 @@
 using System;
-using UnityEngine;
 
 [Serializable]
 public class Weapon : CharacterItem
 {
-    [SerializeField]
     public virtual int Damage
     {
         get;
@@ -56,5 +54,35 @@ public class Weapon : CharacterItem
         this.GoalSize = goalSize;
         this.GoalPos = goalPos;
         this.TimerSpeed = timerSpeed;
+    }
+
+    public Weapon Copy()
+    {
+        return new Weapon(
+            Name, 
+            Damage, 
+            Defense, 
+            BonusAttack, 
+            BonusDefense, 
+            GoalSize, 
+            GoalPos, 
+            TimerSpeed);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if(!(obj is Weapon))
+        {
+            return ReferenceEquals(this, obj);
+        }
+        Weapon weapon = obj as Weapon;
+        return Name.Equals(weapon.Name) &&
+            Damage.Equals(weapon.Damage) &&
+            Defense.Equals(weapon.Defense) &&
+            BonusAttack.Equals(weapon.BonusAttack) &&
+            BonusDefense.Equals(weapon.BonusDefense) &&
+            GoalSize.Equals(weapon.GoalSize) &&
+            GoalPos.Equals(weapon.GoalPos) &&
+            TimerSpeed.Equals(weapon.TimerSpeed);
     }
 }

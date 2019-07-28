@@ -1,6 +1,3 @@
-using UnityEngine;
-using System;
-
 public class CombatConfig : AbstractCombatConfig
 {
     Player player;
@@ -8,11 +5,8 @@ public class CombatConfig : AbstractCombatConfig
 
     public void Initialize(Player savedPlayer, Enemy nextEnemy)
     {
-        player = savedPlayer;
-        player.EquipWeapon(savedPlayer.EquippedWeapon);
-        enemy = nextEnemy;
-        enemy.EquipWeapon(nextEnemy.EquippedWeapon);
-        enemy.SetActionPattern(nextEnemy.GetActionPattern());
+        player = savedPlayer.CopyConfig() as Player;
+        enemy = nextEnemy.CopyConfig() as Enemy;
     }
 
     public override Player GetPlayer()

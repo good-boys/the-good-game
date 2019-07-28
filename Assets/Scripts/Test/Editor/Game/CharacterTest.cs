@@ -164,12 +164,16 @@ public class CharacterTest
     [Test]
     public void TestCopyConfig()
     {
-        Character copy = character.CopyConfig() as Character;
+        Weapon weapon = new Weapon("test_weapon", 1, 1, 1, 1, 1f, 1f, 1f);
+        character.EquipWeapon(weapon);
 
+        Character copy = character.CopyConfig() as Character;
+        
         Assert.AreEqual(character.Name, copy.Name);
         Assert.AreEqual(character.MaxHealth, copy.Health);
         Assert.AreEqual(character.MaxHealth, copy.MaxHealth);
         Assert.AreEqual(character.Speed, copy.Speed);
+        Assert.AreEqual(weapon, copy.EquippedWeapon);
     }
 
     Character givenCharacter()

@@ -176,6 +176,16 @@ public class Character
 
     public object CopyConfig()
     {
-        return new Character(Config);
+        Character copy = new Character(Config);
+        return copyWeapon(copy);
+    }
+
+    protected Character copyWeapon(Character copy)
+    {
+        if(EquippedWeapon != null)
+        {
+            copy.EquipWeapon(EquippedWeapon.Copy());
+        }
+        return copy;
     }
 }
