@@ -29,7 +29,7 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
         newPlayer = new Player(config);
 
         mockSaveManager = new Mock<SaveManager>(saveFile);
-        mockGameSave = new Mock<GameSave>(seed, newPlayer, new Tutorial());
+        mockGameSave = new Mock<GameSave>(seed, newPlayer, new Tutorial[] { new Tutorial() });
 
         base.Setup();
 

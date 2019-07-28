@@ -782,10 +782,14 @@ MonoBehaviour:
     name: 
     health: 0
     speed: 0
-  combatTutorial:
+  attackTutorial:
     steps:
     - receiverId: Test1
     - receiverId: Test2
+  defendTutorial:
+    steps: []
+  comboTutorial:
+    steps: []
 --- !u!4 &1390405872
 Transform:
   m_ObjectHideFlags: 0

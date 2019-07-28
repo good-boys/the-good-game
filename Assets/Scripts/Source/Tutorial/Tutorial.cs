@@ -5,6 +5,11 @@ using UnityEngine;
 [Serializable]
 public class Tutorial
 {
+    public const string ATTACK_TUTORIAL = "Attack";
+    public const string DEFEND_TUTORIAL = "Defend";
+    public const string COMBO_TUTORIAL = "Combo";
+
+    public string Name { get; private set; }
     public TutorialStep Current { get { return steps[currentStepIdx]; } }
     public bool Complete { get; private set; }
 
@@ -17,6 +22,11 @@ public class Tutorial
     }
 
     private int currentStepIdx = 0;
+
+    public void SetName(string name)
+    {
+        Name = name;
+    }
 
     public void Step()
     {

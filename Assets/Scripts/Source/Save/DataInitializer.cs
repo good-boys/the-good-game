@@ -16,7 +16,7 @@ public class DataInitializer : MonoBehaviour
     CharacterConfig startingPlayer;
 
     [SerializeField]
-    Tutorial combatTutorial;
+    Tutorial attackTutorial, defendTutorial, comboTutorial;
 
     public void Init(string saveFile, int seed, CharacterConfig startingPlayer, SaveManager saveManager)
     {
@@ -43,7 +43,11 @@ public class DataInitializer : MonoBehaviour
         }
         else
         {
-            GameSave = new GameSave(seed, new Player(startingPlayer), combatTutorial);
+            attackTutorial.SetName(Tutorial.ATTACK_TUTORIAL);
+            defendTutorial.SetName(Tutorial.DEFEND_TUTORIAL);
+            comboTutorial.SetName(Tutorial.COMBO_TUTORIAL);
+            Tutorial[] newTutorials = { attackTutorial, defendTutorial, comboTutorial };
+            GameSave = new GameSave(seed, new Player(startingPlayer), newTutorials);
         }
     }
 

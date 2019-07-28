@@ -17,7 +17,7 @@ public class TutorialTestScene : MonoBehaviour
     IEnumerator waitAndStartTutorial()
     {
         yield return new WaitForEndOfFrame();
-        Tutorial combatTutorial = tutorialManager.CombatTutorial;
+        Tutorial combatTutorial = tutorialManager.Tutorials[Tutorial.ATTACK_TUTORIAL];
         Debug.LogFormat("Current step id: {0}", combatTutorial.Current.ReceiverID);
         Debug.LogFormat("Current step is complete: {0}", combatTutorial.Current.Complete);
         Debug.LogFormat("Tutorial is complete: {0}", combatTutorial.Complete);

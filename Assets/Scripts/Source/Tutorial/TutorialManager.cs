@@ -4,9 +4,9 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour 
 {
     // TODO: break tutorials into multiple ones (attack, defend, combo, etc)
-    public Tutorial CombatTutorial 
+    public Dictionary<string, Tutorial> Tutorials
     {
-        get { return gameData.GameSave.CombatTutorial; }
+        get { return tutorialMap; }
     }
 
     [SerializeField]
@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField]
     TutorialStepReceiver[] tutorialStepReceivers;
 
+    Dictionary<string, Tutorial> tutorialMap;
     Dictionary<string, TutorialStepReceiver> receiverMap;
 
     private void Start()
@@ -24,7 +25,17 @@ public class TutorialManager : MonoBehaviour
             Debug.LogError("DataInitialier instance not set for TutorialManager");
             return;
         }
+        populateTutorialMap();
         populateReceiverMap();
+    }
+
+    private void populateTutorialMap()
+    {
+        tutorialMap = new Dictionary<string, Tutorial>();
+        foreach(Tutorial tut in gameData.GameSave.Tutorials)
+        {
+            tutorialMap[tut.Name] = tut;
+        }
     }
 
     private void populateReceiverMap()
