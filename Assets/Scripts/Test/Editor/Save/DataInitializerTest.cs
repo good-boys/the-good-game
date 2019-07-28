@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using Moq;
+using System.Collections.Generic;
 
 public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
 {
@@ -13,6 +14,9 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
     CharacterConfig config;
     Player newPlayer;
 
+    Tutorial attackTutorial;
+    Tutorial defendTutorial;
+    Tutorial comboTutorial;
     Mock<SaveManager> mockSaveManager;
     Mock<GameSave> mockGameSave;
     
@@ -33,7 +37,15 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
 
         base.Setup();
 
-        testInstance.Init(saveFile, seed, config, mockSaveManager.Object);
+        Dictionary<string, Tutorial> tuts = new Dictionary<string, Tutorial>();
+        attackTutorial = new Tutorial();
+        tuts[Tutorial.ATTACK_TUTORIAL] = attackTutorial;
+        defendTutorial = new Tutorial();
+        tuts[Tutorial.DEFEND_TUTORIAL] = defendTutorial;
+        comboTutorial = new Tutorial();
+        tuts[Tutorial.COMBO_TUTORIAL] = comboTutorial;
+
+        testInstance.Init(saveFile, seed, config, mockSaveManager.Object, tuts);
 
         mockSaveManager.Setup(manager => manager.Load()).Returns(mockGameSave.Object);
     }

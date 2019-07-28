@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DataInitializer : MonoBehaviour
 {
@@ -18,12 +19,19 @@ public class DataInitializer : MonoBehaviour
     [SerializeField]
     Tutorial attackTutorial, defendTutorial, comboTutorial;
 
-    public void Init(string saveFile, int seed, CharacterConfig startingPlayer, SaveManager saveManager)
+    public void Init(string saveFile, 
+                     int seed, 
+                     CharacterConfig startingPlayer, 
+                     SaveManager saveManager, 
+                     Dictionary<string, Tutorial> tutorials)
     {
         this.saveFile = saveFile;
         this.seed = seed;
         this.startingPlayer = startingPlayer;
         SaveManager = saveManager;
+        attackTutorial = tutorials[Tutorial.ATTACK_TUTORIAL];
+        defendTutorial = tutorials[Tutorial.DEFEND_TUTORIAL];
+        comboTutorial = tutorials[Tutorial.COMBO_TUTORIAL];
     }
 
     public void Awake()
