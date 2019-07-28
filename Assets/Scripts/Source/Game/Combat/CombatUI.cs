@@ -68,6 +68,11 @@ public class CombatUI : AbstractCombatUI
         enemyHealth.fillAmount = 100f;
     }
 
+    public void OnHealthChange(int health, int maxHealth)
+    {
+        damageCharacter(playerHealth, health, maxHealth, 0);
+    }
+
     void damagePlayer(int remainingHealth, int maxHealth, int damage)
     {
         damageNumber.text = damage.ToString();

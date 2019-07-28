@@ -106,6 +106,13 @@ public class Character
         this.characterCombatHandler.Subscribe(characterCombatHandler);
     }
 
+    public void Heal(int health)
+    {
+        Health += health;
+
+        Health = UnityEngine.Mathf.Clamp(Health, 0, MaxHealth);
+    }
+
     public void EquipWeapon(Weapon weapon)
     {
         EquippedWeapon = weapon;

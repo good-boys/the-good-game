@@ -60,7 +60,7 @@ public class WeaponSelect
     public float GoalPos;
     public float TimerSpeed;
 
-    Weapon GetWeapon()
+    public Weapon GetWeapon()
     {
         return new Weapon(
             Name,
@@ -200,11 +200,19 @@ public class GameFlowManager : MonoBehaviour
 
     public void DoRest()
     {
-        //Heal player 10
+        combatConfig.GetPlayer().Heal(10);
+        //TODO: some healing animation
+        combatUI.OnHealthChange(combatConfig.GetPlayer().Health, combatConfig.GetPlayer().MaxHealth);
+
+        NextLevel();
     }
 
     public void DoUpgrade()
     {
-        //Upgrade weapon by 1
+        int nextWeapon = Mathf.Clamp(currentWeapon + 1, 0, weapons.Count - 1);
+        combatConfig.GetPlayer().EquipWeapon(weapons[nextWeapon].GetWeapon());
+        //TODO: some upgrading animation
+
+        NextLevel();
     }
 }
