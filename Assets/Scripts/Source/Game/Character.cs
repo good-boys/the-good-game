@@ -118,6 +118,11 @@ public class Character
         EquippedWeapon = weapon;
     }
 
+    public void SpeedChange(int amount)
+    {
+        Speed += amount;
+    }
+
     public virtual Attack Attack(params Character[] targets)
     {
         return new Attack(this, 

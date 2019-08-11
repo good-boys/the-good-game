@@ -7725,21 +7725,101 @@ MonoBehaviour:
     enemySpeed: 1
     enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
       type: 2}
-  Weapons:
+  - enemyName: Monster 3
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 10
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 10000
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  weapons:
   - Name: Default
     Damage: 5
     Defense: 5
     BonusAttack: 2
     BonusDefense: 2
-    GoalSize: 0.2
-    GoalPos: -145
+    GoalSize: 0.5
+    GoalPos: -180
     TimerSpeed: 5
-  - Name: 1
-    Damage: 10
-    Defense: 6
-    BonusAttack: 3
-    BonusDefense: 3
-    GoalSize: 0.1
+  - Name: Level One
+    Damage: 7
+    Defense: 7
+    BonusAttack: 2
+    BonusDefense: 2
+    GoalSize: 0.4
     GoalPos: -145
     TimerSpeed: 5
   combatUI: {fileID: 268153299}
@@ -7751,6 +7831,7 @@ MonoBehaviour:
   combatConfig: {fileID: 27310879}
   dataInitializer: {fileID: 1882590013}
   currentWeapon: 0
+  currentLevel: 0
 --- !u!4 &1882590012
 Transform:
   m_ObjectHideFlags: 0
@@ -7782,6 +7863,8 @@ MonoBehaviour:
     name: Jane Doe
     health: 100
     speed: 1
+  currentWeapon: 0
+  currentLevel: 0
 --- !u!4 &1888054641 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012373117156, guid: a721d85d0458a524e99c7e3cce944fc0,

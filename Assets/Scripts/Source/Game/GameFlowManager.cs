@@ -119,7 +119,7 @@ public class GameFlowManager : MonoBehaviour
         {
             yield return null;
         }
-
+        
         dataInitializer.SaveManager.Erase();
 
         if (combatUI.GetPlayerCombatHandler(dataInitializer.GameSave.Player) == null)
@@ -129,6 +129,8 @@ public class GameFlowManager : MonoBehaviour
 
         combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
         combatInitializer.Initialize();
+
+        combatConfig.GetPlayer().EquipWeapon(weapons[0].GetWeapon());
         inBattle = true;
         SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
     }
@@ -210,6 +212,7 @@ public class GameFlowManager : MonoBehaviour
     public void DoUpgrade()
     {
         int nextWeapon = Mathf.Clamp(currentWeapon + 1, 0, weapons.Count - 1);
+        currentWeapon = nextWeapon;
         combatConfig.GetPlayer().EquipWeapon(weapons[nextWeapon].GetWeapon());
         //TODO: some upgrading animation
 

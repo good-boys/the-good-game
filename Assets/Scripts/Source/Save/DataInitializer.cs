@@ -44,7 +44,6 @@ public class DataInitializer : MonoBehaviour
         else
         {
             GameSave = new GameSave(seed, new Player(startingPlayer), 0, 0);
-            GameSave.Player.EquipWeapon(new Weapon("Default", 5, 5, 2, 2, .2f, -145f, 5f));
         }
     }
 
