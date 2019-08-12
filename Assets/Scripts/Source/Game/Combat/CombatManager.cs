@@ -86,7 +86,10 @@ public class CombatManager : MonoBehaviour
     {
         foreach(Enemy enemy in characterManager.GetEnemies())
         {
-            turnManager.RegisterAction(characterManager.RequestNextAction(enemy));
+            for(int i = 0; i < enemy.Speed; i++)
+            {
+                turnManager.RegisterAction(characterManager.RequestNextAction(enemy));
+            }
         }
     }
 

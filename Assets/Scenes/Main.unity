@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 154652540}
-  m_IndirectSpecularColor: {r: 0.47181135, g: 0.5140352, b: 0.5493945, a: 1}
+  m_IndirectSpecularColor: {r: 0.47181135, g: 0.5140349, b: 0.5493936, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1174,6 +1174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55d942c02751346e18559a69317c22b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugLoggingEnabled: 1
   playerHealth: {fileID: 30547349}
   enemyHealth: {fileID: 1400197904}
   actionBar: {fileID: 1153752088}
@@ -3661,6 +3662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastSelectedObj: {fileID: 0}
   selectedObject: {fileID: 1746712812}
+  onEnableObject: {fileID: 0}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   unSelectedColor: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!1 &928673307 stripped
@@ -5028,6 +5030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lastSelectedObj: {fileID: 0}
   selectedObject: {fileID: 1570768492}
+  onEnableObject: {fileID: 0}
   selectedColor: {r: 1, g: 1, b: 1, a: 1}
   unSelectedColor: {r: 1, g: 1, b: 1, a: 0.78431374}
 --- !u!4 &1247509732 stripped
@@ -7710,7 +7713,7 @@ MonoBehaviour:
     enemyWeaponDefense: 1
     enemyWeaponBonusAttack: 1
     enemyWeaponBonusDefense: 1
-    enemySpeed: 1
+    enemySpeed: 2
     enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
       type: 2}
   - enemyName: Monster 2

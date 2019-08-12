@@ -11,8 +11,18 @@ public class CombatUI : AbstractCombatUI
     private const float FADE_TRANSITION_DELAY = 0.5f;
 
     int actionIndex = 1;
+
+    [Header("Debug")]
+    [Tooltip("Allows verbose logging")]
     [SerializeField]
-    Image playerHealth, enemyHealth;
+    bool debugLoggingEnabled = false;
+
+    [Header("Components")]
+    [SerializeField]
+    Image playerHealth;
+
+    [SerializeField]
+    Image enemyHealth;
 
     [SerializeField]
     Text actionBar;
@@ -55,8 +65,20 @@ public class CombatUI : AbstractCombatUI
     {
         playerName = player.Name;
         return new CharacterCombatHandler(
-            ()=>{actionBar.text = string.Format("({2}) {0} is attacking with {1}", player.Name, player.EquippedWeapon.Name, actionIndex++);},
-            ()=>{actionBar.text = string.Format("({2}) {0} is defending with {1}", player.Name, player.EquippedWeapon.Name, actionIndex++);},
+            ()=>{
+                actionBar.text = string.Format("({2}) {0} is attacking with {1}", player.Name, player.EquippedWeapon.Name, actionIndex++);
+                if(debugLoggingEnabled)
+                {
+                    Debug.Log(actionBar.text);
+                }
+            },
+            ()=>{
+                actionBar.text = string.Format("({2}) {0} is defending with {1}", player.Name, player.EquippedWeapon.Name, actionIndex++);
+                if (debugLoggingEnabled)
+                {
+                    Debug.Log(actionBar.text);
+                }
+            },
             damagePlayer,
             killPlayer
         );
@@ -91,8 +113,20 @@ public class CombatUI : AbstractCombatUI
     {
         enemyName = enemy.Name;
         return new CharacterCombatHandler(
-            ()=>{actionBar.text = string.Format("({2}) {0} is attacking with {1}", enemy.Name, enemy.EquippedWeapon.Name, actionIndex++);},
-            ()=>{actionBar.text = string.Format("({2}) {0} is defending with {1}", enemy.Name, enemy.EquippedWeapon.Name, actionIndex++);},
+            ()=>{
+                actionBar.text = string.Format("({2}) {0} is attacking with {1}", enemy.Name, enemy.EquippedWeapon.Name, actionIndex++);
+                if(debugLoggingEnabled)
+                {
+                    Debug.Log(actionBar.text);
+                }
+            },
+            ()=>{
+                actionBar.text = string.Format("({2}) {0} is defending with {1}", enemy.Name, enemy.EquippedWeapon.Name, actionIndex++);
+                if(debugLoggingEnabled)
+                {
+                    Debug.Log(actionBar.text);
+                }
+            },
             damageEnemy,
             killEnemy
         );
