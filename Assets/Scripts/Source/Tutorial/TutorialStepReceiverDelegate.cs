@@ -10,20 +10,27 @@ public enum TutorialStepReceiverDelegateAction
 public class TutorialStepReceiverDelegate : MonoBehaviour 
 {
     [SerializeField]
-    TutorialStepReceiverDelegateAction action;
+    bool startEnabled;
 
-    private void Start()
+    [SerializeField]
+    TutorialStepReceiverDelegateAction setupAction;
+
+    [SerializeField]
+    TutorialStepReceiverDelegateAction completeAction;
+
+    private void Awake()
     {
         setupReceiverAction();
+        gameObject.SetActive(startEnabled);
     }
 
     private void setupReceiverAction()
     {
         TutorialStepReceiver receiver = GetComponent<TutorialStepReceiver>();
-        receiver.SetUp(getAction());
+        receiver.SetUp(getAction(setupAction), getAction(completeAction));
     }
 
-    private Action getAction()
+    private Action getAction(TutorialStepReceiverDelegateAction action)
     {
         switch(action)
         {

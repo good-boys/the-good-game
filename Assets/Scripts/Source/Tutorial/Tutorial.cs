@@ -12,9 +12,12 @@ public class Tutorial
     public string Name { get; private set; }
     public TutorialStep Current { get { return steps[currentStepIdx]; } }
     public bool Complete { get; private set; }
+    public string[] Prerequisites { get { return prerequisites; } }
 
     [SerializeField]
     private TutorialStep[] steps;
+    [SerializeField]
+    private string[] prerequisites;
 
     private TutorialStep start
     {

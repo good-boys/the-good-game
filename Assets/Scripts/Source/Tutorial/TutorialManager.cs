@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour 
@@ -10,6 +11,9 @@ public class TutorialManager : MonoBehaviour
     }
 
     [SerializeField]
+    bool debugLogsEnabled = false;
+
+    [SerializeField]
     DataInitializer gameData;
 
     [SerializeField]
@@ -17,6 +21,31 @@ public class TutorialManager : MonoBehaviour
 
     Dictionary<string, Tutorial> tutorialMap;
     Dictionary<string, TutorialStepReceiver> receiverMap;
+
+    public List<Tutorial> AvailableTutorials
+    {
+        get
+        {
+            return tutorialMap.Values.Where((tut) => !tut.Complete && prerequisitesSatisified(tut)).ToList();
+        }
+    }
+
+    private bool prerequisitesSatisified(Tutorial tut)
+    {
+        foreach(string prereq in tut.Prerequisites)
+        {
+            if(tutorialMap[prereq] == null)
+            {
+                Debug.LogWarningFormat("Prerequisite {0} not found for tutorial {1}.", prereq, tut);
+                return false;
+            }
+            if(!tutorialMap[prereq].Complete)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private void Start()
     {
@@ -47,29 +76,60 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    public void TriggerStep(Tutorial tutorial)
+    bool getReceiver(Tutorial tutorial, out TutorialStepReceiver receiver)
     {
-        TutorialStepReceiver receiver;
         if(!receiverMap.TryGetValue(tutorial.Current.ReceiverID, out receiver))
         {
-            Debug.LogErrorFormat("Unable to run step {0}. No receiver found", tutorial.Current.ReceiverID);
+            Debug.LogErrorFormat("Unable to find receiver for step {0}.", tutorial.Current.ReceiverID);
+            return false;
+        }
+        return true;
+    }
+
+    public void TriggerStep(Tutorial tutorial)
+    {
+        debugIfEnabled("Trying to trigger tutorial step {0}", tutorial.Current);
+        TutorialStepReceiver receiver;
+        if(!getReceiver(tutorial, out receiver))
+        {
             return;
         }
 
-        receiver.SetUp(delegate
-        {
-            Debug.LogFormat("[{0}]: STEP COMPLETED", tutorial.Current.ReceiverID);
-            CompleteStep(tutorial);
-            gameData.SaveCurrent();
-        });
+        receiver.SetUp(
+            delegate
+            {
+                Debug.LogFormat("[{0}]: STEP TRIGGERED", tutorial.Current.ReceiverID);
+            },
+            delegate
+            {
+                Debug.LogFormat("[{0}]: STEP COMPLETED", tutorial.Current.ReceiverID);
+                CompleteStep(tutorial);
+                gameData.SaveCurrent();
+            });
+        receiver.TriggerStep();
     }
 
     public void CompleteStep(Tutorial tutorial)
     {
+        TutorialStepReceiver receiver;
+        if(getReceiver(tutorial, out receiver))
+        {
+            receiver.CompleteStep();
+        }
+
         tutorial.Step();
+
         if(!tutorial.Complete)
         {
             TriggerStep(tutorial);
+        }
+    }
+
+    void debugIfEnabled(string message, params object[] varArgs)
+    {
+        if(debugLogsEnabled)
+        {
+            Debug.LogFormat(message, varArgs);
         }
     }
 }

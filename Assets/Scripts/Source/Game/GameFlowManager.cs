@@ -63,6 +63,9 @@ public class GameFlowManager : MonoBehaviour
     public CombatConfig combatConfig;
     public DataInitializer dataInitializer;
 
+    [SerializeField]
+    TutorialManager tutorialManager;
+
     int currentLevel;
     bool loading;
 
@@ -102,6 +105,16 @@ public class GameFlowManager : MonoBehaviour
         combatInitializer.Initialize();
         inBattle = true;
         SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
+        startFirstAvailableTutorial();
+    }
+
+    void startFirstAvailableTutorial()
+    {
+        List<Tutorial> tuts = tutorialManager.AvailableTutorials;
+        if(tuts.Count > 0)
+        {
+            tutorialManager.TriggerStep(tuts[0]);
+        }
     }
 
     public void UnloadScene(string sceneName)
