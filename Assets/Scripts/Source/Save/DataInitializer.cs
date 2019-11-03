@@ -37,6 +37,7 @@ public class DataInitializer : MonoBehaviour
         {
             SaveManager = new SaveManager(getSavePath());
         }
+
         if(SaveManager.HasSave())
         {
             GameSave = SaveManager.Load();

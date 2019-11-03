@@ -120,19 +120,28 @@ public class GameFlowManager : MonoBehaviour
             yield return null;
         }
         
-        dataInitializer.SaveManager.Erase();
-
         if (combatUI.GetPlayerCombatHandler(dataInitializer.GameSave.Player) == null)
         {
             yield return null;
         }
 
+        currentLevel = dataInitializer.GameSave.EnemyLevel;
+        combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
+        combatInitializer.Initialize();
+
+        combatConfig.GetPlayer().EquipWeapon(weapons[dataInitializer.GameSave.WeaponLevel].GetWeapon());
+        inBattle = true;
+        SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
+    }
+
+    public void ClearSave()
+    {
+        dataInitializer.SaveManager.Erase();
+
         combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
         combatInitializer.Initialize();
 
         combatConfig.GetPlayer().EquipWeapon(weapons[0].GetWeapon());
-        inBattle = true;
-        SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
     }
 
     public void UnloadScene(string sceneName)
@@ -191,13 +200,14 @@ public class GameFlowManager : MonoBehaviour
         
         Level level = levels[currentLevel];
 
+        dataInitializer.SaveManager.Save(new GameSave(dataInitializer.GameSave.GetSeed(), combatConfig.GetPlayer(), currentWeapon, currentLevel));
         combatConfig.Initialize(dataInitializer.GameSave.Player, level.GetEnemy());
-        dataInitializer.SaveManager.Save(dataInitializer.GameSave);
         combatUI.Reset();
         combatUI.DoFadeIn();
         combatInitializer.Initialize();
         loading = false;
         inBattle = true;
+        combatConfig.GetPlayer().EquipWeapon(weapons[currentWeapon].GetWeapon());
     }
 
     public void DoRest()
@@ -213,9 +223,8 @@ public class GameFlowManager : MonoBehaviour
     {
         int nextWeapon = Mathf.Clamp(currentWeapon + 1, 0, weapons.Count - 1);
         currentWeapon = nextWeapon;
-        combatConfig.GetPlayer().EquipWeapon(weapons[nextWeapon].GetWeapon());
         //TODO: some upgrading animation
-
+        
         NextLevel();
     }
 }

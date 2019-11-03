@@ -9,6 +9,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: TestAttack
+  m_Name: AttackDown
   m_EditorClassIdentifier: Assembly-CSharp::AttackTemplate
-  direction: 2
+  direction: 3

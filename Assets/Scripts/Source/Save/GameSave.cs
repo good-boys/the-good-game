@@ -21,6 +21,11 @@ public class GameSave
         originalPlayer = player.CopyConfig() as Player;
     }
 
+    public int GetSeed()
+    {
+        return seed;
+    }
+
     public void Reset()
     {
         Random = new Random(seed);
