@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 154652540}
-  m_IndirectSpecularColor: {r: 0.47181135, g: 0.5140349, b: 0.5493936, a: 1}
+  m_IndirectSpecularColor: {r: 0.47181135, g: 0.5140352, b: 0.5493945, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1942,102 +1942,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4000010614711232, guid: 77cf23ae4a802814d80a8786c4c183a7,
     type: 2}
   m_PrefabInternal: {fileID: 1932376459}
---- !u!1 &550644483
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 550644484}
-  - component: {fileID: 550644488}
-  - component: {fileID: 550644487}
-  - component: {fileID: 550644486}
-  - component: {fileID: 550644485}
-  m_Layer: 5
-  m_Name: Highlight
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &550644484
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 550644483}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1570768493}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.019996643, y: 0.42}
-  m_SizeDelta: {x: 106.64, y: 33.57}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &550644485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 550644483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a012c997c355a447ea8e5ab18a3b6738, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startEnabled: 0
-  setupAction: 0
-  completeAction: 1
---- !u!114 &550644486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 550644483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0d895aaf6fed41b795091aaaa01b103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: Attack_Button_Highlight
---- !u!114 &550644487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 550644483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 4775d7aec351c402e8ec8b4ac909356a, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
---- !u!222 &550644488
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 550644483}
 --- !u!1 &551798041
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,10 +2329,10 @@ RectTransform:
   m_Father: {fileID: 1544212277}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 122.5, y: -49.5}
+  m_SizeDelta: {x: 205, y: 59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &593112493
 MonoBehaviour:
@@ -3376,10 +3280,10 @@ RectTransform:
   m_Father: {fileID: 1544212277}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 572.5, y: -49.5}
+  m_SizeDelta: {x: 205, y: 59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &766784196
 MonoBehaviour:
@@ -5858,7 +5762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1352977487
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6785,7 +6689,6 @@ RectTransform:
   m_Children:
   - {fileID: 722495997}
   - {fileID: 1155575109}
-  - {fileID: 550644484}
   m_Father: {fileID: 1229239497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7668,10 +7571,10 @@ RectTransform:
   m_Father: {fileID: 1544212277}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 797.5, y: -49.5}
+  m_SizeDelta: {x: 205, y: 59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1793239487
 MonoBehaviour:
@@ -7783,7 +7686,6 @@ GameObject:
   - component: {fileID: 1882590012}
   - component: {fileID: 1882590011}
   - component: {fileID: 1882590013}
-  - component: {fileID: 1882590014}
   m_Layer: 0
   m_Name: GameFlow
   m_TagString: Untagged
@@ -7823,6 +7725,111 @@ MonoBehaviour:
     enemySpeed: 1
     enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
       type: 2}
+  - enemyName: Monster 3
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 10
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 10000
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  - enemyName: Monster 2
+    enemyWeaponName: Basic
+    enemyHealth: 15
+    enemyWeaponDamage: 5
+    enemyWeaponDefense: 5
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+      type: 2}
+  weapons:
+  - Name: Default
+    Damage: 5
+    Defense: 5
+    BonusAttack: 2
+    BonusDefense: 2
+    GoalSize: 0.5
+    GoalPos: -180
+    TimerSpeed: 5
+  - Name: Level One
+    Damage: 50
+    Defense: 7
+    BonusAttack: 2
+    BonusDefense: 2
+    GoalSize: 0.4
+    GoalPos: -145
+    TimerSpeed: 5
+  - Name: Level Two
+    Damage: 100
+    Defense: 7
+    BonusAttack: 2
+    BonusDefense: 2
+    GoalSize: 0.4
+    GoalPos: -145
+    TimerSpeed: 5
   combatUI: {fileID: 268153299}
   combatManager: {fileID: 27310881}
   camera: {fileID: 163672221}
@@ -7831,7 +7838,8 @@ MonoBehaviour:
   combatInitializer: {fileID: 27310880}
   combatConfig: {fileID: 27310879}
   dataInitializer: {fileID: 1882590013}
-  tutorialManager: {fileID: 1882590014}
+  currentWeapon: 0
+  currentLevel: 0
 --- !u!4 &1882590012
 Transform:
   m_ObjectHideFlags: 0
@@ -7863,34 +7871,8 @@ MonoBehaviour:
     name: Jane Doe
     health: 100
     speed: 1
-  attackTutorial:
-    steps:
-    - receiverId: Attack_Button_Highlight
-    prerequisites: []
-  defendTutorial:
-    steps:
-    - receiverId: Attack
-    prerequisites: []
-  comboTutorial:
-    steps: []
-    prerequisites:
-    - Attack
-    - Defend
---- !u!114 &1882590014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1882590010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa4b573eacfd4db097adbb90baf8272, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugLogsEnabled: 1
-  gameData: {fileID: 1882590013}
-  tutorialStepReceivers:
-  - {fileID: 550644486}
+  currentWeapon: 0
+  currentLevel: 0
 --- !u!4 &1888054641 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012373117156, guid: a721d85d0458a524e99c7e3cce944fc0,
@@ -9012,10 +8994,10 @@ RectTransform:
   m_Father: {fileID: 1544212277}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 347.5, y: -49.5}
+  m_SizeDelta: {x: 205, y: 59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2079268001
 MonoBehaviour:

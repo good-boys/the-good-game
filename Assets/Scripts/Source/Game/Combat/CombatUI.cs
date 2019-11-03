@@ -69,6 +69,11 @@ public class CombatUI : AbstractCombatUI
         enemyHealth.fillAmount = 100f;
     }
 
+    public void OnHealthChange(int health, int maxHealth)
+    {
+        damageCharacter(playerHealth, health, maxHealth, 0);
+    }
+
     void damagePlayer(int remainingHealth, int maxHealth, int damage)
     {
         damageNumber.text = damage.ToString();
@@ -183,12 +188,12 @@ public class CombatUI : AbstractCombatUI
 
     public void Rest()
     {
-        GameFlowManager.instance.NextLevel();
+        GameFlowManager.instance.DoRest();
     }
 
     public void Upgrade()
     {
-        GameFlowManager.instance.NextLevel();
+        GameFlowManager.instance.DoUpgrade();
     }
 
     void damageCharacter(Image healthBar, int remainingHealth, int maxHealth, int dammage)

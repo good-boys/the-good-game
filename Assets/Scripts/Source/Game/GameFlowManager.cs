@@ -48,10 +48,38 @@ public class Level
     }
 }
 
+[Serializable]
+public class WeaponSelect
+{
+    public string Name;
+    public int Damage;
+    public int Defense;
+    public int BonusAttack;
+    public int BonusDefense;
+    public float GoalSize;
+    public float GoalPos;
+    public float TimerSpeed;
+
+    public Weapon GetWeapon()
+    {
+        return new Weapon(
+            Name,
+            Damage,
+            Defense,
+            BonusAttack,
+            BonusDefense,
+            GoalSize,
+            GoalPos,
+            TimerSpeed
+            );
+    }
+}
+
 public class GameFlowManager : MonoBehaviour 
 {
 
     public List<Level> levels = new List<Level>();
+    public List<WeaponSelect> weapons = new List<WeaponSelect>();
     public CombatUI combatUI;
     public CombatManager combatManager;
     public GameObject camera;
@@ -63,10 +91,8 @@ public class GameFlowManager : MonoBehaviour
     public CombatConfig combatConfig;
     public DataInitializer dataInitializer;
 
-    [SerializeField]
-    TutorialManager tutorialManager;
-
-    int currentLevel;
+    public int currentWeapon = 0;
+    public int currentLevel;
     bool loading;
 
     private void Awake()
@@ -93,28 +119,29 @@ public class GameFlowManager : MonoBehaviour
         {
             yield return null;
         }
-
-        dataInitializer.SaveManager.Erase();
-
+        
         if (combatUI.GetPlayerCombatHandler(dataInitializer.GameSave.Player) == null)
         {
             yield return null;
         }
 
+        currentLevel = dataInitializer.GameSave.EnemyLevel;
         combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
         combatInitializer.Initialize();
+
+        combatConfig.GetPlayer().EquipWeapon(weapons[dataInitializer.GameSave.WeaponLevel].GetWeapon());
         inBattle = true;
         SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
-        startFirstAvailableTutorial();
     }
 
-    void startFirstAvailableTutorial()
+    public void ClearSave()
     {
-        List<Tutorial> tuts = tutorialManager.AvailableTutorials;
-        if(tuts.Count > 0)
-        {
-            tutorialManager.TriggerStep(tuts[0]);
-        }
+        dataInitializer.SaveManager.Erase();
+
+        combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
+        combatInitializer.Initialize();
+
+        combatConfig.GetPlayer().EquipWeapon(weapons[0].GetWeapon());
     }
 
     public void UnloadScene(string sceneName)
@@ -173,18 +200,35 @@ public class GameFlowManager : MonoBehaviour
         
         Level level = levels[currentLevel];
 
+        dataInitializer.SaveManager.Save(new GameSave(dataInitializer.GameSave.GetSeed(), 
+                                                      combatConfig.GetPlayer(), 
+                                                      currentWeapon, 
+                                                      currentLevel,
+                                                      dataInitializer.GameSave.Tutorials));
         combatConfig.Initialize(dataInitializer.GameSave.Player, level.GetEnemy());
-
         combatUI.Reset();
         combatUI.DoFadeIn();
         combatInitializer.Initialize();
         loading = false;
         inBattle = true;
+        combatConfig.GetPlayer().EquipWeapon(weapons[currentWeapon].GetWeapon());
     }
 
-    // TODO: OnEnemyDefeated function
+    public void DoRest()
+    {
+        combatConfig.GetPlayer().Heal(10);
+        //TODO: some healing animation
+        combatUI.OnHealthChange(combatConfig.GetPlayer().Health, combatConfig.GetPlayer().MaxHealth);
 
-    // TODO: Heal function
+        NextLevel();
+    }
 
-    // TODO: Weapon selection screen
+    public void DoUpgrade()
+    {
+        int nextWeapon = Mathf.Clamp(currentWeapon + 1, 0, weapons.Count - 1);
+        currentWeapon = nextWeapon;
+        //TODO: some upgrading animation
+        
+        NextLevel();
+    }
 }

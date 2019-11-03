@@ -18,16 +18,24 @@ public class DataInitializer : MonoBehaviour
 
     [SerializeField]
     Tutorial attackTutorial, defendTutorial, comboTutorial;
+    int currentWeapon = 0;
+
+    [SerializeField]
+    int currentLevel = 0;
 
     public void Init(string saveFile, 
                      int seed, 
                      CharacterConfig startingPlayer, 
                      SaveManager saveManager, 
+                     int currentWeapon, 
+                     int currentLevel,
                      Dictionary<string, Tutorial> tutorials)
     {
         this.saveFile = saveFile;
         this.seed = seed;
         this.startingPlayer = startingPlayer;
+        this.currentWeapon = currentWeapon;
+        this.currentLevel = currentLevel;
         SaveManager = saveManager;
         attackTutorial = tutorials[Tutorial.ATTACK_TUTORIAL];
         defendTutorial = tutorials[Tutorial.DEFEND_TUTORIAL];
@@ -42,10 +50,11 @@ public class DataInitializer : MonoBehaviour
     public void SetUp()
     {
         bool unableToLoad = false;
-        if (SaveManager == null)
+        if(SaveManager == null)
         {
             SaveManager = new SaveManager(getSavePath());
         }
+
         if(SaveManager.HasSave())
         {
             try
@@ -69,8 +78,7 @@ public class DataInitializer : MonoBehaviour
             defendTutorial.SetName(Tutorial.DEFEND_TUTORIAL);
             comboTutorial.SetName(Tutorial.COMBO_TUTORIAL);
             Tutorial[] newTutorials = { attackTutorial, defendTutorial, comboTutorial };
-            GameSave = new GameSave(seed, new Player(startingPlayer), newTutorials);
-            GameSave.Player.EquipWeapon(new Weapon("Default", 5, 5, 2, 2, .2f, -145f, 5f));
+            GameSave = new GameSave(seed, new Player(startingPlayer), 0, 0, newTutorials);
         }
     }
 

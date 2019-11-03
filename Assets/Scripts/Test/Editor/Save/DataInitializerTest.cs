@@ -10,13 +10,12 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
     int seed;
     int playerHealth;
     int playerSpeed;
+    int currentlevel;
+    int currentweapon;
 
     CharacterConfig config;
     Player newPlayer;
 
-    Tutorial attackTutorial;
-    Tutorial defendTutorial;
-    Tutorial comboTutorial;
     Mock<SaveManager> mockSaveManager;
     Mock<GameSave> mockGameSave;
     
@@ -28,24 +27,22 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
         playerName = "player name";
         playerHealth = 75;
         playerSpeed = 21;
+        currentweapon = 0;
+        currentlevel = 0;
 
         config = new CharacterConfig(playerName, playerHealth, playerSpeed);
         newPlayer = new Player(config);
 
         mockSaveManager = new Mock<SaveManager>(saveFile);
-        mockGameSave = new Mock<GameSave>(seed, newPlayer, new Tutorial[] { new Tutorial() });
+        mockGameSave = new Mock<GameSave>(seed, newPlayer, currentweapon, currentlevel);
 
         base.Setup();
 
-        Dictionary<string, Tutorial> tuts = new Dictionary<string, Tutorial>();
-        attackTutorial = new Tutorial();
-        tuts[Tutorial.ATTACK_TUTORIAL] = attackTutorial;
-        defendTutorial = new Tutorial();
-        tuts[Tutorial.DEFEND_TUTORIAL] = defendTutorial;
-        comboTutorial = new Tutorial();
-        tuts[Tutorial.COMBO_TUTORIAL] = comboTutorial;
-
-        testInstance.Init(saveFile, seed, config, mockSaveManager.Object, tuts);
+        testInstance.Init(saveFile, seed, config, mockSaveManager.Object, currentweapon, currentlevel, new Dictionary<string, Tutorial>(){
+            { Tutorial.ATTACK_TUTORIAL, new Mock<Tutorial>().Object },
+            { Tutorial.DEFEND_TUTORIAL, new Mock<Tutorial>().Object },
+            { Tutorial.COMBO_TUTORIAL, new Mock<Tutorial>().Object }
+         });
 
         mockSaveManager.Setup(manager => manager.Load()).Returns(mockGameSave.Object);
     }

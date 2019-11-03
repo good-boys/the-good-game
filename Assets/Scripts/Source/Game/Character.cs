@@ -106,9 +106,21 @@ public class Character
         this.characterCombatHandler.Subscribe(characterCombatHandler);
     }
 
+    public void Heal(int health)
+    {
+        Health += health;
+
+        Health = UnityEngine.Mathf.Clamp(Health, 0, MaxHealth);
+    }
+
     public void EquipWeapon(Weapon weapon)
     {
         EquippedWeapon = weapon;
+    }
+
+    public void SpeedChange(int amount)
+    {
+        Speed += amount;
     }
 
     public virtual Attack Attack(params Character[] targets)
