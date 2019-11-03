@@ -9,6 +9,8 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
     int seed;
     int playerHealth;
     int playerSpeed;
+    int currentlevel;
+    int currentweapon;
 
     CharacterConfig config;
     Player newPlayer;
@@ -24,16 +26,18 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
         playerName = "player name";
         playerHealth = 75;
         playerSpeed = 21;
+        currentweapon = 0;
+        currentlevel = 0;
 
         config = new CharacterConfig(playerName, playerHealth, playerSpeed);
         newPlayer = new Player(config);
 
         mockSaveManager = new Mock<SaveManager>(saveFile);
-        mockGameSave = new Mock<GameSave>(seed, newPlayer);
+        mockGameSave = new Mock<GameSave>(seed, newPlayer, currentweapon, currentlevel);
 
         base.Setup();
 
-        testInstance.Init(saveFile, seed, config, mockSaveManager.Object);
+        testInstance.Init(saveFile, seed, config, mockSaveManager.Object, currentweapon, currentlevel);
 
         mockSaveManager.Setup(manager => manager.Load()).Returns(mockGameSave.Object);
     }

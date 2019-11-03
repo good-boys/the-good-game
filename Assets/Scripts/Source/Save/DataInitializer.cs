@@ -15,11 +15,19 @@ public class DataInitializer : MonoBehaviour
     [SerializeField]
     CharacterConfig startingPlayer;
 
-    public void Init(string saveFile, int seed, CharacterConfig startingPlayer, SaveManager saveManager)
+    [SerializeField]
+    int currentWeapon = 0;
+
+    [SerializeField]
+    int currentLevel = 0;
+
+    public void Init(string saveFile, int seed, CharacterConfig startingPlayer, SaveManager saveManager, int currentWeapon, int currentLevel)
     {
         this.saveFile = saveFile;
         this.seed = seed;
         this.startingPlayer = startingPlayer;
+        this.currentWeapon = currentWeapon;
+        this.currentLevel = currentLevel;
         SaveManager = saveManager;
     }
 
@@ -29,14 +37,14 @@ public class DataInitializer : MonoBehaviour
         {
             SaveManager = new SaveManager(getSavePath());
         }
+
         if(SaveManager.HasSave())
         {
             GameSave = SaveManager.Load();
         }
         else
         {
-            GameSave = new GameSave(seed, new Player(startingPlayer));
-            GameSave.Player.EquipWeapon(new Weapon("Default", 5, 5, 2, 2, .2f, -145f, 5f));
+            GameSave = new GameSave(seed, new Player(startingPlayer), 0, 0);
         }
     }
 
