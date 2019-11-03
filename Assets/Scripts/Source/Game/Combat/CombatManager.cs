@@ -30,7 +30,6 @@ public class CombatManager : MonoBehaviour
     TurnManager turnManager;
     GameFlowManager gameFlowManager;
 
-
     public virtual void Init(CharacterManager characterManager, TurnManager turnManager, GameFlowManager gameFlowManager)
     {
         this.characterManager = characterManager;

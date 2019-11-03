@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class TutorialManager : MonoBehaviour
 
     Dictionary<string, Tutorial> tutorialMap;
     Dictionary<string, TutorialStepReceiver> receiverMap;
+    Action onTutorialComplete = delegate() { };
 
     public List<Tutorial> AvailableTutorials
     {
@@ -88,6 +90,11 @@ public class TutorialManager : MonoBehaviour
 
     public void TriggerStep(Tutorial tutorial)
     {
+        if(tutorial.Current == null)
+        {
+            return;
+        }
+
         debugIfEnabled("Trying to trigger tutorial step {0}", tutorial.Current);
         TutorialStepReceiver receiver;
         if(!getReceiver(tutorial, out receiver))
@@ -98,11 +105,11 @@ public class TutorialManager : MonoBehaviour
         receiver.SetUp(
             delegate
             {
-                Debug.LogFormat("[{0}]: STEP TRIGGERED", tutorial.Current.ReceiverID);
+                debugIfEnabled("[{0}]: STEP TRIGGERED", tutorial.Current.ReceiverID);
             },
             delegate
             {
-                Debug.LogFormat("[{0}]: STEP COMPLETED", tutorial.Current.ReceiverID);
+                debugIfEnabled("[{0}]: STEP COMPLETED", tutorial.Current.ReceiverID);
                 CompleteStep(tutorial);
                 gameData.SaveCurrent();
             });
@@ -111,18 +118,21 @@ public class TutorialManager : MonoBehaviour
 
     public void CompleteStep(Tutorial tutorial)
     {
-        TutorialStepReceiver receiver;
-        if(getReceiver(tutorial, out receiver))
-        {
-            receiver.CompleteStep();
-        }
-
         tutorial.Step();
 
-        if(!tutorial.Complete)
+        if(tutorial.Complete)
+        {
+            onTutorialComplete();
+        }
+        else 
         {
             TriggerStep(tutorial);
         }
+    }
+
+    public void OnTutorialComplete(Action onComplete)
+    {
+        onTutorialComplete += onComplete;
     }
 
     void debugIfEnabled(string message, params object[] varArgs)

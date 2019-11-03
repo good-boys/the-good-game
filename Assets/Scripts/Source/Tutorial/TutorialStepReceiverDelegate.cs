@@ -1,10 +1,16 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TutorialStepReceiverDelegateAction
 {
     Show,
     Hide,
+}
+
+public enum TutorialStepTriggerAction
+{
+    ButtonPress,
 }
 
 public class TutorialStepReceiverDelegate : MonoBehaviour 
@@ -16,18 +22,28 @@ public class TutorialStepReceiverDelegate : MonoBehaviour
     TutorialStepReceiverDelegateAction setupAction;
 
     [SerializeField]
+    TutorialStepTriggerAction triggerAction;
+
+    [SerializeField]
     TutorialStepReceiverDelegateAction completeAction;
+
+    [SerializeField]
+    Button triggerButton;
 
     private void Awake()
     {
-        setupReceiverAction();
+        TutorialStepReceiver receiver = GetComponent<TutorialStepReceiver>();
+        setupReceiverActions(receiver);
         gameObject.SetActive(startEnabled);
     }
 
-    private void setupReceiverAction()
+    private void setupReceiverActions(TutorialStepReceiver receiver)
     {
-        TutorialStepReceiver receiver = GetComponent<TutorialStepReceiver>();
         receiver.SetUp(getAction(setupAction), getAction(completeAction));
+        if(triggerAction == TutorialStepTriggerAction.ButtonPress && triggerButton)
+        {
+            triggerButton.onClick.AddListener(receiver.CompleteStep);
+        }
     }
 
     private Action getAction(TutorialStepReceiverDelegateAction action)

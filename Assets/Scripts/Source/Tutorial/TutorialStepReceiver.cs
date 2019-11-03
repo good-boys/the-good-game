@@ -17,8 +17,7 @@ public class TutorialStepReceiver : MonoBehaviour
     {
         onTriggerStep += onTriggerAction;
         onCompleteStep += completeStepCallback;
-        // TODO
-        Debug.LogFormat("[{0}]: ADDING DELEGATES", id);
+
     }
 
     public void TriggerStep()

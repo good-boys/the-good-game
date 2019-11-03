@@ -10,7 +10,7 @@ public class Tutorial
     public const string COMBO_TUTORIAL = "Combo";
 
     public string Name { get; private set; }
-    public TutorialStep Current { get { return steps[currentStepIdx]; } }
+    public TutorialStep Current { get { return steps.Length == 0 ? null : steps[currentStepIdx]; } }
     public bool Complete { get; private set; }
     public string[] Prerequisites { get { return prerequisites; } }
 

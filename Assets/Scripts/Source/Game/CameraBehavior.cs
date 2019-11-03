@@ -13,4 +13,9 @@ public class CameraBehavior : MonoBehaviour {
     {
         GameFlowManager.instance.UnloadScene("Intro");
     }
+
+    public void TriggerTutorial()
+    {
+        GameFlowManager.instance.StartTutorial();
+    }
 }
