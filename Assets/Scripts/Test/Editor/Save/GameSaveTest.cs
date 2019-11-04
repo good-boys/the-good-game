@@ -17,7 +17,7 @@ public class GameSaveTest
     [Test]
     public void TestInit()
     {
-        GameSave save = new GameSave(seed, testPlayer, 0, 0);
+        GameSave save = new GameSave(seed, testPlayer, 0, 0, new Tutorial[] { });
 
         Assert.AreEqual(new Random(seed).Next(), save.Random.Next());
         Assert.AreSame(testPlayer, save.Player);
@@ -26,7 +26,7 @@ public class GameSaveTest
     [Test]
     public void TestReset()
     {
-        GameSave save = new GameSave(seed, testPlayer, 0, 0);
+        GameSave save = new GameSave(seed, testPlayer, 0, 0, new Tutorial[] { });
         save.Random.Next();
         save.Player.Damage(5);
 

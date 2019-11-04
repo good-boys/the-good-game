@@ -95,6 +95,9 @@ public class GameFlowManager : MonoBehaviour
     public int currentLevel;
     bool loading;
 
+    [SerializeField]
+    TutorialManager tutorialManager;
+
     private void Awake()
     {
         if (instance == null)
@@ -134,9 +137,25 @@ public class GameFlowManager : MonoBehaviour
         SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
     }
 
+    public void StartTutorial()
+    {
+        startFirstAvailableTutorial();
+        tutorialManager.OnTutorialComplete(startFirstAvailableTutorial);
+    }
+
+    private void startFirstAvailableTutorial()
+    {
+        List<Tutorial> tuts = tutorialManager.AvailableTutorials;
+        if(tuts.Count > 0)
+        {
+            tutorialManager.TriggerStep(tuts[0]);
+        }
+    }
+
     public void ClearSave()
     {
         dataInitializer.SaveManager.Erase();
+        dataInitializer.GameSave.Reset();
 
         combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
         combatInitializer.Initialize();
@@ -200,7 +219,11 @@ public class GameFlowManager : MonoBehaviour
         
         Level level = levels[currentLevel];
 
-        dataInitializer.SaveManager.Save(new GameSave(dataInitializer.GameSave.GetSeed(), combatConfig.GetPlayer(), currentWeapon, currentLevel));
+        dataInitializer.SaveManager.Save(new GameSave(dataInitializer.GameSave.GetSeed(), 
+                                                      combatConfig.GetPlayer(), 
+                                                      currentWeapon, 
+                                                      currentLevel,
+                                                      dataInitializer.GameSave.Tutorials));
         combatConfig.Initialize(dataInitializer.GameSave.Player, level.GetEnemy());
         combatUI.Reset();
         combatUI.DoFadeIn();

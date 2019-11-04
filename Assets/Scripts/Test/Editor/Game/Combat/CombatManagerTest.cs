@@ -10,6 +10,7 @@ public class CombatManagerTest
     Mock<CharacterManager> mockCharacterManager;
     Mock<TurnManager> mockTurnManager;
     Mock<GameFlowManager> mockGameFlowManager;
+    Mock<TutorialManager> mockTutorialManager;
     Mock<Player> mockPlayer;
     Mock<Enemy> mockEnemy;
     Mock<CharacterAction> mockEnemyAction;
@@ -29,6 +30,7 @@ public class CombatManagerTest
         mockCharacterManager = new Mock<CharacterManager>();
         mockTurnManager = new Mock<TurnManager>();
         mockGameFlowManager = new Mock<GameFlowManager>();
+        mockTutorialManager = new Mock<TutorialManager>();
         mockPlayer = new Mock<Player>("name", 100, 1);
         mockEnemy = new Mock<Enemy>("name", 100, 1);
         mockEnemyAction = new Mock<CharacterAction>(mockEnemy.Object, null, null);
@@ -64,7 +66,8 @@ public class CombatManagerTest
         combatManager = gameObject.AddComponent<CombatManager>();
         combatManager.Init(mockCharacterManager.Object,
                             mockTurnManager.Object,
-                            mockGameFlowManager.Object);
+                            mockGameFlowManager.Object,
+                            mockTutorialManager.Object);
     }
 
     [TearDown]

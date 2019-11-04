@@ -10,6 +10,7 @@ public class CombatInitializerTest
     Mock<CharacterManager> mockCharacterManager;
     Mock<TurnManager> mockTurnManager;
     Mock<GameFlowManager> mockGameFlowManager;
+    Mock<TutorialManager> mockTutorialManager;
     GameObject gameObject;
     CombatInitializer combatInitializer;
 
@@ -22,7 +23,7 @@ public class CombatInitializerTest
         mockCharacterManager = new Mock<CharacterManager>();
         mockTurnManager = new Mock<TurnManager>();
         mockGameFlowManager = new Mock<GameFlowManager>();
-
+        mockTutorialManager = new Mock<TutorialManager>();
         gameObject = new GameObject();
 
         combatInitializer = gameObject.AddComponent<CombatInitializer>();
@@ -31,7 +32,8 @@ public class CombatInitializerTest
                                 mockCombatUI.Object,
                                 mockCharacterManager.Object,
                                 mockTurnManager.Object,
-                                mockGameFlowManager.Object);
+                                mockGameFlowManager.Object,
+                                mockTutorialManager.Object);
     }
     
     [Test]
@@ -50,7 +52,8 @@ public class CombatInitializerTest
         mockCombatUI.Setup(combatUI => combatUI.GetEnemyCombatHandler(It.IsAny<Enemy>())).Returns(mockEnemyCombatHandler.Object);
         mockCombatManager.Setup(combatManager => combatManager.Init(It.IsAny<CharacterManager>(),
                                                                     It.IsAny<TurnManager>(),
-                                                                    It.IsAny<GameFlowManager>()));
+                                                                    It.IsAny<GameFlowManager>(),
+                                                                    It.IsAny<TutorialManager>()));
 
         combatInitializer.Initialize();
 
@@ -63,6 +66,7 @@ public class CombatInitializerTest
         mockEnemy.Verify(enemy => enemy.SubscribeCombatHandler(mockEnemyCombatHandler.Object));
         mockCombatManager.Verify(combatManager => combatManager.Init(mockCharacterManager.Object,
                                                                      mockTurnManager.Object,
-                                                                     mockGameFlowManager.Object));
+                                                                     mockGameFlowManager.Object,
+                                                                     mockTutorialManager.Object));
     }
 }

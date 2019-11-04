@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class DataInitializer : MonoBehaviour
 {
@@ -16,12 +17,19 @@ public class DataInitializer : MonoBehaviour
     CharacterConfig startingPlayer;
 
     [SerializeField]
+    Tutorial attackTutorial, defendTutorial, comboTutorial;
     int currentWeapon = 0;
 
     [SerializeField]
     int currentLevel = 0;
 
-    public void Init(string saveFile, int seed, CharacterConfig startingPlayer, SaveManager saveManager, int currentWeapon, int currentLevel)
+    public void Init(string saveFile, 
+                     int seed, 
+                     CharacterConfig startingPlayer, 
+                     SaveManager saveManager, 
+                     int currentWeapon, 
+                     int currentLevel,
+                     Dictionary<string, Tutorial> tutorials)
     {
         this.saveFile = saveFile;
         this.seed = seed;
@@ -29,10 +37,19 @@ public class DataInitializer : MonoBehaviour
         this.currentWeapon = currentWeapon;
         this.currentLevel = currentLevel;
         SaveManager = saveManager;
+        attackTutorial = tutorials[Tutorial.ATTACK_TUTORIAL];
+        defendTutorial = tutorials[Tutorial.DEFEND_TUTORIAL];
+        comboTutorial = tutorials[Tutorial.COMBO_TUTORIAL];
     }
 
     public void Awake()
     {
+        SetUp();
+    }
+
+    public void SetUp()
+    {
+        bool unableToLoad = false;
         if(SaveManager == null)
         {
             SaveManager = new SaveManager(getSavePath());
@@ -40,17 +57,45 @@ public class DataInitializer : MonoBehaviour
 
         if(SaveManager.HasSave())
         {
-            GameSave = SaveManager.Load();
+            try
+            {
+                GameSave = SaveManager.Load();
+            }
+            catch(System.Exception e)
+            {
+                Debug.LogError(e);
+                unableToLoad = true;
+            }
         }
         else
         {
-            GameSave = new GameSave(seed, new Player(startingPlayer), 0, 0);
+            unableToLoad = true;
+        }
+
+        if(unableToLoad)
+        {
+            attackTutorial.SetName(Tutorial.ATTACK_TUTORIAL);
+            defendTutorial.SetName(Tutorial.DEFEND_TUTORIAL);
+            comboTutorial.SetName(Tutorial.COMBO_TUTORIAL);
+            Tutorial[] newTutorials = { attackTutorial, defendTutorial, comboTutorial };
+            GameSave = new GameSave(seed, new Player(startingPlayer), 0, 0, newTutorials);
         }
     }
 
     public bool IsInitialized()
     {
         return GameSave != null;
+    }
+
+    public void SaveCurrent()
+    {
+        if(SaveManager == null || GameSave == null)
+        {
+            Debug.LogError("Save data not initialized. Unable to save");
+            return;
+        }
+
+        SaveManager.Save(GameSave);
     }
 
     string getSavePath()
