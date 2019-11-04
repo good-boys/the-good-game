@@ -34,7 +34,7 @@ public class DataInitializerTest : MonoBehaviorTestBase<DataInitializer>
         newPlayer = new Player(config);
 
         mockSaveManager = new Mock<SaveManager>(saveFile);
-        mockGameSave = new Mock<GameSave>(seed, newPlayer, currentweapon, currentlevel);
+        mockGameSave = new Mock<GameSave>(seed, newPlayer, currentweapon, currentlevel, new Tutorial[] { });
 
         base.Setup();
 
