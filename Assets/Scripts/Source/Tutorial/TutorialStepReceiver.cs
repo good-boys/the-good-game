@@ -5,6 +5,9 @@ public class TutorialStepReceiver : MonoBehaviour
 {
     Action onTriggerStep = delegate { };
     Action onCompleteStep = delegate { };
+    Action<string> onEventReceived = delegate (string eventName) {};
+    bool stepIsActive = false;
+
     public string ID
     {
         get { return id; }
@@ -22,13 +25,28 @@ public class TutorialStepReceiver : MonoBehaviour
 
     public void TriggerStep()
     {
+        stepIsActive = true;
         onTriggerStep();
         onTriggerStep = delegate { };
     }
 
     public void CompleteStep()
     {
+        stepIsActive = false;
         onCompleteStep();
         onCompleteStep = delegate { };
+    }
+
+    public void ReceiveEvent(string eventName)
+    {
+        if(stepIsActive)
+        {
+            onEventReceived(eventName);
+        }
+    }
+
+    public void SubscribeToEvents(Action<string> onEventReceived)
+    {
+        this.onEventReceived += onEventReceived;
     }
 }

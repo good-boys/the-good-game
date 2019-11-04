@@ -11,6 +11,7 @@ public enum TutorialStepReceiverDelegateAction
 public enum TutorialStepTriggerAction
 {
     ButtonPress,
+    Event
 }
 
 public class TutorialStepReceiverDelegate : MonoBehaviour 
@@ -30,6 +31,15 @@ public class TutorialStepReceiverDelegate : MonoBehaviour
     [SerializeField]
     Button triggerButton;
 
+    [SerializeField]
+    string triggerEventName;
+
+    [SerializeField]
+    string showOnEvent;
+
+    [SerializeField]
+    string hideOnEvent;
+
     private void Awake()
     {
         TutorialStepReceiver receiver = GetComponent<TutorialStepReceiver>();
@@ -43,6 +53,36 @@ public class TutorialStepReceiverDelegate : MonoBehaviour
         if(triggerAction == TutorialStepTriggerAction.ButtonPress && triggerButton)
         {
             triggerButton.onClick.AddListener(receiver.CompleteStep);
+        }
+        if(triggerAction == TutorialStepTriggerAction.Event && !String.IsNullOrEmpty(triggerEventName))
+        {
+            receiver.SubscribeToEvents(delegate(string eventName) 
+            {
+                if(triggerEventName == eventName)
+                {
+                    receiver.CompleteStep();
+                }
+            });
+        }
+        if(!String.IsNullOrEmpty(showOnEvent))
+        {
+            receiver.SubscribeToEvents(delegate (string eventName)
+            {
+                if(showOnEvent == eventName)
+                {
+                    gameObject.SetActive(true);
+                }
+            });
+        }
+        if(!String.IsNullOrEmpty(hideOnEvent))
+        {
+            receiver.SubscribeToEvents(delegate (string eventName)
+            {
+                if(hideOnEvent == eventName)
+                {
+                    gameObject.SetActive(false);
+                }
+            });
         }
     }
 

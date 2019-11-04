@@ -20,12 +20,16 @@ public class CombatInitializer : MonoBehaviour
     [SerializeField]
     GameFlowManager gameFlowManager;
 
+    [SerializeField]
+    TutorialManager tutorialManager;
+
     public void Init(CombatManager combatManager,
                         AbstractCombatConfig combatConfig,
                         AbstractCombatUI combatUI,
                         CharacterManager characterManager,
                         TurnManager turnManager,
-                        GameFlowManager gameFlowManager)
+                        GameFlowManager gameFlowManager,
+                        TutorialManager tutorialManager)
     {
         this.combatManager = combatManager;
         this.combatConfig = combatConfig;
@@ -33,13 +37,14 @@ public class CombatInitializer : MonoBehaviour
         this.characterManager = characterManager;
         this.turnManager = turnManager;
         this.gameFlowManager = gameFlowManager;
+        this.tutorialManager = tutorialManager;
     }
 
     public void Initialize()
     {
         setupCharacterManager();
         setupCombatUI();
-        combatManager.Init(characterManager, turnManager, gameFlowManager);
+        combatManager.Init(characterManager, turnManager, gameFlowManager, tutorialManager);
     }
 
     void setupCharacterManager()

@@ -9,6 +9,10 @@ public class Tutorial
     public const string DEFEND_TUTORIAL = "Defend";
     public const string COMBO_TUTORIAL = "Combo";
 
+    public const string BONUS_TIMER_SHOW_EVENT = "bonus_timer_show";
+    public const string BONUS_TIMER_HIDE_EVENT = "bonus_timer_hide";
+    public const string BONUS_TIMER_CLICK_EVENT = "bonus_timer_click";
+
     public string Name { get; private set; }
     public TutorialStep Current { get { return steps.Length == 0 ? null : steps[currentStepIdx]; } }
     public bool Complete { get; private set; }

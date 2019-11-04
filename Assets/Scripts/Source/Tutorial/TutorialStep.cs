@@ -23,4 +23,9 @@ public class TutorialStep
     {
         Complete = false;
     }
+
+    public override string ToString()
+    {
+        return string.Format("TutorialStep({0}, complete: {1})", receiverId, Complete);
+    }
 }

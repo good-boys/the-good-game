@@ -29,12 +29,14 @@ public class CombatManager : MonoBehaviour
     CharacterManager characterManager;
     TurnManager turnManager;
     GameFlowManager gameFlowManager;
+    TutorialManager tutorialManager;
 
-    public virtual void Init(CharacterManager characterManager, TurnManager turnManager, GameFlowManager gameFlowManager)
+    public virtual void Init(CharacterManager characterManager, TurnManager turnManager, GameFlowManager gameFlowManager, TutorialManager tutorialManager)
     {
         this.characterManager = characterManager;
         this.turnManager = turnManager;
         this.gameFlowManager = gameFlowManager;
+        this.tutorialManager = tutorialManager;
     }
 
     public void PlayerAttack()
@@ -120,19 +122,27 @@ public class CombatManager : MonoBehaviour
             {
                 if (action is Attack)
                 {
+                    tutorialManager.BroadcastEvent(Tutorial.BONUS_TIMER_SHOW_EVENT);
                     gameFlowManager.combatUI.ShowAttackTimer(action.Actor.EquippedWeapon.GoalSize, action.Actor.EquippedWeapon.GoalPos, action.Actor.EquippedWeapon.TimerSpeed);
                     float delta = action.Actor.EquippedWeapon.GoalSize * action.Actor.EquippedWeapon.TimerSpeed;
                     float minTimer = -action.Actor.EquippedWeapon.GoalPos / 360 * action.Actor.EquippedWeapon.TimerSpeed;
                     float maxTimer = minTimer + delta;
+                    bool inBonusZone = false;
                     while (timer < action.Actor.EquippedWeapon.TimerSpeed && !action.Actor.hitBonus && !missed)
                     {
                         timer += Time.deltaTime;
 
                         if (timer > minTimer && timer < maxTimer)
                         {
+                            if(!inBonusZone)
+                            {
+                                inBonusZone = true;
+                                tutorialManager.BroadcastEvent(Tutorial.BONUS_TIMER_SHOW_EVENT);
+                            }
                             if (Input.GetButton("Fire1"))
                             {
                                 action.Actor.hitBonus = true;
+                                tutorialManager.BroadcastEvent(Tutorial.BONUS_TIMER_CLICK_EVENT);
                             }
                         }
                         else
@@ -140,6 +150,11 @@ public class CombatManager : MonoBehaviour
                             if (Input.GetButton("Fire1"))
                             {
                                 missed = true;
+                                tutorialManager.BroadcastEvent(Tutorial.BONUS_TIMER_CLICK_EVENT);
+                            }
+                            if(inBonusZone)
+                            {
+                                tutorialManager.BroadcastEvent(Tutorial.BONUS_TIMER_HIDE_EVENT);
                             }
                         }
                             
@@ -147,6 +162,7 @@ public class CombatManager : MonoBehaviour
                         yield return null;
                     }
                     gameFlowManager.combatUI.EndAttackTimer();
+                    tutorialManager.BroadcastEvent(Tutorial.BONUS_TIMER_HIDE_EVENT);
                     enemyHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the player weapon type
                     enemyHit.PlaySFX("sword_whoosh_01");
                 }

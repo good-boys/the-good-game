@@ -124,7 +124,7 @@ Prefab:
     - target: {fileID: 114813761749918192, guid: df6493e71cfac4bb4975eb6a30abe33d,
         type: 2}
       propertyPath: tutorialStepReceivers.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4324785066750960, guid: df6493e71cfac4bb4975eb6a30abe33d, type: 2}
       propertyPath: m_LocalPosition.x
@@ -173,6 +173,21 @@ Prefab:
       propertyPath: tutorialStepReceivers.Array.data[1]
       value: 
       objectReference: {fileID: 602720542}
+    - target: {fileID: 114813761749918192, guid: df6493e71cfac4bb4975eb6a30abe33d,
+        type: 2}
+      propertyPath: tutorialStepReceivers.Array.data[2]
+      value: 
+      objectReference: {fileID: 611341225}
+    - target: {fileID: 114813761749918192, guid: df6493e71cfac4bb4975eb6a30abe33d,
+        type: 2}
+      propertyPath: tutorialStepReceivers.Array.data[3]
+      value: 
+      objectReference: {fileID: 1861106914}
+    - target: {fileID: 114813761749918192, guid: df6493e71cfac4bb4975eb6a30abe33d,
+        type: 2}
+      propertyPath: debugLogsEnabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df6493e71cfac4bb4975eb6a30abe33d, type: 2}
   m_IsPrefabParent: 0
@@ -382,6 +397,7 @@ MonoBehaviour:
   characterManager: {fileID: 511318807}
   turnManager: {fileID: 27310878}
   gameFlowManager: {fileID: 1882590011}
+  tutorialManager: {fileID: 2090928843}
 --- !u!114 &27310881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2551,6 +2567,9 @@ MonoBehaviour:
   triggerAction: 0
   completeAction: 1
   triggerButton: {fileID: 568947101}
+  triggerEventName: 
+  showOnEvent: 
+  hideOnEvent: 
 --- !u!114 &602720542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,6 +2615,107 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 602720539}
+--- !u!1 &611341222
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 611341223}
+  - component: {fileID: 611341227}
+  - component: {fileID: 611341226}
+  - component: {fileID: 611341225}
+  - component: {fileID: 611341224}
+  m_Layer: 5
+  m_Name: Bonus_TutorialHighlightReceiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &611341223
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611341222}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1023153696}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &611341224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611341222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a012c997c355a447ea8e5ab18a3b6738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEnabled: 0
+  setupAction: 1
+  triggerAction: 1
+  completeAction: 1
+  triggerButton: {fileID: 0}
+  triggerEventName: bonus_timer_click
+  showOnEvent: bonus_timer_show
+  hideOnEvent: bonus_timer_hide
+--- !u!114 &611341225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611341222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d895aaf6fed41b795091aaaa01b103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Bonus_Attack
+--- !u!114 &611341226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611341222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 4775d7aec351c402e8ec8b4ac909356a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &611341227
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611341222}
 --- !u!4 &615400875 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: a8c56a9a492ba85448c53584920911e1, type: 3}
@@ -3264,7 +3384,7 @@ Prefab:
     - target: {fileID: 224089961479595222, guid: afb3a99c8a98b0148b3983f40574a570,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224089961479595222, guid: afb3a99c8a98b0148b3983f40574a570,
         type: 2}
@@ -4281,6 +4401,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1013824629}
+  - {fileID: 611341223}
   - {fileID: 754068812}
   m_Father: {fileID: 1289958286}
   m_RootOrder: 3
@@ -6270,6 +6391,9 @@ MonoBehaviour:
   triggerAction: 0
   completeAction: 1
   triggerButton: {fileID: 1570768495}
+  triggerEventName: 
+  showOnEvent: 
+  hideOnEvent: 
 --- !u!1001 &1420656115
 Prefab:
   m_ObjectHideFlags: 0
@@ -6949,6 +7073,7 @@ RectTransform:
   - {fileID: 722495997}
   - {fileID: 1155575109}
   - {fileID: 1404664706}
+  - {fileID: 1861106918}
   m_Father: {fileID: 1229239497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7936,6 +8061,107 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: cc815fd4bc66b764b8a86a1922e740ac, type: 3}
   m_PrefabInternal: {fileID: 214937490}
+--- !u!1 &1861106913
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1861106918}
+  - component: {fileID: 1861106917}
+  - component: {fileID: 1861106916}
+  - component: {fileID: 1861106914}
+  - component: {fileID: 1861106915}
+  m_Layer: 5
+  m_Name: AttackBonus_TutorialHighlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1861106914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861106913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0d895aaf6fed41b795091aaaa01b103, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Attack_Bonus_Button
+--- !u!114 &1861106915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861106913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a012c997c355a447ea8e5ab18a3b6738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startEnabled: 0
+  setupAction: 0
+  triggerAction: 0
+  completeAction: 1
+  triggerButton: {fileID: 1570768495}
+  triggerEventName: 
+  showOnEvent: 
+  hideOnEvent: 
+--- !u!114 &1861106916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861106913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 4775d7aec351c402e8ec8b4ac909356a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1861106917
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861106913}
+--- !u!224 &1861106918
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861106913}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.0000002, y: 1.0000002, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1570768493}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.17991638, y: -4.840271}
+  m_SizeDelta: {x: 115.06, y: 49.44}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1882590010
 GameObject:
   m_ObjectHideFlags: 0
@@ -8141,8 +8367,11 @@ MonoBehaviour:
     - receiverId: Defend
     prerequisites: []
   comboTutorial:
-    steps: []
-    prerequisites: []
+    steps:
+    - receiverId: Attack_Bonus_Button
+    - receiverId: Bonus_Attack
+    prerequisites:
+    - Attack
   currentLevel: 0
 --- !u!4 &1888054641 stripped
 Transform:

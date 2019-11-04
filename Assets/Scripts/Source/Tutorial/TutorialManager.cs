@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour 
 {
-    // TODO: break tutorials into multiple ones (attack, defend, combo, etc)
     public Dictionary<string, Tutorial> Tutorials
     {
         get { return tutorialMap; }
@@ -28,7 +27,9 @@ public class TutorialManager : MonoBehaviour
     {
         get
         {
-            return tutorialMap.Values.Where((tut) => !tut.Complete && prerequisitesSatisified(tut)).ToList();
+            List<Tutorial> available = tutorialMap.Values.Where((tut) => !tut.Complete && prerequisitesSatisified(tut)).ToList();
+            debugIfEnabled("Found {0} available tutorials", available.Count);
+            return available;
         }
     }
 
@@ -133,6 +134,14 @@ public class TutorialManager : MonoBehaviour
     public void OnTutorialComplete(Action onComplete)
     {
         onTutorialComplete += onComplete;
+    }
+
+    public void BroadcastEvent(string eventName)
+    {
+        foreach(TutorialStepReceiver recv in tutorialStepReceivers)
+        {
+            recv.ReceiveEvent(eventName);
+        }
     }
 
     void debugIfEnabled(string message, params object[] varArgs)
