@@ -7707,103 +7707,103 @@ MonoBehaviour:
   levels:
   - enemyName: Monster 1
     enemyWeaponName: Basic
-    enemyHealth: 10
-    enemyWeaponDamage: 1
-    enemyWeaponDefense: 1
+    enemyHealth: 14
+    enemyWeaponDamage: 3
+    enemyWeaponDefense: 2
     enemyWeaponBonusAttack: 1
     enemyWeaponBonusDefense: 1
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: 7f0dfa46ef157544c99c9f5aaad7d92e,
       type: 2}
   - enemyName: Monster 2
     enemyWeaponName: Basic
-    enemyHealth: 15
+    enemyHealth: 20
     enemyWeaponDamage: 5
     enemyWeaponDefense: 5
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: b46f223ec07bb034b98ae6a5ca95894c,
       type: 2}
   - enemyName: Monster 3
     enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 10
-    enemyWeaponDefense: 5
-    enemyWeaponBonusAttack: 2
-    enemyWeaponBonusDefense: 2
-    enemySpeed: 10000
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
-      type: 2}
-  - enemyName: Monster 2
-    enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 5
+    enemyHealth: 30
+    enemyWeaponDamage: 15
     enemyWeaponDefense: 5
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: 9b1ab8ffdfd9e004eb24d48ca81ce0a0,
       type: 2}
-  - enemyName: Monster 2
+  - enemyName: Monster 4
     enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 5
+    enemyHealth: 40
+    enemyWeaponDamage: 25
     enemyWeaponDefense: 5
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: 31a67449f0ac01347835ac4b3c28634a,
       type: 2}
-  - enemyName: Monster 2
+  - enemyName: Monster 5
     enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 5
-    enemyWeaponDefense: 5
+    enemyHealth: 50
+    enemyWeaponDamage: 25
+    enemyWeaponDefense: 10
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: 897be17e569c5494fa21b1b4f153f158,
       type: 2}
-  - enemyName: Monster 2
+  - enemyName: Monster 6
     enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 5
-    enemyWeaponDefense: 5
+    enemyHealth: 60
+    enemyWeaponDamage: 25
+    enemyWeaponDefense: 10
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: 7f0dfa46ef157544c99c9f5aaad7d92e,
       type: 2}
-  - enemyName: Monster 2
+  - enemyName: Monster 7
     enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 5
-    enemyWeaponDefense: 5
+    enemyHealth: 70
+    enemyWeaponDamage: 25
+    enemyWeaponDefense: 10
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: b46f223ec07bb034b98ae6a5ca95894c,
       type: 2}
-  - enemyName: Monster 2
+  - enemyName: Monster 8
     enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 5
-    enemyWeaponDefense: 5
+    enemyHealth: 80
+    enemyWeaponDamage: 30
+    enemyWeaponDefense: 10
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: 9b1ab8ffdfd9e004eb24d48ca81ce0a0,
       type: 2}
-  - enemyName: Monster 2
+  - enemyName: Monster 9
     enemyWeaponName: Basic
-    enemyHealth: 15
-    enemyWeaponDamage: 5
-    enemyWeaponDefense: 5
+    enemyHealth: 90
+    enemyWeaponDamage: 25
+    enemyWeaponDefense: 10
     enemyWeaponBonusAttack: 2
     enemyWeaponBonusDefense: 2
     enemySpeed: 1
-    enemyActionPattern: {fileID: 11400000, guid: e61d643065fc148679ffb0382caf1cf5,
+    enemyActionPattern: {fileID: 11400000, guid: 31a67449f0ac01347835ac4b3c28634a,
+      type: 2}
+  - enemyName: Monster 10
+    enemyWeaponName: Basic
+    enemyHealth: 200
+    enemyWeaponDamage: 50
+    enemyWeaponDefense: 30
+    enemyWeaponBonusAttack: 2
+    enemyWeaponBonusDefense: 2
+    enemySpeed: 1
+    enemyActionPattern: {fileID: 11400000, guid: 897be17e569c5494fa21b1b4f153f158,
       type: 2}
   weapons:
   - Name: Default
@@ -7815,21 +7815,53 @@ MonoBehaviour:
     GoalPos: -180
     TimerSpeed: 5
   - Name: Level One
-    Damage: 50
+    Damage: 10
     Defense: 7
-    BonusAttack: 2
-    BonusDefense: 2
+    BonusAttack: 4
+    BonusDefense: 4
     GoalSize: 0.4
     GoalPos: -145
-    TimerSpeed: 5
+    TimerSpeed: 4
   - Name: Level Two
-    Damage: 100
-    Defense: 7
-    BonusAttack: 2
-    BonusDefense: 2
+    Damage: 12
+    Defense: 9
+    BonusAttack: 6
+    BonusDefense: 6
     GoalSize: 0.4
     GoalPos: -145
-    TimerSpeed: 5
+    TimerSpeed: 3
+  - Name: Level Three
+    Damage: 15
+    Defense: 11
+    BonusAttack: 8
+    BonusDefense: 8
+    GoalSize: 0.4
+    GoalPos: -145
+    TimerSpeed: 2.5
+  - Name: Level Four
+    Damage: 17
+    Defense: 13
+    BonusAttack: 10
+    BonusDefense: 10
+    GoalSize: 0.3
+    GoalPos: -145
+    TimerSpeed: 2
+  - Name: Level Five
+    Damage: 20
+    Defense: 15
+    BonusAttack: 15
+    BonusDefense: 15
+    GoalSize: 0.2
+    GoalPos: -145
+    TimerSpeed: 2
+  - Name: Level X
+    Damage: 25
+    Defense: 20
+    BonusAttack: 20
+    BonusDefense: 20
+    GoalSize: 0.1
+    GoalPos: -145
+    TimerSpeed: 1
   combatUI: {fileID: 268153299}
   combatManager: {fileID: 27310881}
   camera: {fileID: 163672221}

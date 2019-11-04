@@ -125,10 +125,13 @@ public class GameFlowManager : MonoBehaviour
             yield return null;
         }
 
+        currentWeapon = dataInitializer.GameSave.WeaponLevel;
         currentLevel = dataInitializer.GameSave.EnemyLevel;
         combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
+        int currentHealth = 100 - dataInitializer.GameSave.Player.Health;
+        combatConfig.GetPlayer().Heal(-currentHealth);
         combatInitializer.Initialize();
-
+        combatUI.Reset();
         combatConfig.GetPlayer().EquipWeapon(weapons[dataInitializer.GameSave.WeaponLevel].GetWeapon());
         inBattle = true;
         SceneManager.LoadScene("Intro", LoadSceneMode.Additive);
@@ -137,11 +140,15 @@ public class GameFlowManager : MonoBehaviour
     public void ClearSave()
     {
         dataInitializer.SaveManager.Erase();
+        dataInitializer.GameSave.Reset();
+
+        currentLevel = 0;
 
         combatConfig.Initialize(dataInitializer.GameSave.Player, levels[currentLevel].GetEnemy());
-        combatInitializer.Initialize();
-
         combatConfig.GetPlayer().EquipWeapon(weapons[0].GetWeapon());
+        combatConfig.GetEnemy().EquipWeapon(levels[0].GetEnemy().EquippedWeapon);
+        combatInitializer.Initialize();
+        combatUI.Reset();
     }
 
     public void UnloadScene(string sceneName)
@@ -199,9 +206,9 @@ public class GameFlowManager : MonoBehaviour
         yield return new WaitForSeconds(fadeOutTime + fadeInDelay);
         
         Level level = levels[currentLevel];
-
+        
         dataInitializer.SaveManager.Save(new GameSave(dataInitializer.GameSave.GetSeed(), combatConfig.GetPlayer(), currentWeapon, currentLevel));
-        combatConfig.Initialize(dataInitializer.GameSave.Player, level.GetEnemy());
+        combatConfig.InitializeEnemy(level.GetEnemy());
         combatUI.Reset();
         combatUI.DoFadeIn();
         combatInitializer.Initialize();

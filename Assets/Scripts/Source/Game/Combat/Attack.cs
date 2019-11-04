@@ -32,6 +32,12 @@ public class Attack : CharacterAction
         this.Direction = AttackDirection.None;
     }
 
+    public override void DisableAttack()
+    {
+        this.Damage = 0;
+        this.Bonus = 0;
+    }
+
     public override void AddBonus()
     {
         this.Damage += this.Bonus;

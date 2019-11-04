@@ -158,63 +158,70 @@ public class CombatManager : MonoBehaviour
             }
             else
             {
-                if (action is Attack)
+                if (action.Actor.Health > 0)
                 {
-                    //Debug.Log("Enemy turn attack");
-                    if (enemyAction.Actor.ActiveAction is Defend)
+                    if (action is Attack)
                     {
-                        action = enemyAction;
-                        AttackDirection attackDir = enemyAction.Actor.GetAttackDirection(); //TODO: Make better system for choosing enemy attack direction
-                        gameFlowManager.combatUI.ShowEnemyDirection(attackDir);
-                        //Debug.Log("Enemy turn player defended");
-                        bool hitDirection = false;
-                        while (timer < defendTimer && !hitDirection)
+                        //Debug.Log("Enemy turn attack");
+                        if (enemyAction.Actor.ActiveAction is Defend)
                         {
-                            timer += Time.deltaTime;
-
-                            Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-                            if (dir.magnitude > 0)
+                            action = enemyAction;
+                            AttackDirection attackDir = enemyAction.Actor.GetAttackDirection(); //TODO: Make better system for choosing enemy attack direction
+                            gameFlowManager.combatUI.ShowEnemyDirection(attackDir);
+                            //Debug.Log("Enemy turn player defended");
+                            bool hitDirection = false;
+                            while (timer < defendTimer && !hitDirection)
                             {
-                                hitDirection = true;
-                            }
+                                timer += Time.deltaTime;
 
-                            if (timer > inputStart && timer < inputEnd)
+                                Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+                                if (dir.magnitude > 0)
+                                {
+                                    hitDirection = true;
+                                }
+
+                                if (timer > inputStart && timer < inputEnd)
+                                {
+                                    if (dir.x > 0 && attackDir == AttackDirection.Right)
+                                    {
+                                        action.Actor.hitBonus = true;
+                                    }
+                                    else if (dir.x < 0 && attackDir == AttackDirection.Left)
+                                    {
+                                        action.Actor.hitBonus = true;
+                                    }
+                                    else if (dir.y > 0 && attackDir == AttackDirection.Up)
+                                    {
+                                        action.Actor.hitBonus = true;
+                                    }
+                                    else if (dir.y < 0 && attackDir == AttackDirection.Down)
+                                    {
+                                        action.Actor.hitBonus = true;
+                                    }
+                                }
+
+                                yield return null;
+                            }
+                            playerHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the enemy
+                            if (action.Actor.hitBonus)
                             {
-                                if (dir.x > 0 && attackDir == AttackDirection.Right)
-                                {
-                                    action.Actor.hitBonus = true;
-                                }
-                                else if (dir.x < 0 && attackDir == AttackDirection.Left)
-                                {
-                                    action.Actor.hitBonus = true;
-                                }
-                                else if (dir.y > 0 && attackDir == AttackDirection.Up)
-                                {
-                                    action.Actor.hitBonus = true;
-                                }
-                                else if (dir.y < 0 && attackDir == AttackDirection.Down)
-                                {
-                                    action.Actor.hitBonus = true;
-                                }
+                                playerHit.PlaySFX("sword_strike_armor_chain_04");
                             }
-
-                            yield return null;
+                            else
+                            {
+                                playerHit.PlaySFX("sword_whoosh_06");
+                            }
                         }
-                        playerHit.PlayVFX("small_0002"); //ToDo: Make this a variable passed by the enemy
-                        if (action.Actor.hitBonus)
-                        {
-                            playerHit.PlaySFX("sword_strike_armor_chain_04");
-                        }
-                        else
-                        {
-                            playerHit.PlaySFX("sword_whoosh_06");
-                        }
+                    }
+                    else
+                    {
+                        //Debug.Log("Enemy turn defend");
                     }
                 }
                 else
                 {
-                    //Debug.Log("Enemy turn defend");
+                    action.DisableAttack();
                 }
             }
 

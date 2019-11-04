@@ -9,6 +9,11 @@ public class CombatConfig : AbstractCombatConfig
         enemy = nextEnemy.CopyConfig() as Enemy;
     }
 
+    public void InitializeEnemy(Enemy nextEnemy)
+    {
+        enemy = nextEnemy.CopyConfig() as Enemy;
+    }
+
     public override Player GetPlayer()
     {
         return player;

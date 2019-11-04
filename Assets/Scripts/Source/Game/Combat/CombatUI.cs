@@ -66,6 +66,7 @@ public class CombatUI : AbstractCombatUI
     {
         slain = false;
         enemyHealth.fillAmount = 100f;
+        OnHealthChange(GameFlowManager.instance.combatConfig.GetPlayer().Health, GameFlowManager.instance.combatConfig.GetPlayer().MaxHealth);
     }
 
     public void OnHealthChange(int health, int maxHealth)
@@ -75,6 +76,7 @@ public class CombatUI : AbstractCombatUI
 
     void damagePlayer(int remainingHealth, int maxHealth, int damage)
     {
+        if (enemyHealth.fillAmount == 0) return;
         damageNumber.text = damage.ToString();
         damageNumber.GetComponent<Animator>().SetTrigger("Hit");
         HideDirection();

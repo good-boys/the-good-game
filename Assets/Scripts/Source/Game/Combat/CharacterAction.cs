@@ -31,6 +31,10 @@ public class CharacterAction
     {
     }
 
+    public virtual void DisableAttack()
+    {
+    }
+
     public virtual void Use()
     {
         if(onUseHandler != null)
